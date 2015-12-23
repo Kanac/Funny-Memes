@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
-    d:DataContext="{Binding Source={d:DesignData Source=../Russell Peters Soundboard.Shared/DataModel/SampleData.json, Type=data:SampleDataSource}}"
+    d:DataContext="{Binding Source={d:DesignData Source=../Russell Peters Soundboard.Shared/DataModel/Soundboard.json, Type=data:SoundDataSource}}"
     xmlns:data="using:Russell_Peters_Soundboard.Data"
     mc:Ignorable="d">
 
@@ -14,7 +14,7 @@
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Default">
-                    <ImageBrush x:Key="HubBackgroundImageBrush" ImageSource="Assets/HubBackground.png"/>
+                    <ImageBrush x:Key="HubBackgroundImageBrush" ImageSource="Assets/Russell Hub.jpg"  />
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="HighContrast">
                     <ImageBrush x:Key="HubBackgroundImageBrush" ImageSource="{x:Null}"/>
@@ -52,18 +52,17 @@
             </DataTemplate>
 
             <DataTemplate x:Key="StandardDoubleLineItemTemplate">
-                <Grid>
+                <Grid Margin="0,5,0,5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" Margin="0,9.5,0,0" Grid.Column="0" HorizontalAlignment="Left">
                         <Image Source="{Binding ImagePath}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}" Height="79" Width="79"/>
-                    </Border>
                     <StackPanel Grid.Column="1" Margin="14.5,0,0,0">
-                        <TextBlock Text="{Binding Title}" Style="{ThemeResource ListViewItemTextBlockStyle}"/>
-                        <TextBlock Text="{Binding Subtitle}" Style="{ThemeResource ListViewItemSubheaderTextBlockStyle}"/>
+                        <TextBlock 
+                                    Text="{Binding Title}" FontSize="25" TextWrapping="Wrap"  Style="{ThemeResource ListViewItemTextBlockStyle}"/>
+                        <!--<TextBlock Text="{Binding Subtitle}" Style="{ThemeResource ListViewItemSubheaderTextBlockStyle}"/>-->
                     </StackPanel>
                 </Grid>
             </DataTemplate>
@@ -71,8 +70,13 @@
     </Page.Resources>
 
     <Grid x:Name="LayoutRoot">
-        <Hub x:Name="Hub" x:Uid="Hub" Header="application name" Background="{ThemeResource HubBackgroundImageBrush}">
-            <HubSection x:Uid="HubSection1" Header="SECTION 1" DataContext="{Binding Groups}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+        <MediaElement Name="Audio" AutoPlay="False" Visibility="Collapsed"></MediaElement>
+        
+        <Hub x:Name="Hub"
+             x:Uid="Hub"
+             Header="Russell Peters Soundboard"
+             Background="{ThemeResource HubBackgroundImageBrush}">
+            <!--<HubSection x:Uid="HubSection1" Header="SECTION 1" DataContext="{Binding Groups}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <ListView
                         ItemsSource="{Binding}"
@@ -149,10 +153,25 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </DataTemplate>
-            </HubSection>
+            </HubSection>-->
 
-            <HubSection x:Uid="HubSection5" Header="SECTION 5"
+            <HubSection x:Uid="American Culture" Header="American Culture"
                         DataContext="{Binding Groups[3]}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+                <DataTemplate>
+                    <ListView AutomationProperties.AutomationId="ItemListViewSection5"
+                              AutomationProperties.Name="Items In Group"
+                              SelectionMode="None"
+                              IsItemClickEnabled="True"
+                              ItemsSource="{Binding Items}"
+                              ItemTemplate="{StaticResource StandardDoubleLineItemTemplate}"
+                              ItemClick="ItemView_ItemClick"
+                              ContinuumNavigationTransitionInfo.ExitElementContainer="True">
+                    </ListView>
+                </DataTemplate>
+            </HubSection>
+            
+             <HubSection x:Uid="Convincing Indians" Header="Convincing Indians"
+                        DataContext="{Binding Groups[4]}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <ListView 
                         AutomationProperties.AutomationId="ItemListViewSection5"

@@ -66,7 +66,7 @@ namespace Russell_Peters_Soundboard
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var item = await SampleDataSource.GetItemAsync((string)e.NavigationParameter);
+            var item = await SoundDataSource.GetSoundAsync((string)e.NavigationParameter);
             this.DefaultViewModel["Item"] = item;
         }
 

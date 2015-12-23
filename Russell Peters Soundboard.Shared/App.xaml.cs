@@ -108,6 +108,8 @@ namespace Russell_Peters_Soundboard
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
+
+                // Configure initial page here. Navigation stack isn't restored means (i.e in alt tab mode).
                 if (!rootFrame.Navigate(typeof(HubPage), e.Arguments))
                 {
                     throw new Exception("Failed to create initial page");

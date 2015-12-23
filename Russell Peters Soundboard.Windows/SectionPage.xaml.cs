@@ -65,9 +65,9 @@ namespace Russell_Peters_Soundboard
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var group = await SampleDataSource.GetGroupAsync((string)e.NavigationParameter);
+            var group = await SoundDataSource.GetCategoryAsync((string)e.NavigationParameter);
             this.DefaultViewModel["Group"] = group;
-            this.DefaultViewModel["Items"] = group.Items;
+            this.DefaultViewModel["Items"] = group.SoundItems;
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Russell_Peters_Soundboard
         {
             // Navigate to the appropriate destination page, configuring the new page
             // by passing required information as a navigation parameter
-            var itemId = ((SampleDataItem)e.ClickedItem).UniqueId;
+            var itemId = ((SoundItem)e.ClickedItem).UniqueId;
             this.Frame.Navigate(typeof(ItemPage), itemId);
         }
 

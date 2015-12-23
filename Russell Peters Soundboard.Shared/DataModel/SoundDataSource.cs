@@ -21,9 +21,9 @@ namespace Russell_Peters_Soundboard.Data
     /// <summary>
     /// Generic item data model.
     /// </summary>
-    public class SampleDataItem
+    public class SoundItem
     {
-        public SampleDataItem(String uniqueId, String title, String subtitle, String imagePath, String description, String content)
+        public SoundItem(String uniqueId, String title, String subtitle, String imagePath, String description, String content)
         {
             this.UniqueId = uniqueId;
             this.Title = title;
@@ -44,21 +44,30 @@ namespace Russell_Peters_Soundboard.Data
         {
             return this.Title;
         }
+
+        public void UsingPauseButton(){
+            this.ImagePath = "Assets/PauseButton";
+        }
+
+        public void UsingPlayButton()
+        {
+            this.ImagePath = "Assets/PlayButton";
+        }
     }
 
     /// <summary>
     /// Generic group data model.
     /// </summary>
-    public class SampleDataGroup
+    public class Category
     {
-        public SampleDataGroup(String uniqueId, String title, String subtitle, String imagePath, String description)
+        public Category(String uniqueId, String title, String subtitle, String imagePath, String description)
         {
             this.UniqueId = uniqueId;
             this.Title = title;
             this.Subtitle = subtitle;
             this.Description = description;
             this.ImagePath = imagePath;
-            this.Items = new ObservableCollection<SampleDataItem>();
+            this.SoundItems = new ObservableCollection<SoundItem>();
         }
 
         public string UniqueId { get; private set; }
@@ -66,7 +75,7 @@ namespace Russell_Peters_Soundboard.Data
         public string Subtitle { get; private set; }
         public string Description { get; private set; }
         public string ImagePath { get; private set; }
-        public ObservableCollection<SampleDataItem> Items { get; private set; }
+        public ObservableCollection<SoundItem> SoundItems { get; private set; }
 
         public override string ToString()
         {
@@ -80,47 +89,47 @@ namespace Russell_Peters_Soundboard.Data
     /// SampleDataSource initializes with data read from a static json file included in the 
     /// project.  This provides sample data at both design-time and run-time.
     /// </summary>
-    public sealed class SampleDataSource
+    public sealed class SoundDataSource
     {
-        private static SampleDataSource _sampleDataSource = new SampleDataSource();
+        private static SoundDataSource _soundDataSource = new SoundDataSource();
 
-        private ObservableCollection<SampleDataGroup> _groups = new ObservableCollection<SampleDataGroup>();
-        public ObservableCollection<SampleDataGroup> Groups
+        private ObservableCollection<Category> _categories = new ObservableCollection<Category>();
+        public ObservableCollection<Category> Categories
         {
-            get { return this._groups; }
+            get { return this._categories; }
         }
 
-        public static async Task<IEnumerable<SampleDataGroup>> GetGroupsAsync()
+        public static async Task<IEnumerable<Category>> GetCategoryAsync()
         {
-            await _sampleDataSource.GetSampleDataAsync();
+            await _soundDataSource.GetSoundDataAsync();
 
-            return _sampleDataSource.Groups;
+            return _soundDataSource.Categories;
         }
 
-        public static async Task<SampleDataGroup> GetGroupAsync(string uniqueId)
+        public static async Task<Category> GetCategoryAsync(string uniqueId)
         {
-            await _sampleDataSource.GetSampleDataAsync();
+            await _soundDataSource.GetSoundDataAsync();
             // Simple linear search is acceptable for small data sets
-            var matches = _sampleDataSource.Groups.Where((group) => group.UniqueId.Equals(uniqueId));
+            var matches = _soundDataSource.Categories.Where((group) => group.UniqueId.Equals(uniqueId));
             if (matches.Count() == 1) return matches.First();
             return null;
         }
 
-        public static async Task<SampleDataItem> GetItemAsync(string uniqueId)
+        public static async Task<SoundItem> GetSoundAsync(string uniqueId)
         {
-            await _sampleDataSource.GetSampleDataAsync();
+            await _soundDataSource.GetSoundDataAsync();
             // Simple linear search is acceptable for small data sets
-            var matches = _sampleDataSource.Groups.SelectMany(group => group.Items).Where((item) => item.UniqueId.Equals(uniqueId));
+            var matches = _soundDataSource.Categories.SelectMany(group => group.SoundItems).Where((item) => item.UniqueId.Equals(uniqueId));
             if (matches.Count() == 1) return matches.First();
             return null;
         }
 
-        private async Task GetSampleDataAsync()
+        private async Task GetSoundDataAsync()
         {
-            if (this._groups.Count != 0)
+            if (this._categories.Count != 0)
                 return;
 
-            Uri dataUri = new Uri("ms-appx:///DataModel/SampleData.json");
+            Uri dataUri = new Uri("ms-appx:///DataModel/Soundboard.json");
 
             StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(dataUri);
             string jsonText = await FileIO.ReadTextAsync(file);
@@ -130,7 +139,7 @@ namespace Russell_Peters_Soundboard.Data
             foreach (JsonValue groupValue in jsonArray)
             {
                 JsonObject groupObject = groupValue.GetObject();
-                SampleDataGroup group = new SampleDataGroup(groupObject["UniqueId"].GetString(),
+                Category group = new Category(groupObject["UniqueId"].GetString(),
                                                             groupObject["Title"].GetString(),
                                                             groupObject["Subtitle"].GetString(),
                                                             groupObject["ImagePath"].GetString(),
@@ -139,14 +148,14 @@ namespace Russell_Peters_Soundboard.Data
                 foreach (JsonValue itemValue in groupObject["Items"].GetArray())
                 {
                     JsonObject itemObject = itemValue.GetObject();
-                    group.Items.Add(new SampleDataItem(itemObject["UniqueId"].GetString(),
+                    group.SoundItems.Add(new SoundItem(itemObject["UniqueId"].GetString(),
                                                        itemObject["Title"].GetString(),
                                                        itemObject["Subtitle"].GetString(),
                                                        itemObject["ImagePath"].GetString(),
                                                        itemObject["Description"].GetString(),
                                                        itemObject["Content"].GetString()));
                 }
-                this.Groups.Add(group);
+                this.Categories.Add(group);
             }
         }
     }

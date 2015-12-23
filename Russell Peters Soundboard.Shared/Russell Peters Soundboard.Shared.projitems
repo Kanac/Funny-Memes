@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
@@ -15,8 +15,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)DataModel\SampleDataSource.cs" />
-    <Content Include="$(MSBuildThisFileDirectory)DataModel\SampleData.json" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModel\SoundDataSource.cs" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\PauseButton.PNG" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\PlayButton.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\AmericanCulture.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\BeijingKFC.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\ConvincingIndians.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\EnglishAccents.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Russell Hub.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\TwoAsians.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\WhitePeople.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)DataModel\Soundboard.json" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\LightGray.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\MediumGray.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DarkGray.png" />
