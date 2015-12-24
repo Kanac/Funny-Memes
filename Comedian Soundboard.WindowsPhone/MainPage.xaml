@@ -10,6 +10,15 @@
     xmlns:data="using:Comedian_Soundboard.Data"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <SlideNavigationTransitionInfo/>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
 
     <Grid>
         <ListView SelectionMode="None"
@@ -23,7 +32,7 @@
                     <Grid Margin="0,30,0,0">
                         <TextBlock Text="{Binding Title}" FontSize="20" Margin="20,0,0,0" TextAlignment="Center" VerticalAlignment="Top"></TextBlock>
                         <Border BorderBrush="White" BorderThickness="2" Height="300" Width="300"></Border>
-                        <Image Source="{Binding ImagePath}" Width="300" Height="300"></Image>
+                        <Image Source="{Binding ImagePath}" Width="250" Height="250" Stretch="Fill"></Image>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

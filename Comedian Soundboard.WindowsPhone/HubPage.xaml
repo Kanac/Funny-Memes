@@ -14,7 +14,7 @@
 
     <Grid x:Name="LayoutRoot">
         <MediaElement Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
-        <Border BorderBrush="{ThemeResource PhoneAccentBrush}" BorderThickness="1" Height="50" Width="100"></Border>
+        
         <Grid DataContext="{Binding Category}">
             <GridView 
                 SelectionMode="None"
@@ -27,7 +27,7 @@
                         <Grid>
                             <Border BorderBrush="{ThemeResource PhoneAccentBrush}" BorderThickness="1" Height="50" Width="100" Tapped="Sound_Click"></Border>
                             <ProgressBar x:Name="ProgressBar" Height="50" Width="100" Value="0" Tapped="Sound_Click"></ProgressBar>
-                            <TextBlock Text="{Binding Subtitle}" TextAlignment="Center" VerticalAlignment="Center" Tapped="Sound_Click"></TextBlock>
+                            <TextBlock Text="{Binding Subtitle}" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Tapped="Sound_Click"></TextBlock>
                         </Grid>
                     </DataTemplate>
                     

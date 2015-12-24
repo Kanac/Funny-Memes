@@ -16,6 +16,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\SoundDataSource.cs" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Borat.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\PauseButton.PNG" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\PlayButton.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\AmericanCulture.jpg" />
@@ -26,6 +27,8 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Bush Explanation.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Do ladies work here.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Genqui.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\In My Country.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jagshemash.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\TwoAsians.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\WhitePeople.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)DataModel\Soundboard.json" />

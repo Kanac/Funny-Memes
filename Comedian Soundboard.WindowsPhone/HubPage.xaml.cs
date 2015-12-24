@@ -105,8 +105,7 @@ namespace Comedian_Soundboard
         private void Sound_Click(object sender, TappedRoutedEventArgs e)
         {
             SoundItem soundItem = (SoundItem)(((FrameworkElement)e.OriginalSource).DataContext);
-            //Audio.Source = new Uri(soundItem.SoundPath, UriKind.Relative);
-            Audio.Source = new Uri("ms-appx:///Assets/Sounds/Bush Explanation.mp3", UriKind.RelativeOrAbsolute);
+            Audio.Source = new Uri("ms-appx:///" + soundItem.SoundPath, UriKind.RelativeOrAbsolute);
 
             if (currentProgressBar != null){
                 timer.Stop();
@@ -148,7 +147,6 @@ namespace Comedian_Soundboard
             // Calling when media is opened otherwise NaturalDuration will not return a correct value
             Audio.Play();
             currentProgressBar.Value = 0;
-            currentProgressBar.Visibility = Visibility.Visible;
             double stepSize = Audio.NaturalDuration.TimeSpan.TotalMilliseconds / (100.0);
             timer.Interval = new TimeSpan(0, 0, 0, 0, (int)stepSize);
             timer.Start();
@@ -166,7 +164,7 @@ namespace Comedian_Soundboard
                 currentProgressBar.Value = 0;
             }
             else {
-                currentProgressBar.Value += 1;
+                currentProgressBar.Value = Audio.Position.TotalMilliseconds / Audio.NaturalDuration.TimeSpan.TotalMilliseconds * 100;
             }
         }
     }
