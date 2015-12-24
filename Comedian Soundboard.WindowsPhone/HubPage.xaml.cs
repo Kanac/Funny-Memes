@@ -111,13 +111,10 @@ namespace Comedian_Soundboard
             if (currentProgressBar != null){
                 timer.Stop();
                 timer.Tick -= Timer_Tick;
-                currentProgressBar.Visibility = Visibility.Collapsed;
+                currentProgressBar.Value = 0;
             }
 
-            currentProgressBar = ((FrameworkElement)e.OriginalSource).FindName("ProgressBar") as ProgressBar;
-            if (currentProgressBar == null)
-                currentProgressBar = (ProgressBar)e.OriginalSource;
-
+            currentProgressBar = ((FrameworkElement)sender).FindName("ProgressBar") as ProgressBar;
         }
         #region NavigationHelper registration
 
@@ -166,7 +163,7 @@ namespace Comedian_Soundboard
             {
                 timer.Stop();
                 timer.Tick -= Timer_Tick;
-                currentProgressBar.Visibility = Visibility.Collapsed;
+                currentProgressBar.Value = 0;
             }
             else {
                 currentProgressBar.Value += 1;
