@@ -13,22 +13,21 @@
     
 
     <Grid x:Name="LayoutRoot">
-        <MediaElement Name="Audio" AutoPlay="False" Visibility="Collapsed"></MediaElement>
+        <MediaElement Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
         
         <Grid DataContext="{Binding Category}">
             <GridView 
                 SelectionMode="None"
                 IsItemClickEnabled="True"
                 ItemsSource="{Binding SoundItems}"
-                ItemClick="Sound_Click"
                 HorizontalAlignment="Center"
                 ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                 <GridView.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
-                            <Border BorderBrush="Aqua" BorderThickness="1" Height="70" Width="100"></Border>
+                        <Grid IsTapEnabled="True" IsHitTestVisible="True">
                             <Rectangle Height="50" Width="100"></Rectangle>
-                            <TextBlock Text="{Binding Subtitle}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <ProgressBar x:Name="ProgressBar" Height="50" Width="100" Value="0" Tapped="Sound_Click"></ProgressBar>
+                            <TextBlock Text="{Binding Subtitle}" TextAlignment="Center" VerticalAlignment="Center" Tapped="Sound_Click"></TextBlock>
                         </Grid>
                     </DataTemplate>
                 </GridView.ItemTemplate>

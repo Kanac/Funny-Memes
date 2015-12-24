@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
@@ -23,6 +23,9 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\ConvincingIndians.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\EnglishAccents.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Russell Hub.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Bush Explanation.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Do ladies work here.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Genqui.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\TwoAsians.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\WhitePeople.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)DataModel\Soundboard.json" />

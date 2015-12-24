@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -33,6 +34,8 @@ namespace Comedian_Soundboard
         private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
         private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
+        private DispatcherTimer timer = new DispatcherTimer();
+        private ProgressBar currentProgressBar;
 
         public HubPage()
         {
@@ -46,6 +49,8 @@ namespace Comedian_Soundboard
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+
+
         }
 
         /// <summary>
@@ -78,9 +83,7 @@ namespace Comedian_Soundboard
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            // TODO: Create an appropriate data model for your problem domain to replace the sample data
-
-            // TODO: Change it so that MainPage invokes this and feeds comedian category to this page 
+            // Set data context of current comedian category
             string categoryId = (string)e.NavigationParameter;
             Category category = await SoundDataSource.GetCategoryAsync(categoryId);
             DefaultViewModel["Category"] = category;
@@ -99,19 +102,23 @@ namespace Comedian_Soundboard
             // TODO: Save the unique state of the page here.
         }
 
-
-        /// <summary>
-        /// Shows the details of an item clicked on in the <see cref="ItemPage"/>
-        /// </summary>
-        /// <param name="sender">The source of the click event.</param>
-        /// <param name="e">Defaults about the click event.</param>
-        private void Sound_Click(object sender, ItemClickEventArgs e)
+        private void Sound_Click(object sender, TappedRoutedEventArgs e)
         {
-            var soundItem = e.ClickedItem as SoundItem;
-            Audio.Source = new Uri(soundItem.SoundPath, UriKind.Relative);
-            Audio.Play();
-        }
+            SoundItem soundItem = (SoundItem)(((FrameworkElement)e.OriginalSource).DataContext);
+            //Audio.Source = new Uri(soundItem.SoundPath, UriKind.Relative);
+            Audio.Source = new Uri("ms-appx:///Assets/Sounds/Bush Explanation.mp3", UriKind.RelativeOrAbsolute);
 
+            if (currentProgressBar != null){
+                timer.Stop();
+                timer.Tick -= Timer_Tick;
+                currentProgressBar.Visibility = Visibility.Collapsed;
+            }
+
+            currentProgressBar = ((FrameworkElement)e.OriginalSource).FindName("ProgressBar") as ProgressBar;
+            if (currentProgressBar == null)
+                currentProgressBar = (ProgressBar)e.OriginalSource;
+
+        }
         #region NavigationHelper registration
 
         /// <summary>
@@ -137,5 +144,33 @@ namespace Comedian_Soundboard
         }
 
         #endregion
+
+        private void Audio_MediaOpened(object sender, RoutedEventArgs e)
+        {
+            // Update progress bar of audio at 100 hz 
+            // Calling when media is opened otherwise NaturalDuration will not return a correct value
+            Audio.Play();
+            currentProgressBar.Value = 0;
+            currentProgressBar.Visibility = Visibility.Visible;
+            double stepSize = Audio.NaturalDuration.TimeSpan.TotalMilliseconds / (100.0);
+            timer.Interval = new TimeSpan(0, 0, 0, 0, (int)stepSize);
+            timer.Start();
+            timer.Tick += Timer_Tick;
+
+
+        }
+
+        private void Timer_Tick(object sender, object e)
+        {
+            if (Audio.Position.TotalMilliseconds >= Audio.NaturalDuration.TimeSpan.TotalMilliseconds)
+            {
+                timer.Stop();
+                timer.Tick -= Timer_Tick;
+                currentProgressBar.Visibility = Visibility.Collapsed;
+            }
+            else {
+                currentProgressBar.Value += 1;
+            }
+        }
     }
 }
