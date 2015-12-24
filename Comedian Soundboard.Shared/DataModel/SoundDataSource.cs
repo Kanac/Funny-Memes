@@ -23,13 +23,13 @@ namespace Comedian_Soundboard.Data
     /// </summary>
     public class SoundItem
     {
-        public SoundItem(String uniqueId, String title, String subtitle, String imagePath, String description, String content)
+        public SoundItem(String uniqueId, String title, String subtitle, String soundPath, String description, String content)
         {
             this.UniqueId = uniqueId;
             this.Title = title;
             this.Subtitle = subtitle;
             this.Description = description;
-            this.ImagePath = imagePath;
+            this.SoundPath = soundPath;
             this.Content = content;
         }
 
@@ -37,21 +37,12 @@ namespace Comedian_Soundboard.Data
         public string Title { get; private set; }
         public string Subtitle { get; private set; }
         public string Description { get; private set; }
-        public string ImagePath { get; private set; }
+        public string SoundPath { get; private set; }
         public string Content { get; private set; }
 
         public override string ToString()
         {
             return this.Title;
-        }
-
-        public void UsingPauseButton(){
-            this.ImagePath = "Assets/PauseButton";
-        }
-
-        public void UsingPlayButton()
-        {
-            this.ImagePath = "Assets/PlayButton";
         }
     }
 
@@ -151,7 +142,7 @@ namespace Comedian_Soundboard.Data
                     group.SoundItems.Add(new SoundItem(itemObject["UniqueId"].GetString(),
                                                        itemObject["Title"].GetString(),
                                                        itemObject["Subtitle"].GetString(),
-                                                       itemObject["ImagePath"].GetString(),
+                                                       itemObject["SoundPath"].GetString(),
                                                        itemObject["Description"].GetString(),
                                                        itemObject["Content"].GetString()));
                 }
