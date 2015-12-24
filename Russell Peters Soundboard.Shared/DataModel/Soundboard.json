@@ -5,7 +5,7 @@
     "Subtitle": "Group subtitle: 1",
     "ImagePath": "Assets/DarkGray.png",
     "Description" : "Group Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor scelerisque lorem in vehicula. Aliquam tincidunt, lacus ut sagittis tristique, turpis massa volutpat augue, eu rutrum ligula ante a ante",
-    "Items":
+    "SoundItems":
     [
       {
         "UniqueId": "Group-1-Item-1",
@@ -55,7 +55,7 @@
     "Subtitle": "Group subtitle: 2",
     "ImagePath": "Assets/LightGray.png",
     "Description" : "Group Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor scelerisque lorem in vehicula. Aliquam tincidunt, lacus ut sagittis tristique, turpis massa volutpat augue, eu rutrum ligula ante a ante",
-    "Items":
+    "SoundItems":
     [
       {
         "UniqueId": "Group-2-Item-1",
@@ -89,7 +89,7 @@
     "Subtitle": "Group subtitle: 3",
     "ImagePath": "Assets/MediumGray.png",
     "Description" : "Group Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor scelerisque lorem in vehicula. Aliquam tincidunt, lacus ut sagittis tristique, turpis massa volutpat augue, eu rutrum ligula ante a ante",
-    "Items":
+    "SoundItems":
     [
       {
         "UniqueId": "Group-3-Item-1",
@@ -155,7 +155,7 @@
     "Subtitle": "Group subtitle: 4",
     "ImagePath": "Assets/MediumGray.png",
     "Description" : "Group Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor scelerisque lorem in vehicula. Aliquam tincidunt, lacus ut sagittis tristique, turpis massa volutpat augue, eu rutrum ligula ante a ante",
-    "Items":
+    "SoundItems":
     [
       {
         "UniqueId": "Group-4-Item-1",
@@ -213,7 +213,7 @@
     "Subtitle": "Group subtitle: 5",
     "ImagePath": "Assets/MediumGray.png",
     "Description" : "Group Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor scelerisque lorem in vehicula. Aliquam tincidunt, lacus ut sagittis tristique, turpis massa volutpat augue, eu rutrum ligula ante a ante",
-    "Items":
+    "SoundItems":
     [
       {
         "UniqueId": "Group-5-Item-1",
@@ -255,7 +255,7 @@
     "Subtitle": "Group subtitle: 6",
     "ImagePath": "Assets/MediumGray.png",
     "Description" : "Group Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor scelerisque lorem in vehicula. Aliquam tincidunt, lacus ut sagittis tristique, turpis massa volutpat augue, eu rutrum ligula ante a ante",
-    "Items":
+    "SoundItems":
     [
       {
         "UniqueId": "Group-6-Item-1",

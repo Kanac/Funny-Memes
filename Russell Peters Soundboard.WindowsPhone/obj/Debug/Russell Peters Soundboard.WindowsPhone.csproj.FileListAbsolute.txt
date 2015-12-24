@@ -1,0 +1,47 @@
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\bin\Debug\App.xbf
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\bin\Debug\HubPage.xbf
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\bin\Debug\MainPage.xbf
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\bin\Debug\SectionPage.xbf
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\bin\Debug\ItemPage.xbf
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\bin\Debug\Russell Peters Soundboard.WindowsPhone.xr.xml
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\bin\Debug\Russell Peters Soundboard.WindowsPhone.exe
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\bin\Debug\Russell Peters Soundboard.WindowsPhone.pdb
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\bin\Debug\resources.pri
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\bin\Debug\AppxManifest.xml
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\bin\Debug\Russell Peters Soundboard.WindowsPhone.build.appxrecipe
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\App.g.i.cs
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\App.g.cs
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\HubPage.g.i.cs
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\HubPage.g.cs
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\MainPage.g.i.cs
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\MainPage.g.cs
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\SectionPage.g.i.cs
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\SectionPage.g.cs
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\ItemPage.g.i.cs
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\ItemPage.g.cs
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\XamlTypeInfo.g.cs
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\App.xaml
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\MainPage.xaml
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\SectionPage.xaml
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\ItemPage.xaml
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\App.xbf
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\MainPage.xbf
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\SectionPage.xbf
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\ItemPage.xbf
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\XamlSaveStateFile.xml
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\HubPage.xaml
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\HubPage.xbf
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\Russell Peters Soundboard.WindowsPhone.exe
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\Russell Peters Soundboard.WindowsPhone.pdb
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\priconfig.xml
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\priconfig.xml.intermediate
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\layout.resfiles
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\layout.resfiles.intermediate
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\resources.resfiles
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\resources.resfiles.intermediate
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\pri.resfiles
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\pri.resfiles.intermediate
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\qualifiers.txt
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\qualifiers.txt.intermediate
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Russell Peters Soundboard\Russell Peters Soundboard\Russell Peters Soundboard.WindowsPhone\obj\Debug\ProjectArchitectures.txt

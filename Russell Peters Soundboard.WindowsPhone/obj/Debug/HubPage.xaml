@@ -72,11 +72,11 @@
     <Grid x:Name="LayoutRoot">
         <MediaElement Name="Audio" AutoPlay="False" Visibility="Collapsed"></MediaElement>
         <Grid DataContext="{Binding Groups[3]}">
-            <GridView 
+            <GridView x:ConnectionId='1' 
                 SelectionMode="None"
                 IsItemClickEnabled="True"
                 ItemsSource="{Binding SoundItems}"
-                ItemClick="ItemView_ItemClick"
+                                              
                 ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                 <GridView.ItemTemplate>
                     <DataTemplate>
@@ -89,3 +89,4 @@
         </Grid>
     </Grid>
 </Page>
+

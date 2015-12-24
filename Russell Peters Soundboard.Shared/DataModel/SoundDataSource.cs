@@ -145,7 +145,7 @@ namespace Russell_Peters_Soundboard.Data
                                                             groupObject["ImagePath"].GetString(),
                                                             groupObject["Description"].GetString());
 
-                foreach (JsonValue itemValue in groupObject["Items"].GetArray())
+                foreach (JsonValue itemValue in groupObject["SoundItems"].GetArray())
                 {
                     JsonObject itemObject = itemValue.GetObject();
                     group.SoundItems.Add(new SoundItem(itemObject["UniqueId"].GetString(),
