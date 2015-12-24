@@ -15,7 +15,7 @@
     <Grid x:Name="LayoutRoot">
         <MediaElement Name="Audio" AutoPlay="False" Visibility="Collapsed"></MediaElement>
         
-        <Grid DataContext="{Binding Groups[3]}">
+        <Grid DataContext="{Binding Category}">
             <GridView 
                 SelectionMode="None"
                 IsItemClickEnabled="True"

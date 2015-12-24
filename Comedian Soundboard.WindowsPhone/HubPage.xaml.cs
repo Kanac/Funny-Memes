@@ -81,8 +81,9 @@ namespace Comedian_Soundboard
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
 
             // TODO: Change it so that MainPage invokes this and feeds comedian category to this page 
-            var groups = await SoundDataSource.GetCategoryAsync();
-            this.DefaultViewModel["Groups"] = groups;
+            string categoryId = (string)e.NavigationParameter;
+            Category category = await SoundDataSource.GetCategoryAsync(categoryId);
+            DefaultViewModel["Category"] = category;
         }
 
         /// <summary>

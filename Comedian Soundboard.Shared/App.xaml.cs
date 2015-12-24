@@ -110,7 +110,7 @@ namespace Comedian_Soundboard
                 // parameter
 
                 // Configure initial page here. Navigation stack isn't restored means (i.e in alt tab mode).
-                if (!rootFrame.Navigate(typeof(HubPage), e.Arguments))
+                if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
                 {
                     throw new Exception("Failed to create initial page");
                 }
