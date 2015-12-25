@@ -44,11 +44,9 @@
                 <GridView.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="3,3,3,3">
-                            <Border BorderBrush="{ThemeResource PhoneAccentBrush}" 
-                                    BorderThickness="1" 
+                            <Border BorderThickness="1" 
                                     Loaded="Border_Loaded"
                                     Tapped="Sound_Click">
-                                
                             </Border>
                             
                             <ProgressBar x:Name="ProgressBar" 

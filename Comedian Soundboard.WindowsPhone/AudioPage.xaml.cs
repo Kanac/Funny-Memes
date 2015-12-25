@@ -43,6 +43,7 @@ namespace Comedian_Soundboard
         private DispatcherTimer timer = new DispatcherTimer();
         private ProgressBar currentProgressBar;
         private Brush initColour;
+        private Random random = new Random();
 
         public AudioPage()
         {
@@ -224,14 +225,18 @@ namespace Comedian_Soundboard
 
         private void Border_Loaded(object sender, RoutedEventArgs e)
         {
-            (sender as Border).Width = Window.Current.Bounds.Width * .22;
-            (sender as Border).Height = Window.Current.Bounds.Width * .22;
+            Border border = (Border)sender;
+            border.Width = Window.Current.Bounds.Width * .22;
+            border.Height = Window.Current.Bounds.Width * .22;
+            Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
+            border.BorderBrush = new SolidColorBrush(color);
         }
 
         private void ProgressBar_Loaded(object sender, RoutedEventArgs e)
         {
-            (sender as ProgressBar).Width = Window.Current.Bounds.Width * .22;
-            (sender as ProgressBar).Height = Window.Current.Bounds.Width * .22;
+            ProgressBar progressBar = (ProgressBar)sender;
+            progressBar.Width = Window.Current.Bounds.Width * .22;
+            progressBar.Height = Window.Current.Bounds.Width * .22;
         }
 
         private void Subtitle_Loaded(object sender, RoutedEventArgs e)
