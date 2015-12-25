@@ -145,5 +145,15 @@ namespace Comedian_Soundboard
             await SuspensionManager.SaveAsync();
             deferral.Complete();
         }
+
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            var root = Window.Current.Content as Frame;
+            var mainPage = root.Content as Main;
+            if (mainPage != null && args is FileSavePickerContinuationEventArgs)
+            {
+                mainPage.ContinueFileOpenPicker(args as FileSavePickerContinuationEventArgs);
+            }
+        }
     }
 }

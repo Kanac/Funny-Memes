@@ -9,24 +9,37 @@
     d:DataContext="{Binding Source={d:DesignData Source=../Comedian Soundboard.Shared/DataModel/Soundboard.json, Type=data:SoundDataSource}}"
     xmlns:data="using:Comedian_Soundboard.Data"
     mc:Ignorable="d">
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <SlideNavigationTransitionInfo/>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
 
-    
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="Save" Label="Ringtone" Click="Save_Clicked" />
+        </CommandBar>
+    </Page.BottomAppBar>
 
     <Grid x:Name="LayoutRoot">
         <MediaElement Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
         
         <Grid DataContext="{Binding Category}">
-            <GridView 
-                SelectionMode="None"
+            <GridView x:Name="AudioGridView"
+                SelectionMode="Single"
                 IsItemClickEnabled="True"
                 ItemsSource="{Binding SoundItems}"
                 HorizontalAlignment="Center"
-                ContinuumNavigationTransitionInfo.ExitElementContainer="True">
+                ContinuumNavigationTransitionInfo.ExitElementContainer="False">
                 <GridView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <Border BorderBrush="{ThemeResource PhoneAccentBrush}" BorderThickness="1" Height="50" Width="100" Tapped="Sound_Click"></Border>
-                            <ProgressBar x:Name="ProgressBar" Height="50" Width="100" Value="0" Tapped="Sound_Click"></ProgressBar>
+                            <Border BorderBrush="{ThemeResource PhoneAccentBrush}" BorderThickness="1" Height="100" Width="100" Tapped="Sound_Click"></Border>
+                            <ProgressBar x:Name="ProgressBar" Height="100" Width="100" Value="0" Tapped="Sound_Click" ></ProgressBar>
                             <TextBlock Text="{Binding Subtitle}" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Tapped="Sound_Click"></TextBlock>
                         </Grid>
                     </DataTemplate>

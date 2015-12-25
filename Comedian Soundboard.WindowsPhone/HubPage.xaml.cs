@@ -6,10 +6,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.Provider;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -101,20 +106,7 @@ namespace Comedian_Soundboard
         {
             // TODO: Save the unique state of the page here.
         }
-
-        private void Sound_Click(object sender, TappedRoutedEventArgs e)
-        {
-            SoundItem soundItem = (SoundItem)(((FrameworkElement)e.OriginalSource).DataContext);
-            Audio.Source = new Uri("ms-appx:///" + soundItem.SoundPath, UriKind.RelativeOrAbsolute);
-
-            if (currentProgressBar != null){
-                timer.Stop();
-                timer.Tick -= Timer_Tick;
-                currentProgressBar.Value = 0;
-            }
-
-            currentProgressBar = ((FrameworkElement)sender).FindName("ProgressBar") as ProgressBar;
-        }
+        
         #region NavigationHelper registration
 
         /// <summary>
@@ -136,10 +128,25 @@ namespace Comedian_Soundboard
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            Audio.Source = null;
             this.navigationHelper.OnNavigatedFrom(e);
         }
 
         #endregion
+        private void Sound_Click(object sender, TappedRoutedEventArgs e)
+        {
+            SoundItem soundItem = (SoundItem)(((FrameworkElement)e.OriginalSource).DataContext);
+            Audio.Source = new Uri("ms-appx:///" +  soundItem.SoundPath, UriKind.RelativeOrAbsolute);
+
+            if (currentProgressBar != null)
+            {
+                timer.Stop();
+                timer.Tick -= Timer_Tick;
+                currentProgressBar.Value = 0;
+            }
+
+            currentProgressBar = ((FrameworkElement)sender).FindName("ProgressBar") as ProgressBar;
+        }
 
         private void Audio_MediaOpened(object sender, RoutedEventArgs e)
         {
@@ -165,6 +172,38 @@ namespace Comedian_Soundboard
             }
             else {
                 currentProgressBar.Value = Audio.Position.TotalMilliseconds / Audio.NaturalDuration.TimeSpan.TotalMilliseconds * 100;
+            }
+        }
+
+        private async void Save_Clicked(object sender, RoutedEventArgs e)
+        {
+            FileSavePicker fileSavePicker = new FileSavePicker();
+            SoundItem selectedSound = currentProgressBar.DataContext as SoundItem;
+            if (selectedSound == null)
+                return;
+
+            Uri audioPath = new Uri("ms-appx:///" + selectedSound.SoundPath);
+            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(audioPath);
+
+            fileSavePicker.SuggestedSaveFile = file;
+            fileSavePicker.SuggestedStartLocation = PickerLocationId.ComputerFolder;
+            fileSavePicker.SuggestedFileName = selectedSound.Subtitle;
+            fileSavePicker.ContinuationData.Add("SourcePath", audioPath);
+            fileSavePicker.FileTypeChoices.Add("MP3", new List<string>() { ".mp3" });
+            fileSavePicker.PickSaveFileAndContinue();
+        }
+
+        internal async void ContinueFileOpenPicker(FileSavePickerContinuationEventArgs e)
+        {
+            var file = e.File;
+            String soundPath = (string)e.ContinuationData["SourcePath"];
+
+            if (file != null)
+            {
+                CachedFileManager.DeferUpdates(file);
+                StorageFile srcFile = await StorageFile.GetFileFromPathAsync(soundPath);
+                await srcFile.CopyAndReplaceAsync(file);
+                FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
             }
         }
     }
