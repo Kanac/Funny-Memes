@@ -58,7 +58,7 @@ namespace Comedian_Soundboard
         {
             VibrationDevice testVibrationDevice = VibrationDevice.GetDefault();
             testVibrationDevice.Vibrate(TimeSpan.FromSeconds(1));
-            Frame.Navigate(typeof(HubPage), ((Category)e.ClickedItem).UniqueId);
+            Frame.Navigate(typeof(AudioPage), ((Category)e.ClickedItem).UniqueId);
         }
     }
 }

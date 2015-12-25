@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Comedian_Soundboard.HubPage"
+    x:Class="Comedian_Soundboard.AudioPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Comedian_Soundboard"
@@ -30,7 +30,6 @@
         
         <Grid DataContext="{Binding Category}">
             <GridView x:Name="AudioGridView"
-                SelectionMode="Single"
                 IsItemClickEnabled="True"
                 ItemsSource="{Binding SoundItems}"
                 HorizontalAlignment="Center"
@@ -43,7 +42,6 @@
                             <TextBlock Text="{Binding Subtitle}" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Tapped="Sound_Click"></TextBlock>
                         </Grid>
                     </DataTemplate>
-                    
                 </GridView.ItemTemplate>
             </GridView>
             

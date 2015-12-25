@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -15,7 +16,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using Windows.Storage;
+
 using Comedian_Soundboard.Common;
+
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -53,8 +57,7 @@ namespace Comedian_Soundboard
             {
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
-#endif
-
+ #endif
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -145,11 +148,10 @@ namespace Comedian_Soundboard
             await SuspensionManager.SaveAsync();
             deferral.Complete();
         }
-
         protected override void OnActivated(IActivatedEventArgs args)
         {
             var root = Window.Current.Content as Frame;
-            var mainPage = root.Content as Main;
+            var mainPage = root.Content as AudioPage;
             if (mainPage != null && args is FileSavePickerContinuationEventArgs)
             {
                 mainPage.ContinueFileOpenPicker(args as FileSavePickerContinuationEventArgs);

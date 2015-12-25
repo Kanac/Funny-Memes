@@ -34,7 +34,7 @@ namespace Comedian_Soundboard
     /// <summary>
     /// A page that displays a grouped collection of items.
     /// </summary>
-    public sealed partial class HubPage : Page
+    public sealed partial class AudioPage : Page
     {
         private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -42,7 +42,7 @@ namespace Comedian_Soundboard
         private DispatcherTimer timer = new DispatcherTimer();
         private ProgressBar currentProgressBar;
 
-        public HubPage()
+        public AudioPage()
         {
             this.InitializeComponent();
 
@@ -186,9 +186,8 @@ namespace Comedian_Soundboard
             StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(audioPath);
 
             fileSavePicker.SuggestedSaveFile = file;
-            fileSavePicker.SuggestedStartLocation = PickerLocationId.ComputerFolder;
             fileSavePicker.SuggestedFileName = selectedSound.Subtitle;
-            fileSavePicker.ContinuationData.Add("SourcePath", audioPath);
+            fileSavePicker.ContinuationData.Add("SourcePath", audioPath.AbsolutePath);
             fileSavePicker.FileTypeChoices.Add("MP3", new List<string>() { ".mp3" });
             fileSavePicker.PickSaveFileAndContinue();
         }
@@ -196,12 +195,13 @@ namespace Comedian_Soundboard
         internal async void ContinueFileOpenPicker(FileSavePickerContinuationEventArgs e)
         {
             var file = e.File;
-            String soundPath = (string)e.ContinuationData["SourcePath"];
+            String audioPath = (string)e.ContinuationData["SourcePath"];
 
             if (file != null)
             {
                 CachedFileManager.DeferUpdates(file);
-                StorageFile srcFile = await StorageFile.GetFileFromPathAsync(soundPath);
+                Uri audioPathUri = new Uri("ms-appx://" + audioPath);
+                StorageFile srcFile = await StorageFile.GetFileFromApplicationUriAsync(audioPathUri);
                 await srcFile.CopyAndReplaceAsync(file);
                 FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
             }
