@@ -15,6 +15,7 @@ using Windows.Graphics.Display;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Provider;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -41,6 +42,7 @@ namespace Comedian_Soundboard
         private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
         private DispatcherTimer timer = new DispatcherTimer();
         private ProgressBar currentProgressBar;
+        private Brush initColour;
 
         public AudioPage()
         {
@@ -177,11 +179,12 @@ namespace Comedian_Soundboard
 
         private async void Save_Clicked(object sender, RoutedEventArgs e)
         {
-            FileSavePicker fileSavePicker = new FileSavePicker();
-            SoundItem selectedSound = currentProgressBar.DataContext as SoundItem;
-            if (selectedSound == null)
+            if (currentProgressBar == null)
                 return;
 
+            FileSavePicker fileSavePicker = new FileSavePicker();
+            SoundItem selectedSound = currentProgressBar.DataContext as SoundItem;
+         
             Uri audioPath = new Uri("ms-appx:///" + selectedSound.SoundPath);
             StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(audioPath);
 
@@ -205,6 +208,17 @@ namespace Comedian_Soundboard
                 await srcFile.CopyAndReplaceAsync(file);
                 FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
             }
+        }
+        private void Pointer_Pressed(object sender, PointerRoutedEventArgs e)
+        {
+            ProgressBar progressBar = sender as ProgressBar;
+            initColour = progressBar.Background;
+            progressBar.Background = new SolidColorBrush((Color)Application.Current.Resources["SystemColorControlAccentColor"]);
+        }
+
+        private void Pointer_Released(object sender, PointerRoutedEventArgs e)
+        {
+            (sender as ProgressBar).Background = initColour;
         }
     }
 }
