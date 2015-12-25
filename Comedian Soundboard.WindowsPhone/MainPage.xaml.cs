@@ -6,11 +6,13 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Email;
+using Windows.ApplicationModel.Store;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
 using Windows.Phone.Devices.Notification;
 using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -29,6 +31,7 @@ namespace Comedian_Soundboard
     public sealed partial class MainPage : Page
     {
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
         private Random random = new Random();
 
         /// <summary>
@@ -55,6 +58,7 @@ namespace Comedian_Soundboard
         {
             var groups = await SoundDataSource.GetCategoryAsync();
             this.DefaultViewModel["Groups"] = groups;
+            reviewApp();
         }
 
         private void Group_Click(object sender, ItemClickEventArgs e)
@@ -74,9 +78,9 @@ namespace Comedian_Soundboard
             await EmailManager.ShowComposeNewEmailAsync(mail);
         }
 
-        private void Rate_Click(object sender, RoutedEventArgs e)
+        private async void Rate_Click(object sender, RoutedEventArgs e)
         {
-
+            await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + CurrentApp.AppId));
         }
 
         private async void Lucky_Click(object sender, RoutedEventArgs e)
@@ -98,6 +102,37 @@ namespace Comedian_Soundboard
             (sender as Border).BorderBrush = new SolidColorBrush(color);
         }
 
-        
+        private async void reviewApp()
+        {
+            if (!localSettings.Values.ContainsKey("Views"))
+                localSettings.Values.Add(new KeyValuePair<string, object>("Views", 3));
+            else
+                localSettings.Values["Views"] = 1 + Convert.ToInt32(localSettings.Values["Views"]);
+
+            int viewCount = Convert.ToInt32(localSettings.Values["Views"]);
+
+
+            // Only ask for review up to several times, once every 4 times this page is visited, and do not ask anymore once reviewed
+            if (viewCount % 4 == 0 && viewCount <= 50 && Convert.ToInt32(localSettings.Values["Rate"]) != 1)
+            {
+                var reviewBox = new MessageDialog("Keep updates coming by rating this app 5 stars to support us!");
+                reviewBox.Commands.Add(new UICommand { Label = "Yes! :)", Id = 0 });
+                reviewBox.Commands.Add(new UICommand { Label = "Maybe later", Id = 1 });
+
+                try
+                {
+                    var reviewResult = await reviewBox.ShowAsync();
+                    if ((int)reviewResult.Id == 0)
+                    {
+                        try { await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + CurrentApp.AppId)); }
+                        catch (Exception) { }
+                        localSettings.Values["Rate"] = 1;
+                    }
+                }
+                catch (Exception) { }
+            }
+        }
+
+
     }
 }
