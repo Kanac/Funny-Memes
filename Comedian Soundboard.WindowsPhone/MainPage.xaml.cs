@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Email;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
@@ -57,8 +58,18 @@ namespace Comedian_Soundboard
         private void Group_Click(object sender, ItemClickEventArgs e)
         {
             VibrationDevice testVibrationDevice = VibrationDevice.GetDefault();
-            testVibrationDevice.Vibrate(TimeSpan.FromSeconds(1));
+            testVibrationDevice.Vibrate(TimeSpan.FromSeconds(0.15));
             Frame.Navigate(typeof(AudioPage), ((Category)e.ClickedItem).UniqueId);
+        }
+
+        private async void Comment_Click(object sender, RoutedEventArgs e)
+        {
+            EmailRecipient sendTo = new EmailRecipient() { Address = "testgglol@outlook.com" };
+            EmailMessage mail = new EmailMessage();
+
+            mail.Subject = "Comedian Suggestion for Comedy Soundboard";
+            mail.To.Add(sendTo);
+            await EmailManager.ShowComposeNewEmailAsync(mail);
         }
     }
 }

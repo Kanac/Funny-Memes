@@ -211,6 +211,7 @@ namespace Comedian_Soundboard
         }
         private void Pointer_Pressed(object sender, PointerRoutedEventArgs e)
         {
+            var test = Window.Current.Bounds;
             ProgressBar progressBar = sender as ProgressBar;
             initColour = progressBar.Background;
             progressBar.Background = new SolidColorBrush((Color)Application.Current.Resources["SystemColorControlAccentColor"]);
@@ -219,6 +220,23 @@ namespace Comedian_Soundboard
         private void Pointer_Released(object sender, PointerRoutedEventArgs e)
         {
             (sender as ProgressBar).Background = initColour;
+        }
+
+        private void Border_Loaded(object sender, RoutedEventArgs e)
+        {
+            (sender as Border).Width = Window.Current.Bounds.Width * .22;
+            (sender as Border).Height = Window.Current.Bounds.Width * .22;
+        }
+
+        private void ProgressBar_Loaded(object sender, RoutedEventArgs e)
+        {
+            (sender as ProgressBar).Width = Window.Current.Bounds.Width * .22;
+            (sender as ProgressBar).Height = Window.Current.Bounds.Width * .22;
+        }
+
+        private void Subtitle_Loaded(object sender, RoutedEventArgs e)
+        {
+            (sender as TextBlock).Width = Window.Current.Bounds.Width * .20;
         }
     }
 }

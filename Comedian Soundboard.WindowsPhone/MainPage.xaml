@@ -20,6 +20,14 @@
         </TransitionCollection>
     </Page.Transitions>
 
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="Comment"
+                          Label="Send Feedback"
+                          Click="Comment_Click">
+            </AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
     <Grid>
         <ListView SelectionMode="None"
                   ItemsSource="{Binding Groups}"
