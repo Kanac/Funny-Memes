@@ -10,6 +10,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
 using Windows.Phone.Devices.Notification;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -28,6 +29,7 @@ namespace Comedian_Soundboard
     public sealed partial class MainPage : Page
     {
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private Random random = new Random();
 
         /// <summary>
         /// Gets the view model for this <see cref="Page"/>.
@@ -58,7 +60,7 @@ namespace Comedian_Soundboard
         private void Group_Click(object sender, ItemClickEventArgs e)
         {
             VibrationDevice testVibrationDevice = VibrationDevice.GetDefault();
-            testVibrationDevice.Vibrate(TimeSpan.FromSeconds(0.15));
+            testVibrationDevice.Vibrate(TimeSpan.FromMilliseconds(150));
             Frame.Navigate(typeof(AudioPage), ((Category)e.ClickedItem).UniqueId);
         }
 
@@ -70,6 +72,22 @@ namespace Comedian_Soundboard
             mail.Subject = "Comedian Suggestion for Comedy Soundboard";
             mail.To.Add(sendTo);
             await EmailManager.ShowComposeNewEmailAsync(mail);
+        }
+
+        private void Rate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Lucky_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Border_Loaded(object sender, RoutedEventArgs e)
+        {
+            Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
+            (sender as Border).BorderBrush = new SolidColorBrush(color);
         }
     }
 }

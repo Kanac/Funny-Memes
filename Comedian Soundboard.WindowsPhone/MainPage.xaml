@@ -22,10 +22,13 @@
 
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton Icon="Comment"
+            <AppBarButton Icon="Mail"
                           Label="Send Feedback"
-                          Click="Comment_Click">
-            </AppBarButton>
+                          Click="Comment_Click"/>
+            <AppBarButton Label="Rate App"
+                          Click="Rate_Click" Icon="SolidStar"/>
+            <AppBarButton Label="Feeling Lucky"
+                          Click="Lucky_Click" Icon="Rotate"/>
         </CommandBar>
     </Page.BottomAppBar>
     <Grid>
@@ -38,9 +41,26 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,30,0,0">
-                        <TextBlock Text="{Binding Title}" FontSize="20" Margin="20,0,0,0" TextAlignment="Center" VerticalAlignment="Top"></TextBlock>
-                        <Border BorderBrush="White" BorderThickness="2" Height="300" Width="300"></Border>
-                        <Image Source="{Binding ImagePath}" Width="250" Height="250" Stretch="Fill"></Image>
+                        <TextBlock 
+                            Text="{Binding Title}" 
+                            FontSize="25" 
+                            TextAlignment="Center" 
+                            VerticalAlignment="Top"
+                            Margin="0,3,0,0">
+                        </TextBlock>
+                        <Border 
+                            Loaded="Border_Loaded"
+                            BorderThickness="2" 
+                            Height="300"
+                            Width="280">
+                        </Border>
+                        <Image 
+                            Source="{Binding ImagePath}" 
+                            Width="250" 
+                            Height="250" 
+                            Stretch="Fill" 
+                            Margin="0,30,0,0">
+                        </Image>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

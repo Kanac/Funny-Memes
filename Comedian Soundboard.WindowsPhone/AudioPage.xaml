@@ -36,7 +36,7 @@
                 ContinuumNavigationTransitionInfo.ExitElementContainer="False">
                 <GridView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="5,5,5,5">
+                        <Grid Margin="3,3,3,3">
                             <Border BorderBrush="{ThemeResource PhoneAccentBrush}" 
                                     BorderThickness="1" 
                                     Loaded="Border_Loaded"
