@@ -8,6 +8,7 @@
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     d:DataContext="{Binding Source={d:DesignData Source=../Comedian Soundboard.Shared/DataModel/Soundboard.json, Type=data:SoundDataSource}}"
     xmlns:data="using:Comedian_Soundboard.Data"
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -29,6 +30,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height=".85*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         
         <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
@@ -48,7 +50,7 @@
                                     Loaded="Border_Loaded"
                                     Tapped="Sound_Click">
                             </Border>
-                            
+
                             <ProgressBar x:Name="ProgressBar" 
                                          PointerPressed="Pointer_Pressed"
                                          PointerReleased="Pointer_Released" 
@@ -61,7 +63,7 @@
                                          Loaded="ProgressBar_Loaded"
                                          Tapped="Sound_Click">
                             </ProgressBar>
-                            
+
                             <TextBlock Text="{Binding Subtitle}" 
                                        TextAlignment="Center" 
                                        TextWrapping="Wrap" 
@@ -72,11 +74,24 @@
                             </TextBlock>
                         </Grid>
                     </DataTemplate>
-                    
+
                 </GridView.ItemTemplate>
             </GridView>
-            
-            
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
+        </Grid>
+        <Grid Grid.Row="2" Margin="0,45,0,0">
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
         </Grid>
     </Grid>
 </Page>

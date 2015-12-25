@@ -5,6 +5,7 @@
     xmlns:local="using:Comedian_Soundboard"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     d:DataContext="{Binding Source={d:DesignData Source=../Comedian Soundboard.Shared/DataModel/Soundboard.json, Type=data:SoundDataSource}}"
     xmlns:data="using:Comedian_Soundboard.Data"
@@ -32,6 +33,11 @@
         </CommandBar>
     </Page.BottomAppBar>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        
         <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
 
         <ListView SelectionMode="None"
@@ -72,5 +78,20 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <Grid Grid.Row="1">
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />
+        </Grid>
+        <Grid Grid.Row="1" Margin="0,45,0,0">
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />
+        </Grid>
     </Grid>
 </Page>
