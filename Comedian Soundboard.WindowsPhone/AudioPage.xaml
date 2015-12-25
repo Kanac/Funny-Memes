@@ -26,9 +26,16 @@
     </Page.BottomAppBar>
 
     <Grid x:Name="LayoutRoot">
-        <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height=".85*"></RowDefinition>
+        </Grid.RowDefinitions>
         
-        <Grid DataContext="{Binding Category}">
+        <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
+
+        <TextBlock FontSize="25" TextAlignment="Center" Text="{Binding Category.Title}"></TextBlock>
+        
+        <Grid DataContext="{Binding Category}" Grid.Row="1">
             <GridView x:Name="AudioGridView"
                 IsItemClickEnabled="True"
                 ItemsSource="{Binding SoundItems}"

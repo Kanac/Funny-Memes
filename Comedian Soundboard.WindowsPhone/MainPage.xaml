@@ -36,11 +36,16 @@
                   ItemsSource="{Binding Groups}"
                   IsItemClickEnabled="True"
                   ItemClick="Group_Click"
-                  HorizontalAlignment="Center"
                   ContinuumNavigationTransitionInfo.ExitElementContainer="True">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment"
+                                        Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="0,30,0,0">
+                    <Grid Margin="0,30,0,0" HorizontalAlignment="Center" >
                         <TextBlock 
                             Text="{Binding Title}" 
                             FontSize="25" 
