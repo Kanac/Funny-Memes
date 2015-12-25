@@ -32,6 +32,8 @@
         </CommandBar>
     </Page.BottomAppBar>
     <Grid>
+        <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
+
         <ListView SelectionMode="None"
                   ItemsSource="{Binding Groups}"
                   IsItemClickEnabled="True"

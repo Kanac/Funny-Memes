@@ -79,9 +79,17 @@ namespace Comedian_Soundboard
 
         }
 
-        private void Lucky_Click(object sender, RoutedEventArgs e)
+        private async void Lucky_Click(object sender, RoutedEventArgs e)
         {
+            IEnumerable<Category> comedians = await SoundDataSource.GetCategoryAsync();
+            Category randComedian = comedians.ElementAt(random.Next(0, comedians.Count()));
+            SoundItem randSound = randComedian.SoundItems.ElementAt(random.Next(0, randComedian.SoundItems.Count()));
+            Audio.Source = new Uri("ms-appx:///" + randSound.SoundPath, UriKind.RelativeOrAbsolute);
 
+        }
+        private void Audio_MediaOpened(object sender, RoutedEventArgs e)
+        {
+            Audio.Play();
         }
 
         private void Border_Loaded(object sender, RoutedEventArgs e)
@@ -89,5 +97,7 @@ namespace Comedian_Soundboard
             Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
             (sender as Border).BorderBrush = new SolidColorBrush(color);
         }
+
+        
     }
 }
