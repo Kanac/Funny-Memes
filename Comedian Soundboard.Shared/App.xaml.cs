@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
 
 using Comedian_Soundboard.Common;
+using Microsoft.ApplicationInsights;
 
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
@@ -40,6 +41,8 @@ namespace Comedian_Soundboard
         /// </summary>
         public App()
         {
+            WindowsAppInitializer.InitializeAsync();
+
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
         }
