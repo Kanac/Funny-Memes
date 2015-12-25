@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\SoundDataSource.cs" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Borat.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Dave Chappelle.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Jack Black.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Jeff Dunham.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Jim Carrey.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\PauseButton.PNG" />
@@ -57,25 +58,25 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Borat\Wow wow wee waa.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Borat\Yes 2.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Borat\You Have Big Bollocks song.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\4 thumbs down.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Black Gallagher.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Fat girls.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Free crack.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Half Baked  I love weed.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Help.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\I dont do drugs.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\I know this isnt your responsibility.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Im rich bitch.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Im Rick James.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Mama.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\My father is a drug dealer.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Osama Bin Laden.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Playa Hater.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Samuel L. Jackson Beer.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Smoke A Lot  Get away from me biatch.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\The TimeHaters.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Tyrone  Is anthrax bad.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Ummmm bitch.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\4 Nuggetts.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\Cck Pushups Explanation.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\Crapola.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\Especially Delicious.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\Get on Top.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\Hardass.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\Hey.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\I just wanted to say it.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\I Pledge.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\I win.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\Indignant Yeah.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\Its Fantastic.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\King Kong in Spanish.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\Laughs.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\Mammoth.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\On the set of Nacho Libre.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\Recreation Clothes.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\Run Like the Wind.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\Touched By.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jeff Dunham\Ha Ha Pick Up The Phone.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jeff Dunham\Not Beats.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jeff Dunham\Pick Up Its Your Boyfriend.mp3" />
@@ -140,5 +141,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\ObservableDictionary.cs" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en-US\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\" />
   </ItemGroup>
 </Project>
