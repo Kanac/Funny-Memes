@@ -58,6 +58,19 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Borat\Wow wow wee waa.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Borat\Yes 2.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Borat\You Have Big Bollocks song.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Half Baked  I love weed.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Help.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\I dont do drugs.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\I know this isnt your responsibility.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Mama.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\My father is a drug dealer.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Racial.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Smoke A Lot  Get away from me biatch.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Social constraints.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\The truth.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Yeah 1.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Yeah 2.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\Yeah 3.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\4 Nuggetts.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\Cck Pushups Explanation.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Jack Black\Crapola.mp3" />
@@ -141,8 +154,5 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\ObservableDictionary.cs" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en-US\Resources.resw" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Dave Chappelle\" />
   </ItemGroup>
 </Project>
