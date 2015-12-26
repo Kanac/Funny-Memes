@@ -16,6 +16,23 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\SoundDataSource.cs" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Adam Sandler.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\Bar Mitzvah song.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\Christmas Song.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\Crazy Guy.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\Drunk.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\Ducky.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\Fart Doctor.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\Gold Jacket.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\Helping.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\I Am.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\My Walrus.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\Oprah.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\Record.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\The Hannukah Song.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\The Wedding Singer.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\Tourettes.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\Unlimited Boob Access.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Borat\Borat.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Borat\Sounds\658.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Borat\Sounds\Bury Wife.mp3" />
