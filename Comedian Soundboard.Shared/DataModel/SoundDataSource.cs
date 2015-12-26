@@ -63,9 +63,9 @@ namespace Comedian_Soundboard.Data
 
         public string UniqueId { get; private set; }
         public string Title { get; private set; }
-        public string Subtitle { get; set; }
+        public string Subtitle { get; private set; }
         public string Description { get; private set; }
-        public string ImagePath { get; set; }
+        public string ImagePath { get; private set; }
         public ObservableCollection<SoundItem> SoundItems { get; private set; }
 
         public override string ToString()
@@ -115,6 +115,9 @@ namespace Comedian_Soundboard.Data
             return null;
         }
 
+        // Automatically parses the assets into objects for each comedian provided that files are located in the given hierarchy
+        // Assets/Comedians/(x)/ is the location of the (only) file for iamge
+        // Assets/Comedians/(x)/Sounds/ is the location of all the mp3 files
         private async Task GetSoundDataAutomatedAsync() {
             if (this._categories.Count != 0)
                 return;
@@ -140,6 +143,8 @@ namespace Comedian_Soundboard.Data
             }
         }
 
+        // Originally used a json file to provide metadeta for audio files
+        // Now automatically parsing the files through their folders and relying on data set in the file
         private async Task GetSoundDataAsync()
         {
             if (this._categories.Count != 0)
