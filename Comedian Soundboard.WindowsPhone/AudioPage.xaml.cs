@@ -1,11 +1,11 @@
 ﻿using Comedian_Soundboard.Common;
 using Comedian_Soundboard.Data;
-
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Resources;
@@ -198,7 +198,7 @@ namespace Comedian_Soundboard
 
         internal async void ContinueFileOpenPicker(FileSavePickerContinuationEventArgs e)
         {
-            var file = e.File;
+            StorageFile file = e.File;
             String audioPath = (string)e.ContinuationData["SourcePath"];
 
             if (file != null)
@@ -206,7 +206,6 @@ namespace Comedian_Soundboard
                 CachedFileManager.DeferUpdates(file);
                 Uri audioPathUri = new Uri("ms-appx://" + audioPath);
                 StorageFile srcFile = await StorageFile.GetFileFromApplicationUriAsync(audioPathUri);
-                await srcFile.CopyAndReplaceAsync(file);
                 FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
             }
         }

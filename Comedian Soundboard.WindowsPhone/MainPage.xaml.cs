@@ -63,8 +63,6 @@ namespace Comedian_Soundboard
 
         private void Group_Click(object sender, ItemClickEventArgs e)
         {
-            VibrationDevice testVibrationDevice = VibrationDevice.GetDefault();
-            testVibrationDevice.Vibrate(TimeSpan.FromMilliseconds(101));
             Frame.Navigate(typeof(AudioPage), ((Category)e.ClickedItem).UniqueId);
         }
 
