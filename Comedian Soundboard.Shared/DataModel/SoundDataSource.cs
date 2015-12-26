@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Windows.Data.Json;
 using Windows.Storage;
@@ -121,7 +123,7 @@ namespace Comedian_Soundboard.Data
         private async Task GetSoundDataAutomatedAsync() {
             if (this._categories.Count != 0)
                 return;
-
+            
             StorageFolder appFolder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync(@"Assets\Comedians\");
             IReadOnlyList<StorageFolder> comedianFolders = await appFolder.GetFoldersAsync();
             foreach (StorageFolder currComedianFolder in comedianFolders) {
@@ -133,10 +135,39 @@ namespace Comedian_Soundboard.Data
                 StorageFolder currComedianSoundFolder = await currComedianFolder.GetFolderAsync("Sounds");
                 IReadOnlyList<StorageFile> comedianSounds = await currComedianSoundFolder.GetFilesAsync();
 
+                Dictionary<string, int> wordCount = new Dictionary<string, int>();
+
                 foreach (StorageFile currComedianSound in comedianSounds) {
+                    var words = currComedianSound.DisplayName.Split(' ');
+                    int count = 0;
+                    StringBuilder audioName = new StringBuilder();
+                    foreach (var word in words) {
+                        if (count >= 3) break;
+                        if (word != "") {
+                            audioName.Append(word[0].ToString().ToUpper());
+                            if (word.Length > 1)
+                                audioName.Append(word.Substring(1));
+
+                            audioName.Append(" ");
+                            count++;
+                        }
+                    }
+
+                    audioName.Remove(audioName.Length - 1, 1);
+                    string audioNameDisplay = audioName.ToString();
+                    if (wordCount.ContainsKey(audioName.ToString()))
+                    {
+                        wordCount[audioName.ToString()]++;
+                        audioNameDisplay += " " + wordCount[audioName.ToString()];
+                    }
+                    else
+                        wordCount.Add(audioName.ToString(), 1);
+
+
                     string currComedianSoundPath = "Assets/Comedians/" + currComedianFolder.DisplayName + "/Sounds/" + currComedianSound.Name;
                     currComedian.SoundItems.Add(
-                        new SoundItem("", "", currComedianSound.DisplayName, currComedianSoundPath, "", ""));
+                        new SoundItem("", "", audioNameDisplay, currComedianSoundPath, "", ""));
+
                 }
 
                 this.Categories.Add(currComedian);
