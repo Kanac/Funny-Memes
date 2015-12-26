@@ -62,8 +62,9 @@
                             Margin="0,3,0,0">
                         </TextBlock>
                         <Border 
+                            x:Name="ImageBorder"
                             Loaded="Border_Loaded"
-                            BorderThickness="2" 
+                            BorderThickness="3" 
                             Height="300"
                             Width="280">
                         </Border>
@@ -72,7 +73,12 @@
                             Width="250" 
                             Height="250" 
                             Stretch="Fill" 
-                            Margin="0,30,0,0">
+                            Margin="0,30,0,0"
+                            PointerPressed="Pointer_Pressed"
+                            PointerReleased="Pointer_Released" 
+                            PointerCanceled="Pointer_Released"
+                            PointerCaptureLost="Pointer_Released"
+                            PointerExited="Pointer_Released">
                         </Image>
                     </Grid>
                 </DataTemplate>

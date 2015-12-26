@@ -212,7 +212,6 @@ namespace Comedian_Soundboard
         }
         private void Pointer_Pressed(object sender, PointerRoutedEventArgs e)
         {
-            var test = Window.Current.Bounds;
             ProgressBar progressBar = sender as ProgressBar;
             initColour = progressBar.Background;
             progressBar.Background = new SolidColorBrush((Color)Application.Current.Resources["SystemColorControlAccentColor"]);

@@ -133,6 +133,16 @@ namespace Comedian_Soundboard
             }
         }
 
+        private void Pointer_Pressed(object sender, PointerRoutedEventArgs e)
+        {
+            Border border = (sender as Image).FindName("ImageBorder") as Border;
+            border.BorderThickness = new Thickness(8);
+        }
 
+        private void Pointer_Released(object sender, PointerRoutedEventArgs e)
+        {
+            Border border = (sender as Image).FindName("ImageBorder") as Border;
+            border.BorderThickness = new Thickness(3);
+        }
     }
 }

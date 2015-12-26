@@ -10,8 +10,8 @@
             <Style TargetType="UI:AdControl" x:Key="HorizontalAd">
                 <Setter Property="HorizontalAlignment" Value="Center"></Setter>
                 <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                <Setter Property="Width" Value="480"></Setter>
-                <Setter Property="Height" Value="80"></Setter>
+                <Setter Property="Width" Value="320"></Setter>
+                <Setter Property="Height" Value="50"></Setter>
             </Style>
         </ResourceDictionary>
     </Application.Resources>
