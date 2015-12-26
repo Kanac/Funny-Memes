@@ -125,15 +125,15 @@ namespace Comedian_Soundboard.Data
                 IReadOnlyList<StorageFile> currComedianFiles = await currComedianFolder.GetFilesAsync();  // Should only contain comedian image
                 string currComedianImagePath = "Assets/Comedians/" + currComedianFolder.DisplayName + "/" + currComedianFiles.FirstOrDefault().Name;
 
-                Category currComedian = new Category("", currComedianFolder.DisplayName, "", currComedianImagePath, "");
+                Category currComedian = new Category(currComedianFolder.DisplayName, currComedianFolder.DisplayName, "", currComedianImagePath, "");
 
                 StorageFolder currComedianSoundFolder = await currComedianFolder.GetFolderAsync("Sounds");
                 IReadOnlyList<StorageFile> comedianSounds = await currComedianSoundFolder.GetFilesAsync();
 
                 foreach (StorageFile currComedianSound in comedianSounds) {
-                    string currComedianSoundPath = "Assets/Comedians/" + currComedianFolder.DisplayName + "/" + currComedianSound.Name;
+                    string currComedianSoundPath = "Assets/Comedians/" + currComedianFolder.DisplayName + "/Sounds/" + currComedianSound.Name;
                     currComedian.SoundItems.Add(
-                        new SoundItem("", "", currComedianSound.DisplayName, "", currComedianSoundPath, ""));
+                        new SoundItem("", "", currComedianSound.DisplayName, currComedianSoundPath, "", ""));
                 }
 
                 this.Categories.Add(currComedian);
