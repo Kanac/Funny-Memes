@@ -117,6 +117,39 @@ namespace Comedian_Soundboard.Data
             return null;
         }
 
+        // Helper method that changes the input string to match given constraints such that only the first 3 words are taken and 
+        // if those 3 words have already been used before (recorded by dictionary input wordCount) it will list a number suffix to it as well
+        private string humanizeAudioTitle(string title, Dictionary<string, int> wordCount) {
+            var words = title.Split(' ');
+            int count = 0;
+            StringBuilder audioName = new StringBuilder();
+            foreach (var word in words)
+            {
+                if (count >= 3) break;
+                if (word != "")
+                {
+                    audioName.Append(word[0].ToString().ToUpper());
+                    if (word.Length > 1)
+                        audioName.Append(word.Substring(1));
+
+                    audioName.Append(" ");
+                    count++;
+                }
+            }
+
+            audioName.Remove(audioName.Length - 1, 1);
+            string audioNameDisplay = audioName.ToString();
+            if (wordCount.ContainsKey(audioName.ToString()))
+            {
+                wordCount[audioName.ToString()]++;
+                audioNameDisplay += " " + wordCount[audioName.ToString()];
+            }
+            else
+                wordCount.Add(audioName.ToString(), 1);
+
+            return audioNameDisplay;
+        }
+
         // Automatically parses the assets into objects for each comedian provided that files are located in the given hierarchy
         // Assets/Comedians/(x)/ is the location of the (only) file for iamge
         // Assets/Comedians/(x)/Sounds/ is the location of all the mp3 files
@@ -138,36 +171,11 @@ namespace Comedian_Soundboard.Data
                 Dictionary<string, int> wordCount = new Dictionary<string, int>();
 
                 foreach (StorageFile currComedianSound in comedianSounds) {
-                    var words = currComedianSound.DisplayName.Split(' ');
-                    int count = 0;
-                    StringBuilder audioName = new StringBuilder();
-                    foreach (var word in words) {
-                        if (count >= 3) break;
-                        if (word != "") {
-                            audioName.Append(word[0].ToString().ToUpper());
-                            if (word.Length > 1)
-                                audioName.Append(word.Substring(1));
-
-                            audioName.Append(" ");
-                            count++;
-                        }
-                    }
-
-                    audioName.Remove(audioName.Length - 1, 1);
-                    string audioNameDisplay = audioName.ToString();
-                    if (wordCount.ContainsKey(audioName.ToString()))
-                    {
-                        wordCount[audioName.ToString()]++;
-                        audioNameDisplay += " " + wordCount[audioName.ToString()];
-                    }
-                    else
-                        wordCount.Add(audioName.ToString(), 1);
-
-
+                    string audioNameDisplay = humanizeAudioTitle(currComedianSound.DisplayName, wordCount);
                     string currComedianSoundPath = "Assets/Comedians/" + currComedianFolder.DisplayName + "/Sounds/" + currComedianSound.Name;
+
                     currComedian.SoundItems.Add(
                         new SoundItem("", "", audioNameDisplay, currComedianSoundPath, "", ""));
-
                 }
 
                 this.Categories.Add(currComedian);
