@@ -58,6 +58,7 @@
                         <TextBlock 
                             Text="{Binding Title}" 
                             FontSize="25" 
+                            FontWeight= "Medium"
                             TextAlignment="Center" 
                             VerticalAlignment="Top"
                             Margin="0,3,0,0">

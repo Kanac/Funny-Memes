@@ -63,9 +63,9 @@ namespace Comedian_Soundboard.Data
 
         public string UniqueId { get; private set; }
         public string Title { get; private set; }
-        public string Subtitle { get; private set; }
+        public string Subtitle { get; set; }
         public string Description { get; private set; }
-        public string ImagePath { get; private set; }
+        public string ImagePath { get; set; }
         public ObservableCollection<SoundItem> SoundItems { get; private set; }
 
         public override string ToString()
@@ -92,7 +92,7 @@ namespace Comedian_Soundboard.Data
 
         public static async Task<IEnumerable<Category>> GetCategoryAsync()
         {
-            await _soundDataSource.GetSoundDataAsync();
+            await _soundDataSource.GetSoundDataAutomatedAsync();
 
             return _soundDataSource.Categories;
         }
@@ -113,6 +113,31 @@ namespace Comedian_Soundboard.Data
             var matches = _soundDataSource.Categories.SelectMany(group => group.SoundItems).Where((item) => item.UniqueId.Equals(uniqueId));
             if (matches.Count() == 1) return matches.First();
             return null;
+        }
+
+        private async Task GetSoundDataAutomatedAsync() {
+            if (this._categories.Count != 0)
+                return;
+
+            StorageFolder appFolder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync(@"Assets\Comedians\");
+            IReadOnlyList<StorageFolder> comedianFolders = await appFolder.GetFoldersAsync();
+            foreach (StorageFolder currComedianFolder in comedianFolders) {
+                IReadOnlyList<StorageFile> currComedianFiles = await currComedianFolder.GetFilesAsync();  // Should only contain comedian image
+                string currComedianImagePath = "Assets/Comedians/" + currComedianFolder.DisplayName + "/" + currComedianFiles.FirstOrDefault().Name;
+
+                Category currComedian = new Category("", currComedianFolder.DisplayName, "", currComedianImagePath, "");
+
+                StorageFolder currComedianSoundFolder = await currComedianFolder.GetFolderAsync("Sounds");
+                IReadOnlyList<StorageFile> comedianSounds = await currComedianSoundFolder.GetFilesAsync();
+
+                foreach (StorageFile currComedianSound in comedianSounds) {
+                    string currComedianSoundPath = "Assets/Comedians/" + currComedianFolder.DisplayName + "/" + currComedianSound.Name;
+                    currComedian.SoundItems.Add(
+                        new SoundItem("", "", currComedianSound.DisplayName, "", currComedianSoundPath, ""));
+                }
+
+                this.Categories.Add(currComedian);
+            }
         }
 
         private async Task GetSoundDataAsync()
