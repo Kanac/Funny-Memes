@@ -51,7 +51,6 @@
                 IsItemClickEnabled="True"
                 ItemsSource="{Binding SoundItems}"
                 MaxWidth="1000"
-                      ScrollViewer.VerticalScrollMode="Enabled"
                 HorizontalAlignment="Center">
                 <GridView.ItemTemplate>
                     <DataTemplate>

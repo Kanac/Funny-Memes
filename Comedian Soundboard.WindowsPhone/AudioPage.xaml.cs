@@ -57,8 +57,6 @@ namespace Comedian_Soundboard
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-
-
         }
 
         /// <summary>
@@ -134,7 +132,6 @@ namespace Comedian_Soundboard
             Audio.Source = null;
             this.navigationHelper.OnNavigatedFrom(e);
         }
-
         #endregion
         private void Sound_Click(object sender, TappedRoutedEventArgs e)
         {

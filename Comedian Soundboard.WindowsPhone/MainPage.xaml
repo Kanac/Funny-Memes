@@ -37,6 +37,11 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
+
+        <StackPanel x:Name="LoadingPanel">
+            <ProgressBar IsIndeterminate="True"></ProgressBar>
+            <TextBlock FontSize="15">Loading...</TextBlock>
+        </StackPanel>
         
         <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
 
