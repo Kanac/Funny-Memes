@@ -231,8 +231,6 @@ namespace Comedian_Soundboard
         private void Border_Loaded(object sender, RoutedEventArgs e)
         {
             Border border = (Border)sender;
-            border.Width = 220;
-            border.Height = 220;
             Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
             border.BorderBrush = new SolidColorBrush(color);
         }
@@ -240,8 +238,6 @@ namespace Comedian_Soundboard
         private void ProgressBar_Loaded(object sender, RoutedEventArgs e)
         {
             ProgressBar progressBar = (ProgressBar)sender;
-            progressBar.Width = 200;
-            progressBar.Height = 200;
             progressBar.Background = new SolidColorBrush((Color)Application.Current.Resources["SystemColorControlAccentColor"]);
         }
 

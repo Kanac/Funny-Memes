@@ -44,18 +44,26 @@
                PointerExited="PointerImage_Released">
         </Image>
         
-        <TextBlock IsHitTestVisible="False" FontSize="25" TextAlignment="Center" Text="{Binding Category.Title}"></TextBlock>
+        <TextBlock IsHitTestVisible="False" FontSize="35" FontWeight="Medium" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Category.Title}"></TextBlock>
         
         <Grid DataContext="{Binding Category}" Grid.Row="1">
-            <GridView x:Name="AudioGridView"
+            <ListView x:Name="AudioGridView"
                 IsItemClickEnabled="True"
                 ItemsSource="{Binding SoundItems}"
-                MaxWidth="1000"
                 HorizontalAlignment="Center">
-                <GridView.ItemTemplate>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="3,3,3,3">
                             <Border BorderThickness="3" 
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Width="150"
+                                    Height="150"
                                     Loaded="Border_Loaded"
                                     Tapped="Sound_Click">
                             </Border>
@@ -67,6 +75,10 @@
                                          PointerCaptureLost="Pointer_Released"
                                          PointerExited="Pointer_Released"
                                          Value="0" 
+                                         VerticalAlignment="Center"
+                                         HorizontalAlignment="Center"
+                                         Width="135"
+                                         Height="135"
                                          Loaded="ProgressBar_Loaded"
                                          Tapped="Sound_Click">
                             </ProgressBar>
@@ -76,14 +88,14 @@
                                        TextWrapping="Wrap" 
                                        IsHitTestVisible="False" 
                                        VerticalAlignment="Center" 
-                                       Loaded="Subtitle_Loaded"
+                                       Width="120"
                                        Tapped="Sound_Click">
                             </TextBlock>
                         </Grid>
                     </DataTemplate>
 
-                </GridView.ItemTemplate>
-            </GridView>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
 
         <!--<Grid Grid.Row="2">
