@@ -38,6 +38,7 @@
                Width="50" 
                Height="50" 
                Tapped="Back_Tapped" 
+               VerticalAlignment="Top"
                HorizontalAlignment="Left"
                PointerPressed="PointerImage_Pressed"
                PointerReleased="PointerImage_Released" 
@@ -45,10 +46,20 @@
                PointerCaptureLost="PointerImage_Released"
                PointerExited="PointerImage_Released">
         </Image>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock TextWrapping="WrapWholeWords" MaxWidth="175" IsHitTestVisible="False" FontSize="35" FontWeight="Medium" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Category.Title}"></TextBlock>
+            <Ellipse Width="110"  
+                     Height="110" 
+                     Margin="20,0,0,0"
+                     Stretch="Fill">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{Binding Category.ImagePath}"/>
+                </Ellipse.Fill>
+            </Ellipse>
+        </StackPanel>
         
-        <TextBlock IsHitTestVisible="False" FontSize="35" FontWeight="Medium" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Category.Title}"></TextBlock>
-        
-        <Grid DataContext="{Binding Category}" Grid.Row="1" HorizontalAlignment="Center">
+        <Grid DataContext="{Binding Category}" Grid.Row="1" HorizontalAlignment="Center" Margin="0,20,0,0">
             <ListView x:Name="AudioGridView"
                 IsItemClickEnabled="True"
                 HorizontalAlignment="Stretch"
