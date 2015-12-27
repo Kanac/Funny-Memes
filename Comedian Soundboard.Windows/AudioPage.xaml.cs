@@ -183,35 +183,25 @@ namespace Comedian_Soundboard
 
         private async void Save_Clicked(object sender, RoutedEventArgs e)
         {
-            //if (currentProgressBar == null)
-            //    return;
+            if (currentProgressBar == null)
+                return;
 
-            //FileSavePicker fileSavePicker = new FileSavePicker();
-            //SoundItem selectedSound = currentProgressBar.DataContext as SoundItem;
-         
-            //Uri audioPath = new Uri("ms-appx:///" + selectedSound.SoundPath);
-            //StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(audioPath);
+            FileSavePicker fileSavePicker = new FileSavePicker();
+            SoundItem selectedSound = currentProgressBar.DataContext as SoundItem;
 
-            //fileSavePicker.SuggestedSaveFile = file;
-            //fileSavePicker.SuggestedFileName = selectedSound.Subtitle;
-            //fileSavePicker.ContinuationData.Add("SourcePath", audioPath.AbsolutePath);
-            //fileSavePicker.FileTypeChoices.Add("MP3", new List<string>() { ".mp3" });
-            //fileSavePicker.PickSaveFileAndContinue();
+            Uri audioPath = new Uri("ms-appx:///" + selectedSound.SoundPath);
+            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(audioPath);
+
+            fileSavePicker.SuggestedSaveFile = file;
+            fileSavePicker.SuggestedFileName = selectedSound.Subtitle;
+            // fileSavePicker.ContinuationData.Add("SourcePath", audioPath.AbsolutePath);
+            fileSavePicker.FileTypeChoices.Add("MP3", new List<string>() { ".mp3" });
+            StorageFile pickedFile = await fileSavePicker.PickSaveFileAsync();
+
+            CachedFileManager.DeferUpdates(pickedFile);
+            await file.CopyAndReplaceAsync(pickedFile);
+            FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(pickedFile);
         }
-
-        //internal async void ContinueFileOpenPicker(FileSavePickerContinuationEventArgs e)
-        //{
-        //    StorageFile file = e.File;
-        //    String audioPath = (string)e.ContinuationData["SourcePath"];
-
-        //    if (file != null)
-        //    {
-        //        CachedFileManager.DeferUpdates(file);
-        //        Uri audioPathUri = new Uri("ms-appx://" + audioPath);
-        //        StorageFile srcFile = await StorageFile.GetFileFromApplicationUriAsync(audioPathUri);
-        //        FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
-        //    }
-        //}
 
         private void Pointer_Pressed(object sender, PointerRoutedEventArgs e)
         {
@@ -227,6 +217,15 @@ namespace Comedian_Soundboard
             if (initColour != null)
                 progressBar.Background = initColour;
         }
+        private void PointerImage_Pressed(object sender, PointerRoutedEventArgs e)
+        {
+            (sender as Image).Opacity = 0.5;
+        }
+
+        private void PointerImage_Released(object sender, PointerRoutedEventArgs e)
+        {
+            (sender as Image).Opacity = 1;
+        }
 
         private void Border_Loaded(object sender, RoutedEventArgs e)
         {
@@ -239,21 +238,6 @@ namespace Comedian_Soundboard
         {
             ProgressBar progressBar = (ProgressBar)sender;
             progressBar.Background = new SolidColorBrush((Color)Application.Current.Resources["SystemColorControlAccentColor"]);
-        }
-
-        private void Subtitle_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void PointerImage_Pressed(object sender, PointerRoutedEventArgs e)
-        {
-            (sender as Image).Opacity = 0.5;
-        }
-
-        private void PointerImage_Released(object sender, PointerRoutedEventArgs e)
-        {
-            (sender as Image).Opacity = 1;
         }
     }
 }

@@ -203,6 +203,7 @@ namespace Comedian_Soundboard
                 CachedFileManager.DeferUpdates(file);
                 Uri audioPathUri = new Uri("ms-appx://" + audioPath);
                 StorageFile srcFile = await StorageFile.GetFileFromApplicationUriAsync(audioPathUri);
+                await srcFile.CopyAndReplaceAsync(file);
                 FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
             }
         }
