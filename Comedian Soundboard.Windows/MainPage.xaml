@@ -9,11 +9,32 @@
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     d:DataContext="{Binding Source={d:DesignData Source=../Comedian Soundboard.Shared/DataModel/Soundboard.json, Type=data:SoundDataSource}}"
     xmlns:data="using:Comedian_Soundboard.Data"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="ListViewItemStyle1" TargetType="ListViewItem">
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="TabNavigation" Value="Local"/>
+            <Setter Property="IsHoldingEnabled" Value="True"/>
+            <Setter Property="Margin" Value="0,0,18,2"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <ListViewItemPresenter CheckHintBrush="#00000000" CheckBrush="#00000000" ContentMargin="4" ContentTransitions="{TemplateBinding ContentTransitions}" DragForeground="#00000000" DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" PointerOverBackgroundMargin="1" ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" SelectedPointerOverBorderBrush="#00000000" SelectionCheckMarkVisualEnabled="True" SelectedForeground="#00000000" SelectedPointerOverBackground="#00000000" SelectedBorderThickness="{ThemeResource ListViewItemCompactSelectedBorderThemeThickness}" SelectedBackground="#00000000" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Foreground="#00000000">
+                        </ListViewItemPresenter>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    
     <Page.Transitions>
         <TransitionCollection>
-            <EntranceThemeTransition></EntranceThemeTransition>
+            <EdgeUIThemeTransition></EdgeUIThemeTransition>
         </TransitionCollection>
     </Page.Transitions>
 
@@ -33,59 +54,26 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
-        
+
         <StackPanel x:Name="LoadingPanel">
             <ProgressBar IsIndeterminate="True"></ProgressBar>
             <TextBlock FontSize="15">Loading...</TextBlock>
         </StackPanel>
-        
-        <ListView SelectionMode="None"
-                  ItemsSource="{Binding Groups}"
-                  IsItemClickEnabled="True"
-                  ItemClick="Group_Click">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment"
-                            Value="Stretch">
-                    </Setter>
-                </Style>
-            </ListView.ItemContainerStyle>
+
+        <ListView ItemsSource="{Binding Groups}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="0,30,0,0" HorizontalAlignment="Center" >
-                        <TextBlock 
-                            Text="{Binding Title}" 
-                            FontSize="25" 
-                            FontWeight= "Medium"
-                            TextAlignment="Center" 
-                            VerticalAlignment="Top"
-                            Margin="0,3,0,0">
-                        </TextBlock>
-                        <Border 
-                            x:Name="ImageBorder"
-                            Loaded="Border_Loaded"
-                            BorderThickness="3" 
-                            Height="300"
-                            Width="280">
-                        </Border>
-                        <Image 
-                            Source="{Binding ImagePath}" 
-                            Width="250" 
-                            Height="250" 
-                            Stretch="Fill" 
-                            Margin="0,30,0,0"
-                            PointerPressed="Pointer_Pressed"
-                            PointerReleased="Pointer_Released" 
-                            PointerCanceled="Pointer_Released"
-                            PointerCaptureLost="Pointer_Released"
-                            PointerExited="Pointer_Released">
-                        </Image>
+                    <Grid>
+                        <Rectangle Fill="Azure" Width="300" Height="300"></Rectangle>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        
+
 
         <!--<Grid Grid.Row="1">
             <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />

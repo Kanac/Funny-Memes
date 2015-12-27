@@ -12,8 +12,7 @@
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
-            <EntranceThemeTransition>
-            </EntranceThemeTransition>
+            <EdgeUIThemeTransition></EdgeUIThemeTransition>
         </TransitionCollection>
     </Page.Transitions>
 
@@ -46,11 +45,18 @@
         
         <TextBlock IsHitTestVisible="False" FontSize="35" FontWeight="Medium" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Category.Title}"></TextBlock>
         
-        <Grid DataContext="{Binding Category}" Grid.Row="1">
+        <Grid DataContext="{Binding Category}" Grid.Row="1" HorizontalAlignment="Center">
             <ListView x:Name="AudioGridView"
                 IsItemClickEnabled="True"
-                ItemsSource="{Binding SoundItems}"
-                HorizontalAlignment="Center">
+                HorizontalAlignment="Stretch"
+                ItemsSource="{Binding SoundItems}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment"
+                            Value="Stretch">
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal" />

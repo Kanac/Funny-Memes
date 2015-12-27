@@ -197,9 +197,12 @@ namespace Comedian_Soundboard
             fileSavePicker.FileTypeChoices.Add("MP3", new List<string>() { ".mp3" });
             StorageFile pickedFile = await fileSavePicker.PickSaveFileAsync();
 
-            CachedFileManager.DeferUpdates(pickedFile);
-            await file.CopyAndReplaceAsync(pickedFile);
-            FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(pickedFile);
+            if (pickedFile != null)
+            {
+                CachedFileManager.DeferUpdates(pickedFile);
+                await file.CopyAndReplaceAsync(pickedFile);
+                FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(pickedFile);
+            }
         }
 
         private void Pointer_Pressed(object sender, PointerRoutedEventArgs e)
