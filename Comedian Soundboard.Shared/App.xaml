@@ -5,6 +5,7 @@
     xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     xmlns:local="using:Comedian_Soundboard">
 
+
     <Application.Resources>
         <ResourceDictionary>
             <Style TargetType="UI:AdControl" x:Key="HorizontalAd">

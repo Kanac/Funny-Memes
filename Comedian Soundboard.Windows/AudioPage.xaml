@@ -42,7 +42,7 @@
                 <GridView.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="3,3,3,3">
-                            <Border BorderThickness="1" 
+                            <Border BorderThickness="3" 
                                     Loaded="Border_Loaded"
                                     Tapped="Sound_Click">
                             </Border>

@@ -45,6 +45,9 @@ namespace Comedian_Soundboard
 
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+#if WINDOWS_APP
+            RequestedTheme = ApplicationTheme.Dark;
+#endif
         }
 
         /// <summary>

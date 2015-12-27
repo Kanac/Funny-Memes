@@ -57,8 +57,6 @@ namespace Comedian_Soundboard
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-
-
         }
 
         /// <summary>
@@ -214,19 +212,22 @@ namespace Comedian_Soundboard
         {
             ProgressBar progressBar = sender as ProgressBar;
             initColour = progressBar.Background;
-            progressBar.Background = new SolidColorBrush((Color)Application.Current.Resources["SystemColorControlAccentColor"]);
+            Color accent = ((Color)Application.Current.Resources["SystemColorControlAccentColor"]);
+            progressBar.Background = new SolidColorBrush(Color.FromArgb(50, accent.R, accent.G, accent.B));
         }
 
         private void Pointer_Released(object sender, PointerRoutedEventArgs e)
         {
-            (sender as ProgressBar).Background = initColour;
+            ProgressBar progressBar = (ProgressBar)sender;
+            if (initColour != null)
+                progressBar.Background = initColour;
         }
 
         private void Border_Loaded(object sender, RoutedEventArgs e)
         {
             Border border = (Border)sender;
-            border.Width = Window.Current.Bounds.Width * .22;
-            border.Height = Window.Current.Bounds.Width * .22;
+            border.Width = Window.Current.Bounds.Width * .23;
+            border.Height = Window.Current.Bounds.Width * .23;
             Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
             border.BorderBrush = new SolidColorBrush(color);
         }
@@ -236,6 +237,7 @@ namespace Comedian_Soundboard
             ProgressBar progressBar = (ProgressBar)sender;
             progressBar.Width = Window.Current.Bounds.Width * .22;
             progressBar.Height = Window.Current.Bounds.Width * .22;
+            progressBar.Background = new SolidColorBrush((Color)Application.Current.Resources["SystemColorControlAccentColor"]);
         }
 
         private void Subtitle_Loaded(object sender, RoutedEventArgs e)
