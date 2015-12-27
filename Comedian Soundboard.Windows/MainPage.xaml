@@ -31,7 +31,7 @@
             </Setter>
         </Style>
     </Page.Resources>
-    
+
     <Page.Transitions>
         <TransitionCollection>
             <EdgeUIThemeTransition></EdgeUIThemeTransition>
@@ -54,7 +54,9 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/ComedyBackground2.jpg"></ImageBrush>
+        </Grid.Background>
         <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
 
         <StackPanel x:Name="LoadingPanel">
@@ -62,17 +64,36 @@
             <TextBlock FontSize="15">Loading...</TextBlock>
         </StackPanel>
 
-        <ListView ItemsSource="{Binding Groups}">
+        <ListView SelectionMode="None"
+                  ItemsSource="{Binding Groups}"
+                  IsItemClickEnabled="True"
+                  ItemClick="Group_Click" ItemContainerStyle="{StaticResource ListViewItemStyle1}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Rectangle Fill="Azure" Width="300" Height="300"></Rectangle>
+                    <Grid Margin="0,30,0,0" HorizontalAlignment="Center" >
+                        <TextBlock 
+                            Text="{Binding Title}" 
+                            FontSize="25" 
+                            Foreground="White"
+                            FontWeight= "Medium"
+                            TextAlignment="Center" 
+                            VerticalAlignment="Top"
+                            Margin="0,3,0,0">
+                        </TextBlock>
+                        
+                        <Ellipse
+                            Width="250" 
+                            Height="250" 
+                            Stretch="Fill" 
+                            Margin="0,40,0,0">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding ImagePath}"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
-        
 
 
         <!--<Grid Grid.Row="1">

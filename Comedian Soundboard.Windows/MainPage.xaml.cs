@@ -151,22 +151,7 @@ namespace Comedian_Soundboard
         {
             Audio.Play();
         }
-        private void Pointer_Pressed(object sender, PointerRoutedEventArgs e)
-        {
-            Border border = (sender as Image).FindName("ImageBorder") as Border;
-            border.BorderThickness = new Thickness(8);
-        }
 
-        private void Pointer_Released(object sender, PointerRoutedEventArgs e)
-        {
-            Border border = (sender as Image).FindName("ImageBorder") as Border;
-            border.BorderThickness = new Thickness(3);
-        }
-        private void Border_Loaded(object sender, RoutedEventArgs e)
-        {
-            Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
-            (sender as Border).BorderBrush = new SolidColorBrush(color);
-        }
         private async void reviewApp()
         {
             if (!localSettings.Values.ContainsKey("Views"))

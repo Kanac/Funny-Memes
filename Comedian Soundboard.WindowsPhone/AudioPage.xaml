@@ -48,7 +48,7 @@
                         <Grid Margin="3,3,3,3">
                             <Border BorderThickness="1" 
                                     Loaded="Border_Loaded"
-                                    Tapped="Sound_Click">
+                                    IsHitTestVisible="False">
                             </Border>
 
                             <ProgressBar x:Name="ProgressBar" 
@@ -69,8 +69,7 @@
                                        TextWrapping="Wrap" 
                                        IsHitTestVisible="False" 
                                        VerticalAlignment="Center" 
-                                       Loaded="Subtitle_Loaded"
-                                       Tapped="Sound_Click">
+                                       Loaded="Subtitle_Loaded">
                             </TextBlock>
                         </Grid>
                     </DataTemplate>

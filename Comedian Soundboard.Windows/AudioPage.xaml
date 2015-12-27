@@ -28,6 +28,9 @@
             <RowDefinition Height=".85*"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/ComedyBackground2.jpg"></ImageBrush>
+        </Grid.Background>
         
         <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
 
@@ -59,7 +62,7 @@
                 </ListView.ItemContainerStyle>
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal" />
+                        <WrapGrid MaximumRowsOrColumns="5" Orientation="Horizontal" />
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
                 <ListView.ItemTemplate>
@@ -68,10 +71,10 @@
                             <Border BorderThickness="3" 
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
-                                    Width="150"
-                                    Height="150"
+                                    Width="140"
+                                    Height="140"
                                     Loaded="Border_Loaded"
-                                    Tapped="Sound_Click">
+                                    IsHitTestVisible="False">
                             </Border>
 
                             <ProgressBar x:Name="ProgressBar" 
@@ -94,8 +97,7 @@
                                        TextWrapping="Wrap" 
                                        IsHitTestVisible="False" 
                                        VerticalAlignment="Center" 
-                                       Width="120"
-                                       Tapped="Sound_Click">
+                                       Width="120">
                             </TextBlock>
                         </Grid>
                     </DataTemplate>
