@@ -153,12 +153,14 @@ namespace Comedian_Soundboard
         }
         protected override void OnActivated(IActivatedEventArgs args)
         {
+#if WINDOWS_PHONE_APP
             var root = Window.Current.Content as Frame;
             var mainPage = root.Content as AudioPage;
             if (mainPage != null && args is FileSavePickerContinuationEventArgs)
             {
                 mainPage.ContinueFileOpenPicker(args as FileSavePickerContinuationEventArgs);
             }
+#endif
         }
     }
 }

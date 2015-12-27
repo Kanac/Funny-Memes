@@ -5,12 +5,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.ApplicationModel.Email;
 using Windows.ApplicationModel.Store;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
-using Windows.Phone.Devices.Notification;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -69,12 +67,12 @@ namespace Comedian_Soundboard
 
         private async void Comment_Click(object sender, RoutedEventArgs e)
         {
-            EmailRecipient sendTo = new EmailRecipient() { Address = "testgglol@outlook.com" };
-            EmailMessage mail = new EmailMessage();
+            //EmailRecipient sendTo = new EmailRecipient() { Address = "testgglol@outlook.com" };
+            //EmailMessage mail = new EmailMessage();
 
-            mail.Subject = "Comedian Suggestion for Comedy Soundboard";
-            mail.To.Add(sendTo);
-            await EmailManager.ShowComposeNewEmailAsync(mail);
+            //mail.Subject = "Comedian Suggestion for Comedy Soundboard";
+            //mail.To.Add(sendTo);
+            //await EmailManager.ShowComposeNewEmailAsync(mail);
         }
 
         private async void Rate_Click(object sender, RoutedEventArgs e)
