@@ -32,12 +32,26 @@
         
         <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
 
-        <TextBlock FontSize="25" TextAlignment="Center" Text="{Binding Category.Title}"></TextBlock>
+        <Image Source="Assets/BackButton.png" 
+               Width="50" 
+               Height="50" 
+               Tapped="Back_Tapped" 
+               HorizontalAlignment="Left"
+               PointerPressed="PointerImage_Pressed"
+               PointerReleased="PointerImage_Released" 
+               PointerCanceled="PointerImage_Released"
+               PointerCaptureLost="PointerImage_Released"
+               PointerExited="PointerImage_Released">
+        </Image>
+        
+        <TextBlock IsHitTestVisible="False" FontSize="25" TextAlignment="Center" Text="{Binding Category.Title}"></TextBlock>
         
         <Grid DataContext="{Binding Category}" Grid.Row="1">
             <GridView x:Name="AudioGridView"
                 IsItemClickEnabled="True"
                 ItemsSource="{Binding SoundItems}"
+                MaxWidth="1000"
+                      ScrollViewer.VerticalScrollMode="Enabled"
                 HorizontalAlignment="Center">
                 <GridView.ItemTemplate>
                     <DataTemplate>
@@ -53,8 +67,6 @@
                                          PointerCanceled="Pointer_Released"
                                          PointerCaptureLost="Pointer_Released"
                                          PointerExited="Pointer_Released"
-                                         Height="100" 
-                                         Width="100" 
                                          Value="0" 
                                          Loaded="ProgressBar_Loaded"
                                          Tapped="Sound_Click">

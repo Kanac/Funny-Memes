@@ -134,6 +134,11 @@ namespace Comedian_Soundboard
         }
 
         #endregion
+        private void Back_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.GoBack();
+        }
+
         private void Sound_Click(object sender, TappedRoutedEventArgs e)
         {
             SoundItem soundItem = (SoundItem)(((FrameworkElement)e.OriginalSource).DataContext);
@@ -226,8 +231,8 @@ namespace Comedian_Soundboard
         private void Border_Loaded(object sender, RoutedEventArgs e)
         {
             Border border = (Border)sender;
-            border.Width = Window.Current.Bounds.Width * .23;
-            border.Height = Window.Current.Bounds.Width * .23;
+            border.Width = 220;
+            border.Height = 220;
             Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
             border.BorderBrush = new SolidColorBrush(color);
         }
@@ -235,14 +240,24 @@ namespace Comedian_Soundboard
         private void ProgressBar_Loaded(object sender, RoutedEventArgs e)
         {
             ProgressBar progressBar = (ProgressBar)sender;
-            progressBar.Width = Window.Current.Bounds.Width * .22;
-            progressBar.Height = Window.Current.Bounds.Width * .22;
+            progressBar.Width = 200;
+            progressBar.Height = 200;
             progressBar.Background = new SolidColorBrush((Color)Application.Current.Resources["SystemColorControlAccentColor"]);
         }
 
         private void Subtitle_Loaded(object sender, RoutedEventArgs e)
         {
-            (sender as TextBlock).Width = Window.Current.Bounds.Width * .20;
+            
+        }
+
+        private void PointerImage_Pressed(object sender, PointerRoutedEventArgs e)
+        {
+            (sender as Image).Opacity = 0.5;
+        }
+
+        private void PointerImage_Released(object sender, PointerRoutedEventArgs e)
+        {
+            (sender as Image).Opacity = 1;
         }
     }
 }
