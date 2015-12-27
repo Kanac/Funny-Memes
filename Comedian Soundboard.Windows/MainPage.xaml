@@ -35,7 +35,12 @@
         </Grid.RowDefinitions>
         
         <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
-
+        
+        <StackPanel x:Name="LoadingPanel">
+            <ProgressBar IsIndeterminate="True"></ProgressBar>
+            <TextBlock FontSize="15">Loading...</TextBlock>
+        </StackPanel>
+        
         <ListView SelectionMode="None"
                   ItemsSource="{Binding Groups}"
                   IsItemClickEnabled="True"

@@ -42,7 +42,6 @@ namespace Comedian_Soundboard
             this.InitializeComponent();
 
             this.navigationHelper = new NavigationHelper(this);
-
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
         }
