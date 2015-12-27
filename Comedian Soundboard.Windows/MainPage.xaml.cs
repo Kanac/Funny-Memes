@@ -9,6 +9,7 @@ using Windows.ApplicationModel.Store;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.System;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -126,12 +127,11 @@ namespace Comedian_Soundboard
 
         private async void Comment_Click(object sender, RoutedEventArgs e)
         {
-            //EmailRecipient sendTo = new EmailRecipient() { Address = "testgglol@outlook.com" };
-            //EmailMessage mail = new EmailMessage();
-
-            //mail.Subject = "Comedian Suggestion for Comedy Soundboard";
-            //mail.To.Add(sendTo);
-            //await EmailManager.ShowComposeNewEmailAsync(mail);
+            string to = "testgglol@outlook.com";
+            string subject = "Comedian Suggestion";
+            string body = "Hi, here's an idea for your cool app...";
+            string link = string.Format("mailto:{0}?subject={1}&amp;body={2}", to, subject, Uri.EscapeDataString(body));
+            await Launcher.LaunchUriAsync(new Uri(link));
         }
 
         private async void Rate_Click(object sender, RoutedEventArgs e)

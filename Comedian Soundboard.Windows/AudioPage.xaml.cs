@@ -194,7 +194,6 @@ namespace Comedian_Soundboard
 
             fileSavePicker.SuggestedSaveFile = file;
             fileSavePicker.SuggestedFileName = selectedSound.Subtitle;
-            // fileSavePicker.ContinuationData.Add("SourcePath", audioPath.AbsolutePath);
             fileSavePicker.FileTypeChoices.Add("MP3", new List<string>() { ".mp3" });
             StorageFile pickedFile = await fileSavePicker.PickSaveFileAsync();
 
