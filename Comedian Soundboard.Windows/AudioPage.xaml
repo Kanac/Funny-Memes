@@ -118,7 +118,6 @@
                             </TextBlock>
                         </Grid>
                     </DataTemplate>
-
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>

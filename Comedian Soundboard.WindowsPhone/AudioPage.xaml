@@ -12,11 +12,7 @@
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
-            <NavigationThemeTransition>
-                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                    <SlideNavigationTransitionInfo/>
-                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-            </NavigationThemeTransition>
+            <EdgeUIThemeTransition></EdgeUIThemeTransition>
         </TransitionCollection>
     </Page.Transitions>
 
@@ -32,12 +28,31 @@
             <RowDefinition Height=".85*"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/ComedyBackground2.jpg" Stretch="Fill"></ImageBrush>
+        </Grid.Background>
         
         <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
 
-        <TextBlock FontSize="25" TextAlignment="Center" Text="{Binding Category.Title}"></TextBlock>
-        
-        <Grid DataContext="{Binding Category}" Grid.Row="1">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock TextWrapping="WrapWholeWords" MaxWidth="175" IsHitTestVisible="False" FontSize="35" FontWeight="Medium" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Category.Title}"></TextBlock>
+            <Grid Margin="20,0,0,0">
+                <Ellipse
+                    Width="105"
+                    Height="105"
+                    Fill="White">
+                </Ellipse>
+                <Ellipse Width="100"  
+                     Height="100" 
+                     Stretch="Fill">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding Category.ImagePath}"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </Grid>
+        </StackPanel>
+
+        <Grid DataContext="{Binding Category}" Grid.Row="1" Margin="0,10,0,0">
             <GridView x:Name="AudioGridView"
                 IsItemClickEnabled="True"
                 ItemsSource="{Binding SoundItems}"
@@ -46,7 +61,7 @@
                 <GridView.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="3,3,3,3">
-                            <Border BorderThickness="1" 
+                            <Border BorderThickness="3" 
                                     Loaded="Border_Loaded"
                                     IsHitTestVisible="False">
                             </Border>
@@ -57,8 +72,6 @@
                                          PointerCanceled="Pointer_Released"
                                          PointerCaptureLost="Pointer_Released"
                                          PointerExited="Pointer_Released"
-                                         Height="100" 
-                                         Width="100" 
                                          Value="0" 
                                          Loaded="ProgressBar_Loaded"
                                          Tapped="Sound_Click">
@@ -66,7 +79,7 @@
 
                             <TextBlock Text="{Binding Subtitle}" 
                                        TextAlignment="Center" 
-                                       TextWrapping="Wrap" 
+                                       TextWrapping="WrapWholeWords" 
                                        IsHitTestVisible="False" 
                                        VerticalAlignment="Center" 
                                        Loaded="Subtitle_Loaded">
