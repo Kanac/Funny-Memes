@@ -9,15 +9,7 @@ namespace Comedian_Soundboard.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var names = (value as string).Split(' ');
-            StringBuilder formattedName = new StringBuilder();
-            int count = 0;
-            while (count < names.Length) {
-                formattedName.Append(names[count++]);
-                if (count != names.Length)
-                    formattedName.Append("\n");
-            }
-            return formattedName.ToString();
+            return (value as string).Replace(' ', '\n');
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
