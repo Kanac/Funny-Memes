@@ -26,57 +26,57 @@
     </Page.BottomAppBar>
 
     <Grid x:Name="LayoutRoot">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height=".85*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.Background>
-                <ImageBrush ImageSource="Assets/ComedyBackground2.jpg"></ImageBrush>
-            </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height=".85*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/ComedyBackground2.jpg"></ImageBrush>
+        </Grid.Background>
 
-            <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
+        <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock IsHitTestVisible="False" 
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock IsHitTestVisible="False" 
                        FontSize="35" 
                        FontWeight="Medium" 
                        VerticalAlignment="Center" 
                        TextAlignment="Center" 
                        Text="{Binding Category.Title, Converter={StaticResource NameSplit}}" >
-                </TextBlock>
-                <Grid Margin="20,0,0,0">
-                    <Ellipse
-                    Width="108"
-                    Height="108"
-                    StrokeThickness="8"
+            </TextBlock>
+            <Grid Margin="20,0,0,0">
+                <Ellipse
+                    Width="105"
+                    Height="105"
+                    StrokeThickness="3"
                     Loaded="Ellipse_Loaded">
-                    </Ellipse>
-                    <Ellipse Width="100"  
+                </Ellipse>
+                <Ellipse Width="100"  
                      Height="100" 
                      Stretch="Fill">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="{Binding Category.ImagePath}"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-                </Grid>
-            </StackPanel>
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding Category.ImagePath}"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </Grid>
+        </StackPanel>
 
-            <Grid DataContext="{Binding Category}" Grid.Row="1" Margin="0,10,0,0">
-                <GridView x:Name="AudioGridView"
+        <Grid DataContext="{Binding Category}" Grid.Row="1" Margin="0,10,0,0">
+            <GridView x:Name="AudioGridView"
                 IsItemClickEnabled="True"
                 ItemsSource="{Binding SoundItems}"
                 HorizontalAlignment="Center"
                 ContinuumNavigationTransitionInfo.ExitElementContainer="False">
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Margin="3,3,3,3">
-                                <Border BorderThickness="3" 
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="3,3,3,3">
+                            <Border BorderThickness="3" 
                                     Loaded="Border_Loaded"
                                     IsHitTestVisible="False">
-                                </Border>
+                            </Border>
 
-                                <ProgressBar x:Name="ProgressBar" 
+                            <ProgressBar x:Name="ProgressBar" 
                                          PointerPressed="Pointer_Pressed"
                                          PointerReleased="Pointer_Released" 
                                          PointerCanceled="Pointer_Released"
@@ -85,27 +85,26 @@
                                          Value="0" 
                                          Loaded="ProgressBar_Loaded"
                                          Tapped="Sound_Click">
-                                </ProgressBar>
+                            </ProgressBar>
 
-                                <TextBlock Text="{Binding Subtitle}" 
+                            <TextBlock Text="{Binding Subtitle}" 
                                        TextAlignment="Center" 
                                        TextWrapping="WrapWholeWords" 
                                        IsHitTestVisible="False" 
                                        VerticalAlignment="Center" 
                                        Loaded="Subtitle_Loaded">
-                                </TextBlock>
-                            </Grid>
-                        </DataTemplate>
+                            </TextBlock>
+                        </Grid>
+                    </DataTemplate>
 
-                    </GridView.ItemTemplate>
-                </GridView>
-            </Grid>
+                </GridView.ItemTemplate>
+            </GridView>
         </Grid>
 
-        <Grid VerticalAlignment="Bottom">
+        <Grid Grid.Row="2">
             <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
         </Grid>
-        <Grid VerticalAlignment="Bottom" Margin="0,49,0,0">
+        <Grid Grid.Row="2" Margin="0,49,0,0">
             <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
             <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
             <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />

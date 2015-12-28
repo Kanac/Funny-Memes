@@ -67,7 +67,7 @@
         <ListView SelectionMode="None"
                   ItemsSource="{Binding Groups}"
                   IsItemClickEnabled="True"
-                  ItemClick="Group_Click" ItemContainerStyle="{StaticResource ListViewItemStyle1}">
+                  ItemContainerStyle="{StaticResource ListViewItemStyle1}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,30,0,0" HorizontalAlignment="Center" >
@@ -93,6 +93,7 @@
                             Width="250" 
                             Height="250" 
                             Stretch="Fill" 
+                            Tapped="Group_Click"
                             PointerPressed="Pointer_Pressed"
                             PointerReleased="Pointer_Released" 
                             PointerCanceled="Pointer_Released"

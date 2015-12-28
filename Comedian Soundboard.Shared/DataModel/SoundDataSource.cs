@@ -115,7 +115,7 @@ namespace Comedian_Soundboard.Data
 
         public static async Task<SoundItem> GetSoundAsync(string uniqueId)
         {
-            await _soundDataSource.GetSoundDataAsync();
+            await _soundDataSource.GetSoundDataAutomatedAsync();
             // Simple linear search is acceptable for small data sets
             var matches = _soundDataSource.Categories.SelectMany(group => group.SoundItems).Where((item) => item.UniqueId.Equals(uniqueId));
             if (matches.Count() == 1) return matches.First();

@@ -33,50 +33,53 @@
     </Page.BottomAppBar>
 
     <Grid>
-        <Grid>
-            <Grid.Background>
-                <ImageBrush ImageSource="Assets/ComedyBackground2.jpg"></ImageBrush>
-            </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/ComedyBackground2.jpg"></ImageBrush>
+        </Grid.Background>
 
-            <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
+        <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
 
-            <StackPanel x:Name="LoadingPanel">
-                <ProgressBar IsIndeterminate="True"></ProgressBar>
-                <TextBlock Margin="5,0,0,0" FontSize="15">Loading...</TextBlock>
-            </StackPanel>
+        <StackPanel x:Name="LoadingPanel">
+            <ProgressBar IsIndeterminate="True"></ProgressBar>
+            <TextBlock Margin="5,0,0,0" FontSize="15">Loading...</TextBlock>
+        </StackPanel>
 
-            <ListView SelectionMode="None"
+        <ListView SelectionMode="None"
                       ItemsSource="{Binding Groups}"
-                      IsItemClickEnabled="True"
-                      ItemClick="Group_Click">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment"
+                      IsItemClickEnabled="True">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment"
                                 Value="Stretch">
-                        </Setter>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="0,30,0,0" HorizontalAlignment="Center" >
-                            <TextBlock 
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,30,0,0" HorizontalAlignment="Center" >
+                        <TextBlock 
                                 Text="{Binding Title}" 
                                 FontSize="30" 
                                 Foreground="White"
                                 FontWeight= "Medium"
                                 TextAlignment="Center" 
                                 VerticalAlignment="Top">
-                            </TextBlock>
-                        
-                            <Grid Margin="0,45,0,0">
+                        </TextBlock>
+
+                        <Grid Margin="0,45,0,0">
                             <Ellipse
                                 x:Name="ImageBorder"
-                                Width="225"
-                                Height="225"
-                                StrokeThickness="8"
+                                Width="235"
+                                Height="235"
+                                StrokeThickness="3"
                                 Loaded="Border_Loaded">
-                             </Ellipse>
-                             <Ellipse
+                            </Ellipse>
+                            <Ellipse
                                 Width="220" 
                                 Height="220" 
                                 Stretch="Fill" 
@@ -84,21 +87,21 @@
                                 PointerReleased="Pointer_Released" 
                                 PointerCanceled="Pointer_Released"
                                 PointerCaptureLost="Pointer_Released"
-                                PointerExited="Pointer_Released">
+                                PointerExited="Pointer_Released"
+                                Tapped="Group_Click">
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="{Binding ImagePath}"/>
                                 </Ellipse.Fill>
-                                </Ellipse>
-                            </Grid>
+                            </Ellipse>
                         </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
-        <Grid VerticalAlignment="Bottom">
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid Grid.Row="1">
             <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />
         </Grid>
-        <Grid VerticalAlignment="Bottom" Margin="0,49,0,0">
+        <Grid Grid.Row="1" Margin="0,49,0,0">
             <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />
             <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />
             <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />

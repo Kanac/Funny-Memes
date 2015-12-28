@@ -121,9 +121,9 @@ namespace Comedian_Soundboard
         }
         #endregion
 
-        private void Group_Click(object sender, ItemClickEventArgs e)
+        private void Group_Click(object sender, TappedRoutedEventArgs e)
         {
-            Frame.Navigate(typeof(AudioPage), ((Category)e.ClickedItem).UniqueId);
+            Frame.Navigate(typeof(AudioPage), ((e.OriginalSource as FrameworkElement).DataContext as Category).UniqueId);
         }
 
         private async void Comment_Click(object sender, RoutedEventArgs e)
@@ -162,15 +162,15 @@ namespace Comedian_Soundboard
         {
             FrameworkElement image = (sender as FrameworkElement);
             Ellipse border = image.FindName("ImageBorder") as Ellipse;
-            image.Width = 240;
-            image.Height = 240;
+            border.Width = 265;
+            border.Height = 265;
         }
         private void Pointer_Released(object sender, PointerRoutedEventArgs e)
         {
             FrameworkElement image = (sender as FrameworkElement);
             Ellipse border = image.FindName("ImageBorder") as Ellipse;
-            image.Width = 250;
-            image.Height = 250;
+            border.Width = 255;
+            border.Height = 255;
         }
 
         private async void reviewApp()
