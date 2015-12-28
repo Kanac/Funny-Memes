@@ -40,7 +40,8 @@
                 <Ellipse
                     Width="105"
                     Height="105"
-                    Fill="White">
+                    Fill="White"
+                    Loaded="Ellipse_Loaded">
                 </Ellipse>
                 <Ellipse Width="100"  
                      Height="100" 

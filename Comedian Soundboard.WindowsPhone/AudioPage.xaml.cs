@@ -239,5 +239,12 @@ namespace Comedian_Soundboard
         {
             (sender as TextBlock).Width = Window.Current.Bounds.Width * .20;
         }
+
+        private void Ellipse_Loaded(object sender, RoutedEventArgs e)
+        {
+            Ellipse border = (Ellipse)sender;
+            Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
+            border.Fill = new SolidColorBrush(color);
+        }
     }
 }
