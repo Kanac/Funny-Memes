@@ -81,16 +81,23 @@
                             Margin="0,3,0,0">
                         </TextBlock>
                         <Ellipse
+                            x:Name="ImageBorder"
                             Width="255"
                             Height="255"
                             Fill="White"
-                            Margin="0,40,0,0">
+                            Margin="0,40,0,0"
+                            Loaded="Border_Loaded">
                         </Ellipse>
                         <Ellipse
                             Width="250" 
                             Height="250" 
                             Stretch="Fill" 
-                            Margin="0,40,0,0">
+                            Margin="0,40,0,0"
+                            PointerPressed="Pointer_Pressed"
+                            PointerReleased="Pointer_Released" 
+                            PointerCanceled="Pointer_Released"
+                            PointerCaptureLost="Pointer_Released"
+                            PointerExited="Pointer_Released">
                             <Ellipse.Fill>
                                 <ImageBrush ImageSource="{Binding ImagePath}"/>
                             </Ellipse.Fill>

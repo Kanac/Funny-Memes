@@ -209,8 +209,7 @@ namespace Comedian_Soundboard
         {
             ProgressBar progressBar = sender as ProgressBar;
             initColour = progressBar.Background;
-            Color accent = ((Color)Application.Current.Resources["SystemColorControlAccentColor"]);
-            progressBar.Background = new SolidColorBrush(Color.FromArgb(50, accent.R, accent.G, accent.B));
+            progressBar.Background = new SolidColorBrush((Color)Application.Current.Resources["SystemColorControlAccentColor"]);
         }
 
         private void Pointer_Released(object sender, PointerRoutedEventArgs e)
@@ -233,8 +232,14 @@ namespace Comedian_Soundboard
         {
             ProgressBar progressBar = (ProgressBar)sender;
             Color accent = ((Color)Application.Current.Resources["SystemColorControlAccentColor"]);
-            progressBar.Background = new SolidColorBrush(accent);
-            progressBar.Foreground = new SolidColorBrush(Color.FromArgb(100, 255, 255, 255));
+            progressBar.Foreground = new SolidColorBrush(accent);
+        }
+
+        private void Border_Loaded(object sender, RoutedEventArgs e)
+        {
+            Border border = (Border)sender;
+            Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
+            border.BorderBrush = new SolidColorBrush(color);
         }
     }
 }

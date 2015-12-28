@@ -69,7 +69,9 @@
             <ListView x:Name="AudioGridView"
                 IsItemClickEnabled="True"
                 HorizontalAlignment="Stretch"
-                ItemsSource="{Binding SoundItems}">
+                ItemsSource="{Binding SoundItems}"
+                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                SelectionMode="None">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment"
@@ -91,7 +93,8 @@
                                     HorizontalAlignment="Center"
                                     Width="140"
                                     Height="140"
-                                    IsHitTestVisible="False">
+                                    IsHitTestVisible="False"
+                                    Loaded="Border_Loaded">
                             </Border>
 
                             <ProgressBar x:Name="ProgressBar" 
