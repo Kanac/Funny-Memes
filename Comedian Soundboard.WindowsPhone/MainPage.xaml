@@ -60,26 +60,25 @@
                     <Grid Margin="0,30,0,0" HorizontalAlignment="Center" >
                         <TextBlock 
                             Text="{Binding Title}" 
-                            FontSize="25" 
+                            FontSize="35" 
                             Foreground="White"
                             FontWeight= "Medium"
                             TextAlignment="Center" 
-                            VerticalAlignment="Top"
-                            Margin="0,3,0,0">
+                            VerticalAlignment="Top">
                         </TextBlock>
+                        
+                        <Grid Margin="0,45,0,0">
                         <Ellipse
                             x:Name="ImageBorder"
                             Width="225"
                             Height="225"
-                            Margin="0,40,0,0"
-                            StrokeThickness="15"
+                            StrokeThickness="8"
                             Loaded="Border_Loaded">
-                        </Ellipse>
-                        <Ellipse
+                         </Ellipse>
+                         <Ellipse
                             Width="220" 
                             Height="220" 
                             Stretch="Fill" 
-                            Margin="0,40,0,0"
                             PointerPressed="Pointer_Pressed"
                             PointerReleased="Pointer_Released" 
                             PointerCanceled="Pointer_Released"
@@ -88,7 +87,8 @@
                             <Ellipse.Fill>
                                 <ImageBrush ImageSource="{Binding ImagePath}"/>
                             </Ellipse.Fill>
-                        </Ellipse>
+                            </Ellipse>
+                        </Grid>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -38,9 +38,9 @@
             <TextBlock TextWrapping="WrapWholeWords" MaxWidth="175" IsHitTestVisible="False" FontSize="35" FontWeight="Medium" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Category.Title}"></TextBlock>
             <Grid Margin="20,0,0,0">
                 <Ellipse
-                    Width="105"
-                    Height="105"
-                    Fill="White"
+                    Width="108"
+                    Height="108"
+                    StrokeThickness="8"
                     Loaded="Ellipse_Loaded">
                 </Ellipse>
                 <Ellipse Width="100"  
