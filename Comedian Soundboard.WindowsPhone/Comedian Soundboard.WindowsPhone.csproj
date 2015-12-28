@@ -109,8 +109,6 @@
     <Content Include="Assets\StoreLogo.jpg" />
     <Content Include="Assets\Wide310x150Logo.jpg" />
     <Content Include="Assets\WideLogo.png" />
-    <Content Include="Assets\HubBackground.theme-dark.png" />
-    <Content Include="Assets\HubBackground.theme-light.png" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

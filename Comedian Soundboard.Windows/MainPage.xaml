@@ -73,35 +73,36 @@
                     <Grid Margin="0,30,0,0" HorizontalAlignment="Center" >
                         <TextBlock 
                             Text="{Binding Title}" 
-                            FontSize="25" 
+                            FontSize="35" 
                             Foreground="White"
                             FontWeight= "Medium"
                             TextAlignment="Center" 
-                            VerticalAlignment="Top"
-                            Margin="0,3,0,0">
+                            VerticalAlignment="Top">
                         </TextBlock>
-                        <Ellipse
+
+                        <Grid Margin="0,45,0,0">
+                            <Ellipse
                             x:Name="ImageBorder"
                             Width="255"
                             Height="255"
-                            Fill="White"
-                            Margin="0,40,0,0"
+                            StrokeThickness="8"
                             Loaded="Border_Loaded">
-                        </Ellipse>
-                        <Ellipse
+                            </Ellipse>
+                            
+                            <Ellipse
                             Width="250" 
                             Height="250" 
                             Stretch="Fill" 
-                            Margin="0,40,0,0"
                             PointerPressed="Pointer_Pressed"
                             PointerReleased="Pointer_Released" 
                             PointerCanceled="Pointer_Released"
                             PointerCaptureLost="Pointer_Released"
                             PointerExited="Pointer_Released">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="{Binding ImagePath}"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding ImagePath}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Grid>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
