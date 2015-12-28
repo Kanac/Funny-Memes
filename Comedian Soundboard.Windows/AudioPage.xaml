@@ -49,14 +49,20 @@
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <TextBlock TextWrapping="WrapWholeWords" MaxWidth="175" IsHitTestVisible="False" FontSize="35" FontWeight="Medium" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Category.Title}"></TextBlock>
-            <Ellipse Width="110"  
+            <Grid Margin="20,0,0,0">
+                <Ellipse
+                    Width="115"
+                    Height="115"
+                    Fill="White">
+                </Ellipse>
+                <Ellipse Width="110"  
                      Height="110" 
-                     Margin="20,0,0,0"
                      Stretch="Fill">
-                <Ellipse.Fill>
-                    <ImageBrush ImageSource="{Binding Category.ImagePath}"/>
-                </Ellipse.Fill>
-            </Ellipse>
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding Category.ImagePath}"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </Grid>
         </StackPanel>
         
         <Grid DataContext="{Binding Category}" Grid.Row="1" HorizontalAlignment="Center" Margin="0,20,0,0">
@@ -79,12 +85,12 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="3,3,3,3">
-                            <Border BorderThickness="3" 
+                            <Border BorderThickness="4" 
+                                    BorderBrush="White"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
                                     Width="140"
                                     Height="140"
-                                    Loaded="Border_Loaded"
                                     IsHitTestVisible="False">
                             </Border>
 

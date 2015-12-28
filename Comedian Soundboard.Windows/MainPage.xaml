@@ -80,7 +80,12 @@
                             VerticalAlignment="Top"
                             Margin="0,3,0,0">
                         </TextBlock>
-                        
+                        <Ellipse
+                            Width="255"
+                            Height="255"
+                            Fill="White"
+                            Margin="0,40,0,0">
+                        </Ellipse>
                         <Ellipse
                             Width="250" 
                             Height="250" 

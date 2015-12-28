@@ -229,17 +229,14 @@ namespace Comedian_Soundboard
             (sender as Image).Opacity = 1;
         }
 
-        private void Border_Loaded(object sender, RoutedEventArgs e)
-        {
-            Border border = (Border)sender;
-            Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
-            border.BorderBrush = new SolidColorBrush(color);
-        }
-
         private void ProgressBar_Loaded(object sender, RoutedEventArgs e)
         {
             ProgressBar progressBar = (ProgressBar)sender;
-            progressBar.Background = new SolidColorBrush((Color)Application.Current.Resources["SystemColorControlAccentColor"]);
+            //Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
+            Color accent = ((Color)Application.Current.Resources["SystemColorControlAccentColor"]);
+            //progressBar.Background = new SolidColorBrush(color);
+            progressBar.Background = new SolidColorBrush(accent);
+
         }
     }
 }
