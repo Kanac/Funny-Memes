@@ -5,7 +5,9 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.Data.Json;
+using Windows.Foundation.Metadata;
 using Windows.Storage;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
@@ -101,10 +103,13 @@ namespace Comedian_Soundboard.Data
 
         public static async Task<Category> GetCategoryAsync(string uniqueId)
         {
-            await _soundDataSource.GetSoundDataAsync();
+            await _soundDataSource.GetSoundDataAutomatedAsync();
             // Simple linear search is acceptable for small data sets
             var matches = _soundDataSource.Categories.Where((group) => group.UniqueId.Equals(uniqueId));
-            if (matches.Count() == 1) return matches.First();
+            if (matches.Count() == 1) {
+                 await _soundDataSource.GetSoundItemAutomatedAsync(matches.First());
+                 return matches.First();
+            }
             return null;
         }
 
@@ -157,33 +162,42 @@ namespace Comedian_Soundboard.Data
             if (this._categories.Count != 0)
                 return;
             
-            StorageFolder appFolder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync(@"Assets\Comedians\");
+            StorageFolder appFolder = await Package.Current.InstalledLocation.GetFolderAsync(@"Assets\Comedians\");
             IReadOnlyList<StorageFolder> comedianFolders = await appFolder.GetFoldersAsync();
             foreach (StorageFolder currComedianFolder in comedianFolders) {
                 IReadOnlyList<StorageFile> currComedianFiles = await currComedianFolder.GetFilesAsync();  // Should only contain comedian image
                 string currComedianImagePath = "Assets/Comedians/" + currComedianFolder.DisplayName + "/" + currComedianFiles.FirstOrDefault().Name;
 
                 Category currComedian = new Category(currComedianFolder.DisplayName, currComedianFolder.DisplayName, "", currComedianImagePath, "");
-
-                StorageFolder currComedianSoundFolder = await currComedianFolder.GetFolderAsync("Sounds");
-                IReadOnlyList<StorageFile> comedianSounds = await currComedianSoundFolder.GetFilesAsync();
-
-                Dictionary<string, int> wordCount = new Dictionary<string, int>();
-
-                foreach (StorageFile currComedianSound in comedianSounds) {
-                    string audioNameDisplay = humanizeAudioTitle(currComedianSound.DisplayName, wordCount);
-                    string currComedianSoundPath = "Assets/Comedians/" + currComedianFolder.DisplayName + "/Sounds/" + currComedianSound.Name;
-
-                    currComedian.SoundItems.Add(
-                        new SoundItem("", "", audioNameDisplay, currComedianSoundPath, "", ""));
-                }
-
                 this.Categories.Add(currComedian);
+            }
+        }
+
+        // This method helps split the task of parsing the actual sound files for each comedian.
+        // Modularizing this function so that not all comedian sounds are loaded on bootup 
+        // Only load them when user clicks on a comedian to save app memory especially on 512 MB devices
+        private async Task GetSoundItemAutomatedAsync(Category comedian) {
+            if (comedian.SoundItems.Count != 0)
+                return;
+
+            StorageFolder currComedianSoundFolder = await Package.Current.InstalledLocation.GetFolderAsync(@"Assets\Comedians\" + comedian.Title + @"\Sounds\");
+            IReadOnlyList<StorageFile> comedianSounds = await currComedianSoundFolder.GetFilesAsync();
+
+            Dictionary<string, int> wordCount = new Dictionary<string, int>();
+
+            foreach (StorageFile currComedianSound in comedianSounds)
+            {
+                string audioNameDisplay = humanizeAudioTitle(currComedianSound.DisplayName, wordCount);
+                string currComedianSoundPath = "Assets/Comedians/" + comedian.Title + "/Sounds/" + currComedianSound.Name;
+
+                comedian.SoundItems.Add(
+                    new SoundItem("", "", audioNameDisplay, currComedianSoundPath, "", ""));
             }
         }
 
         // Originally used a json file to provide metadeta for audio files
         // Now automatically parsing the files through their folders and relying on data set in the file
+        [Deprecated("Use GetSoundDataAutomatedAsync() instead", DeprecationType.Deprecate, 1) ]
         private async Task GetSoundDataAsync()
         {
             if (this._categories.Count != 0)

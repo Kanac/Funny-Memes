@@ -39,7 +39,7 @@ namespace Comedian_Soundboard
         public MainPage()
         {
             DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
             this.InitializeComponent();
 
             this.navigationHelper = new NavigationHelper(this);
