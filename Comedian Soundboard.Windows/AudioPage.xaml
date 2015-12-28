@@ -20,7 +20,7 @@
         <ValueConverter:NameSplit x:Key="NameSplit" />
     </Page.Resources>
     <Page.BottomAppBar>
-        <CommandBar IsOpen="True" IsSticky="True">
+        <CommandBar>
             <AppBarButton Icon="Save" Label="Save Audio File" Click="Save_Clicked" />
         </CommandBar>
     </Page.BottomAppBar>
@@ -135,19 +135,19 @@
             </ListView>
         </Grid>
 
-        <!--<Grid Grid.Row="2">
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
+        <Grid Grid.Row="2">
+            <UI:AdControl ApplicationId="a68cc9d2-57ba-4afa-b57d-775ab4c7f44a" Style="{StaticResource HorizontalLongAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265039" />
         </Grid>
-        <Grid Grid.Row="2" Margin="0,45,0,0">
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265040" />
-        </Grid>-->
+        <Grid Grid.Row="2" Margin="0,89,0,0">
+            <UI:AdControl ApplicationId="a68cc9d2-57ba-4afa-b57d-775ab4c7f44a" Style="{StaticResource HorizontalLongAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265039" />
+            <UI:AdControl ApplicationId="a68cc9d2-57ba-4afa-b57d-775ab4c7f44a" Style="{StaticResource HorizontalLongAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265039" />
+            <UI:AdControl ApplicationId="a68cc9d2-57ba-4afa-b57d-775ab4c7f44a" Style="{StaticResource HorizontalLongAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265039" />
+            <UI:AdControl ApplicationId="a68cc9d2-57ba-4afa-b57d-775ab4c7f44a" Style="{StaticResource HorizontalLongAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265039" />
+            <UI:AdControl ApplicationId="a68cc9d2-57ba-4afa-b57d-775ab4c7f44a" Style="{StaticResource HorizontalLongAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265039" />
+            <UI:AdControl ApplicationId="a68cc9d2-57ba-4afa-b57d-775ab4c7f44a" Style="{StaticResource HorizontalLongAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265039" />
+            <UI:AdControl ApplicationId="a68cc9d2-57ba-4afa-b57d-775ab4c7f44a" Style="{StaticResource HorizontalLongAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265039" />
+            <UI:AdControl ApplicationId="a68cc9d2-57ba-4afa-b57d-775ab4c7f44a" Style="{StaticResource HorizontalLongAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265039" />
+            <UI:AdControl ApplicationId="a68cc9d2-57ba-4afa-b57d-775ab4c7f44a" Style="{StaticResource HorizontalLongAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265039" />
+        </Grid>
     </Grid>
 </Page>

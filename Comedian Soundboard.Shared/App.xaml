@@ -14,6 +14,12 @@
                 <Setter Property="Width" Value="320"></Setter>
                 <Setter Property="Height" Value="50"></Setter>
             </Style>
+            <Style TargetType="UI:AdControl" x:Key="HorizontalLongAd">
+                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="Width" Value="728"></Setter>
+                <Setter Property="Height" Value="90"></Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

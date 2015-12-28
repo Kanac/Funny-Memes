@@ -52,7 +52,7 @@ namespace Comedian_Soundboard
             // Hub is only supported in Portrait orientation
             DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
 
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;

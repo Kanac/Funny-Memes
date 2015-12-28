@@ -158,8 +158,6 @@ namespace Comedian_Soundboard
             timer.Interval = new TimeSpan(0, 0, 0, 0, (int)stepSize);
             timer.Start();
             timer.Tick += Timer_Tick;
-
-
         }
 
         private void Timer_Tick(object sender, object e)
