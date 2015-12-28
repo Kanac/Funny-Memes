@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\NameSplit.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\SoundDataSource.cs" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Adam Sandler.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\Bar Mitzvah song.mp3" />

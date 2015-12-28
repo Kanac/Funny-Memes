@@ -15,7 +15,10 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SynthesizeLinkMetadata>true</SynthesizeLinkMetadata>
-    <PackageCertificateKeyFile>Comedian Soundboard.Windows_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Comedian Soundboard.Windows_StoreKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>BF2C9672143EDC13517E991F82DC39BB9FC92284</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -115,6 +118,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="Comedian Soundboard.Windows_StoreKey.pfx" />
     <None Include="Comedian Soundboard.Windows_TemporaryKey.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -129,6 +133,7 @@
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.jpg" />
     <Content Include="Assets\WideLogo.png" />
+    <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.ApplicationInsights, Version=1.2.3.490, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">

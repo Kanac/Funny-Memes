@@ -9,16 +9,19 @@
     d:DataContext="{Binding Source={d:DesignData Source=../Comedian Soundboard.Shared/DataModel/Soundboard.json, Type=data:SoundDataSource}}"
     xmlns:data="using:Comedian_Soundboard.Data"
     xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
+    xmlns:ValueConverter="using:Comedian_Soundboard.Converters"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
             <EdgeUIThemeTransition></EdgeUIThemeTransition>
         </TransitionCollection>
     </Page.Transitions>
-
+    <Page.Resources>
+        <ValueConverter:NameSplit x:Key="NameSplit" />
+    </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton Icon="Save" Label="Save" Click="Save_Clicked" />
+            <AppBarButton Icon="Save" Label="Save Audio File" Click="Save_Clicked" />
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -35,7 +38,13 @@
         <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <TextBlock TextWrapping="WrapWholeWords" MaxWidth="175" IsHitTestVisible="False" FontSize="35" FontWeight="Medium" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Category.Title}"></TextBlock>
+            <TextBlock IsHitTestVisible="False" 
+                       FontSize="35" 
+                       FontWeight="Medium" 
+                       VerticalAlignment="Center" 
+                       TextAlignment="Center" 
+                       Text="{Binding Category.Title, Converter={StaticResource NameSplit}}" >
+            </TextBlock>
             <Grid Margin="20,0,0,0">
                 <Ellipse
                     Width="108"

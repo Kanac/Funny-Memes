@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
+    xmlns:ValueConverter="using:Comedian_Soundboard.Converters"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     d:DataContext="{Binding Source={d:DesignData Source=../Comedian Soundboard.Shared/DataModel/Soundboard.json, Type=data:SoundDataSource}}"
     xmlns:data="using:Comedian_Soundboard.Data"
@@ -16,7 +17,9 @@
             <EdgeUIThemeTransition></EdgeUIThemeTransition>
         </TransitionCollection>
     </Page.Transitions>
-
+    <Page.Resources>
+        <ValueConverter:NameSplit x:Key="NameSplit" />
+    </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar>
             <AppBarButton Icon="Mail"
