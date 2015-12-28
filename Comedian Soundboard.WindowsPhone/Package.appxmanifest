@@ -21,21 +21,9 @@
         </m3:DefaultTile>
         <m3:SplashScreen Image="Assets\SplashScreen.jpg" />
       </m3:VisualElements>
-      <Extensions>
-        <Extension Category="windows.fileTypeAssociation">
-          <FileTypeAssociation Name=".mp3">
-            <DisplayName>mp3</DisplayName>
-            <SupportedFileTypes>
-              <FileType ContentType="audio/mp3">.mp3</FileType>
-            </SupportedFileTypes>
-          </FileTypeAssociation>
-        </Extension>
-      </Extensions>
     </Application>
   </Applications>
   <Capabilities>
     <Capability Name="internetClientServer" />
-    <Capability Name="removableStorage" />
-    <Capability Name="musicLibrary" />
   </Capabilities>
 </Package>

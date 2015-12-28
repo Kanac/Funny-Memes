@@ -170,6 +170,8 @@ namespace Comedian_Soundboard.Data
 
                 Category currComedian = new Category(currComedianFolder.DisplayName, currComedianFolder.DisplayName, "", currComedianImagePath, "");
                 this.Categories.Add(currComedian);
+
+                await GetSoundItemAutomatedAsync(currComedian);
             }
         }
 
