@@ -96,12 +96,11 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\BadgeLogo.jpg" />
     <Content Include="Assets\Comedy50.jpg" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\SmallLogo.png" />
-    <Content Include="Assets\SplashScreen.jpg" />
     <Content Include="Assets\SplashScreen.png" />
+    <Content Include="Assets\SplashScreen.scale-100.jpg" />
     <Content Include="Assets\Square150x150Logo.jpg" />
     <Content Include="Assets\Square44x44Logo.jpg" />
     <Content Include="Assets\Square71x71Logo.jpg" />

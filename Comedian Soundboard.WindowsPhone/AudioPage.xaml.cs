@@ -231,8 +231,8 @@ namespace Comedian_Soundboard
         private void ProgressBar_Loaded(object sender, RoutedEventArgs e)
         {
             ProgressBar progressBar = (ProgressBar)sender;
-            progressBar.Width = Window.Current.Bounds.Width * .22;
-            progressBar.Height = Window.Current.Bounds.Width * .22;
+            progressBar.Width = Window.Current.Bounds.Width * .21;
+            progressBar.Height = Window.Current.Bounds.Width * .21;
         }
 
         private void Subtitle_Loaded(object sender, RoutedEventArgs e)

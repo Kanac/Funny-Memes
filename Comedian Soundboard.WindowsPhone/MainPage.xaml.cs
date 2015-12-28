@@ -156,21 +156,23 @@ namespace Comedian_Soundboard
         }
         private void Pointer_Pressed(object sender, PointerRoutedEventArgs e)
         {
-            Ellipse border = (sender as FrameworkElement).FindName("ImageBorder") as Ellipse;
-            border.Width = 265;
-            border.Height = 265;
+            FrameworkElement image = (sender as FrameworkElement);
+            Ellipse border = image.FindName("ImageBorder") as Ellipse;
+            image.Width = 210;
+            image.Height = 210;
         }
 
         private void Pointer_Released(object sender, PointerRoutedEventArgs e)
         {
-            Ellipse border = (sender as FrameworkElement).FindName("ImageBorder") as Ellipse;
-            border.Width = 255;
-            border.Height = 255;
+            FrameworkElement image = (sender as FrameworkElement);
+            Ellipse border = image.FindName("ImageBorder") as Ellipse;
+            image.Width = 220;
+            image.Height = 220;
         }
         private void Border_Loaded(object sender, RoutedEventArgs e)
         {
             Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
-            (sender as Ellipse).Fill = new SolidColorBrush(color);
+            (sender as Ellipse).Stroke = new SolidColorBrush(color);
         }
         private async void reviewApp()
         {

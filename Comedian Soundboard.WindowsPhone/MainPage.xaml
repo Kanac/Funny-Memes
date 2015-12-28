@@ -41,7 +41,7 @@
 
         <StackPanel x:Name="LoadingPanel">
             <ProgressBar IsIndeterminate="True"></ProgressBar>
-            <TextBlock FontSize="15">Loading...</TextBlock>
+            <TextBlock Margin="5,0,0,0" FontSize="15">Loading...</TextBlock>
         </StackPanel>
 
         <ListView SelectionMode="None"
@@ -69,15 +69,15 @@
                         </TextBlock>
                         <Ellipse
                             x:Name="ImageBorder"
-                            Width="255"
-                            Height="255"
-                            Fill="White"
+                            Width="225"
+                            Height="225"
                             Margin="0,40,0,0"
+                            StrokeThickness="15"
                             Loaded="Border_Loaded">
                         </Ellipse>
                         <Ellipse
-                            Width="250" 
-                            Height="250" 
+                            Width="220" 
+                            Height="220" 
                             Stretch="Fill" 
                             Margin="0,40,0,0"
                             PointerPressed="Pointer_Pressed"
@@ -97,7 +97,7 @@
         <Grid Grid.Row="1">
             <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />
         </Grid>
-        <Grid Grid.Row="1" Margin="0,45,0,0">
+        <Grid Grid.Row="1" Margin="0,49,0,0">
             <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />
             <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />
             <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="265038" />
