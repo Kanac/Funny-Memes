@@ -120,11 +120,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\BackButton.png" />
-    <Content Include="Assets\Logo.scale-100.png" />
-    <Content Include="Assets\SmallLogo.scale-100.png" />
-    <Content Include="Assets\SplashScreen.scale-100.png" />
-    <Content Include="Assets\StoreLogo.scale-100.png" />
-    <Content Include="Assets\WideLogo.scale-100.png" />
+    <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\SmallLogo.png" />
+    <Content Include="Assets\SplashScreen.png" />
+    <Content Include="Assets\Square150x150Logo.jpg" />
+    <Content Include="Assets\Square310x310Logo.jpg" />
+    <Content Include="Assets\Square70x70Logo.jpg" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.jpg" />
+    <Content Include="Assets\WideLogo.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.ApplicationInsights, Version=1.2.3.490, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">

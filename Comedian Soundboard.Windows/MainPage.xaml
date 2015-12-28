@@ -39,7 +39,7 @@
     </Page.Transitions>
 
     <Page.BottomAppBar>
-        <CommandBar>
+        <CommandBar IsSticky="True" IsOpen="True">
             <AppBarButton Icon="Mail"
                           Label="Send Feedback"
                           Click="Comment_Click"/>

@@ -60,7 +60,7 @@
                     <Grid Margin="0,30,0,0" HorizontalAlignment="Center" >
                         <TextBlock 
                             Text="{Binding Title}" 
-                            FontSize="35" 
+                            FontSize="30" 
                             Foreground="White"
                             FontWeight= "Medium"
                             TextAlignment="Center" 

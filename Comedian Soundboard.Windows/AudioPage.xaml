@@ -17,8 +17,8 @@
     </Page.Transitions>
 
     <Page.BottomAppBar>
-        <CommandBar>
-            <AppBarButton Icon="Save" Label="Save" Click="Save_Clicked" />
+        <CommandBar IsOpen="True" IsSticky="True">
+            <AppBarButton Icon="Save" Label="Save Audio File" Click="Save_Clicked" />
         </CommandBar>
     </Page.BottomAppBar>
 
