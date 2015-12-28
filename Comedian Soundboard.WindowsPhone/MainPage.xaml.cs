@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -155,19 +156,21 @@ namespace Comedian_Soundboard
         }
         private void Pointer_Pressed(object sender, PointerRoutedEventArgs e)
         {
-            Border border = (sender as Image).FindName("ImageBorder") as Border;
-            border.BorderThickness = new Thickness(8);
+            Ellipse border = (sender as FrameworkElement).FindName("ImageBorder") as Ellipse;
+            border.Width = 265;
+            border.Height = 265;
         }
 
         private void Pointer_Released(object sender, PointerRoutedEventArgs e)
         {
-            Border border = (sender as Image).FindName("ImageBorder") as Border;
-            border.BorderThickness = new Thickness(3);
+            Ellipse border = (sender as FrameworkElement).FindName("ImageBorder") as Ellipse;
+            border.Width = 255;
+            border.Height = 255;
         }
         private void Border_Loaded(object sender, RoutedEventArgs e)
         {
             Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
-            (sender as Border).BorderBrush = new SolidColorBrush(color);
+            (sender as Ellipse).Fill = new SolidColorBrush(color);
         }
         private async void reviewApp()
         {

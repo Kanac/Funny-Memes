@@ -232,11 +232,9 @@ namespace Comedian_Soundboard
         private void ProgressBar_Loaded(object sender, RoutedEventArgs e)
         {
             ProgressBar progressBar = (ProgressBar)sender;
-            //Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
             Color accent = ((Color)Application.Current.Resources["SystemColorControlAccentColor"]);
-            //progressBar.Background = new SolidColorBrush(color);
             progressBar.Background = new SolidColorBrush(accent);
-
+            progressBar.Foreground = new SolidColorBrush(Color.FromArgb(100, 255, 255, 255));
         }
     }
 }

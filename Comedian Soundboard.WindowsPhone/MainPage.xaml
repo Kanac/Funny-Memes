@@ -13,11 +13,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Transitions>
         <TransitionCollection>
-            <NavigationThemeTransition>
-                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                    <SlideNavigationTransitionInfo/>
-                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-            </NavigationThemeTransition>
+            <EdgeUIThemeTransition></EdgeUIThemeTransition>
         </TransitionCollection>
     </Page.Transitions>
 
@@ -32,24 +28,26 @@
                           Click="Lucky_Click" Icon="Rotate"/>
         </CommandBar>
     </Page.BottomAppBar>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/ComedyBackground2.jpg" Stretch="Fill"></ImageBrush>
+        </Grid.Background>
+        <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
 
         <StackPanel x:Name="LoadingPanel">
             <ProgressBar IsIndeterminate="True"></ProgressBar>
             <TextBlock FontSize="15">Loading...</TextBlock>
         </StackPanel>
-        
-        <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
 
         <ListView SelectionMode="None"
                   ItemsSource="{Binding Groups}"
                   IsItemClickEnabled="True"
-                  ItemClick="Group_Click"
-                  ContinuumNavigationTransitionInfo.ExitElementContainer="True">
+                  ItemClick="Group_Click">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment"
@@ -63,30 +61,34 @@
                         <TextBlock 
                             Text="{Binding Title}" 
                             FontSize="25" 
+                            Foreground="White"
                             FontWeight= "Medium"
                             TextAlignment="Center" 
                             VerticalAlignment="Top"
                             Margin="0,3,0,0">
                         </TextBlock>
-                        <Border 
+                        <Ellipse
                             x:Name="ImageBorder"
-                            Loaded="Border_Loaded"
-                            BorderThickness="3" 
-                            Height="300"
-                            Width="280">
-                        </Border>
-                        <Image 
-                            Source="{Binding ImagePath}" 
+                            Width="255"
+                            Height="255"
+                            Fill="White"
+                            Margin="0,40,0,0"
+                            Loaded="Border_Loaded">
+                        </Ellipse>
+                        <Ellipse
                             Width="250" 
                             Height="250" 
                             Stretch="Fill" 
-                            Margin="0,30,0,0"
+                            Margin="0,40,0,0"
                             PointerPressed="Pointer_Pressed"
                             PointerReleased="Pointer_Released" 
                             PointerCanceled="Pointer_Released"
                             PointerCaptureLost="Pointer_Released"
                             PointerExited="Pointer_Released">
-                        </Image>
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding ImagePath}"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
