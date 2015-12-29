@@ -259,14 +259,8 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Will Ferrell\Sounds\Who let the dogs out   Song.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Will Ferrell\Sounds\Youre not a doctor.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Will Ferrell\Will Ferrell.jpg" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\ComedyBackground.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\ComedyBackground2.jpg" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\PauseButton.PNG" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\PlayButton.png" />
     <Content Include="$(MSBuildThisFileDirectory)DataModel\Soundboard.json" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\LightGray.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\MediumGray.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\DarkGray.png" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\NavigationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\RelayCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />

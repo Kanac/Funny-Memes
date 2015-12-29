@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="62206AnthonyC.ComedySoundboard" Publisher="CN=F30DC63F-6CBF-4542-8D92-E93F173C760F" Version="1.1.0.7" />
+  <Identity Name="62206AnthonyC.ComedySoundboard" Publisher="CN=F30DC63F-6CBF-4542-8D92-E93F173C760F" Version="1.1.0.8" />
   <mp:PhoneIdentity PhoneProductId="1c06db92-2be8-4ec3-97bd-8710117ec575" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Comedy Soundboard</DisplayName>

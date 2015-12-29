@@ -118,6 +118,10 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="AdMediator.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Comedian Soundboard.Windows_StoreKey.pfx" />
     <None Include="Comedian Soundboard.Windows_TemporaryKey.pfx" />
     <None Include="packages.config" />
