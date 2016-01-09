@@ -62,7 +62,7 @@
                 <Ellipse
                     Width="120"
                     Height="120"
-                    StrokeThickness="3"
+                    StrokeThickness="5"
                     Loaded="Ellipse_Loaded">
                 </Ellipse>
                 <Ellipse Width="110"  

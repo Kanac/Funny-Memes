@@ -83,9 +83,9 @@
                         <Grid Margin="0,45,0,0">
                             <Ellipse
                             x:Name="ImageBorder"
-                            Width="265"
-                            Height="265"
-                            StrokeThickness="3"
+                            Width="258"
+                            Height="258"
+                            StrokeThickness="4"
                             Loaded="Border_Loaded">
                             </Ellipse>
                             

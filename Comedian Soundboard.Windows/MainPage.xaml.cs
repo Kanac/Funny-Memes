@@ -163,12 +163,16 @@ namespace Comedian_Soundboard
             FrameworkElement image = (sender as FrameworkElement);
             Ellipse border = image.FindName("ImageBorder") as Ellipse;
             border.StrokeThickness = 8;
+            border.Width = 265;
+            border.Height = 265;
         }
         private void Pointer_Released(object sender, PointerRoutedEventArgs e)
         {
             FrameworkElement image = (sender as FrameworkElement);
             Ellipse border = image.FindName("ImageBorder") as Ellipse;
-            border.StrokeThickness = 3;
+            border.StrokeThickness = 4;
+            border.Width = 258;
+            border.Height = 258;
         }
 
         private async void reviewApp()
