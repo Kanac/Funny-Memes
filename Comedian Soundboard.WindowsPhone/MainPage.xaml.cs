@@ -11,6 +11,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
 using Windows.Phone.Devices.Notification;
+using Windows.System;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -158,6 +159,8 @@ namespace Comedian_Soundboard
         {
             FrameworkElement image = (sender as FrameworkElement);
             Ellipse border = image.FindName("ImageBorder") as Ellipse;
+            border.Width = 235;
+            border.Height = 235;
             border.StrokeThickness = 8;
         }
 
@@ -165,7 +168,9 @@ namespace Comedian_Soundboard
         {
             FrameworkElement image = (sender as FrameworkElement);
             Ellipse border = image.FindName("ImageBorder") as Ellipse;
-            border.StrokeThickness = 3;
+            border.Width = 228;
+            border.Height = 228;
+            border.StrokeThickness = 4;
         }
         private void Border_Loaded(object sender, RoutedEventArgs e)
         {
@@ -193,7 +198,7 @@ namespace Comedian_Soundboard
                 if ((int)reviewResult.Id == 0)
                 {
                     try {
-                        await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + CurrentApp.AppId));
+                        await Launcher.LaunchUriAsync(new Uri(string.Format("ms-windows-store:REVIEW?PFN={0}", Windows.ApplicationModel.Package.Current.Id.FamilyName)));
                     }
                     catch (Exception e) {
                         reviewBox = new MessageDialog("An error has occured! " + e.Message);

@@ -196,7 +196,7 @@ namespace Comedian_Soundboard
                 if ((int)reviewResult.Id == 0)
                 {
                     try {
-                        await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + CurrentApp.AppId));
+                        await Launcher.LaunchUriAsync(new Uri(string.Format("ms-windows-store:REVIEW?PFN={0}", Windows.ApplicationModel.Package.Current.Id.FamilyName)));
                     }
                     catch (Exception e) {
                         reviewBox = new MessageDialog("An error has occured! " + e.Message);
