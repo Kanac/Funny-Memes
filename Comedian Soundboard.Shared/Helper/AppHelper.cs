@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Background;
+using Windows.ApplicationModel.Store;
 using Windows.Data.Xml.Dom;
 using Windows.System;
 using Windows.UI.Notifications;
@@ -60,7 +61,11 @@ namespace Comedian_Soundboard.Helper
                 {
                     try
                     {
+#if WINDOWS_APP
                         await Launcher.LaunchUriAsync(new Uri(string.Format("ms-windows-store:REVIEW?PFN={0}", Windows.ApplicationModel.Package.Current.Id.FamilyName)));
+#elif WINDOWS_PHONE_APP
+                        await Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + "450ee59b-0aff-40b4-b896-0382d05d96ee"));
+#endif
                     }
                     catch (Exception e)
                     {

@@ -148,7 +148,7 @@ namespace Comedian_Soundboard
 
         private async void Rate_Click(object sender, RoutedEventArgs e)
         {
-            await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + CurrentApp.AppId));
+            await Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + "450ee59b-0aff-40b4-b896-0382d05d96ee"));
         }
 
         private async void Lucky_Click(object sender, RoutedEventArgs e)
@@ -167,8 +167,8 @@ namespace Comedian_Soundboard
         {
             FrameworkElement image = (sender as FrameworkElement);
             Ellipse border = image.FindName("ImageBorder") as Ellipse;
-            border.Width = 238;
-            border.Height = 238;
+            border.Width = 235;
+            border.Height = 235;
             border.StrokeThickness = 8;
         }
 
