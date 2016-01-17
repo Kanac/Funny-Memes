@@ -35,7 +35,7 @@ namespace Comedian_Soundboard
 #if WINDOWS_PHONE_APP
         private TransitionCollection transitions;
 #endif
-
+        public static bool firstLoad = false;
         /// <summary>
         /// Initializes the singleton instance of the <see cref="App"/> class. This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().

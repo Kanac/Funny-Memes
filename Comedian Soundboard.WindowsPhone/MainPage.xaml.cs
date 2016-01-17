@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.Email;
 using Windows.ApplicationModel.Store;
 using Windows.Foundation;
@@ -22,7 +24,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
-
+using Comedian_Soundboard.Helper;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Comedian_Soundboard
@@ -81,7 +83,12 @@ namespace Comedian_Soundboard
             var groups = await SoundDataSource.GetCategoryAsync();
             this.DefaultViewModel["Groups"] = groups;
             LoadingPanel.Visibility = Visibility.Collapsed;
-            reviewApp();
+            AppHelper.ReviewApp();
+            if (!App.firstLoad)
+            {
+                await AppHelper.SetupBackgroundToast();
+                App.firstLoad = false;
+            }
         }
 
         /// <summary>
@@ -176,38 +183,6 @@ namespace Comedian_Soundboard
         {
             Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
             (sender as Ellipse).Stroke = new SolidColorBrush(color);
-        }
-        private async void reviewApp()
-        {
-            if (!localSettings.Values.ContainsKey("Views"))
-                localSettings.Values.Add(new KeyValuePair<string, object>("Views", 3));
-            else
-                localSettings.Values["Views"] = 1 + Convert.ToInt32(localSettings.Values["Views"]);
-
-            int viewCount = Convert.ToInt32(localSettings.Values["Views"]);
-
-
-            // Only ask for review up to several times, once every 4 times this page is visited, and do not ask anymore once reviewed
-            if (viewCount % 4 == 0 && viewCount <= 50 && Convert.ToInt32(localSettings.Values["Rate"]) != 1)
-            {
-                var reviewBox = new MessageDialog("Keep updates coming by rating this app 5 stars to support us!");
-                reviewBox.Commands.Add(new UICommand { Label = "Yes! :)", Id = 0 });
-                reviewBox.Commands.Add(new UICommand { Label = "Maybe later", Id = 1 });
-
-                var reviewResult = await reviewBox.ShowAsync();
-                if ((int)reviewResult.Id == 0)
-                {
-                    try {
-                        await Launcher.LaunchUriAsync(new Uri(string.Format("ms-windows-store:REVIEW?PFN={0}", Windows.ApplicationModel.Package.Current.Id.FamilyName)));
-                    }
-                    catch (Exception e) {
-                        reviewBox = new MessageDialog("An error has occured! " + e.Message);
-                        await reviewBox.ShowAsync();
-                    }
-
-                    localSettings.Values["Rate"] = 1;
-                }
-            }
         }
     }
 }
