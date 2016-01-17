@@ -87,6 +87,7 @@ namespace Comedian_Soundboard
             if (!App.firstLoad)
             {
                 await AppHelper.SetupBackgroundToast();
+                AppHelper.setupReuseToast();
                 App.firstLoad = false;
             }
         }
@@ -166,8 +167,8 @@ namespace Comedian_Soundboard
         {
             FrameworkElement image = (sender as FrameworkElement);
             Ellipse border = image.FindName("ImageBorder") as Ellipse;
-            border.Width = 235;
-            border.Height = 235;
+            border.Width = 238;
+            border.Height = 238;
             border.StrokeThickness = 8;
         }
 

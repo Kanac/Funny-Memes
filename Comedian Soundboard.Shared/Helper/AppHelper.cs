@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Background;
+using Windows.Data.Xml.Dom;
 using Windows.System;
+using Windows.UI.Notifications;
 using Windows.UI.Popups;
 
 namespace Comedian_Soundboard.Helper
@@ -93,6 +96,32 @@ namespace Comedian_Soundboard.Helper
 
                 BackgroundTaskRegistration task = builder.Register();
             }
+        }
+        public static void setupReuseToast()
+        {
+            // Check if a reuse toast is already scheduled
+            if (ToastNotificationManager.CreateToastNotifier().GetScheduledToastNotifications().Where(x => x.Id == "Reuse").Count() > 0)
+            {
+                return;
+            }
+
+            ToastTemplateType toastTemplate = ToastTemplateType.ToastImageAndText02;
+            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
+
+            XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
+            toastTextElements[0].AppendChild(toastXml.CreateTextNode("Comedy"));
+            toastTextElements[1].AppendChild(toastXml.CreateTextNode("Check out new comedy sounds now!"));
+
+            IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
+            XmlElement audio = toastXml.CreateElement("audio");
+            audio.SetAttribute("src", "ms-appx:///Assets/yourturn.mp3");
+            toastNode.AppendChild(audio);
+
+            ToastNotification toast = new ToastNotification(toastXml);
+            DateTime dueTime = DateTime.Now.AddMinutes(50);
+            ScheduledToastNotification scheduledToast = new ScheduledToastNotification(toastXml, dueTime);
+            scheduledToast.Id = "Reuse";
+            ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledToast);
         }
     }
 }

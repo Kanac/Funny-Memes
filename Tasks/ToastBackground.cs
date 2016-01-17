@@ -14,12 +14,17 @@ namespace Tasks
     {
         public void Run(IBackgroundTaskInstance taskInstance)
         {
+            if (ToastNotificationManager.CreateToastNotifier().GetScheduledToastNotifications().Where(x => x.Id == "Background").Count() > 0)
+            {
+                return;
+            }
+
             ToastTemplateType toastTemplate = ToastTemplateType.ToastImageAndText02;
             XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
 
             XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
             toastTextElements[0].AppendChild(toastXml.CreateTextNode("Comedy"));
-            toastTextElements[1].AppendChild(toastXml.CreateTextNode("Check out the new comedy audio!"));
+            toastTextElements[1].AppendChild(toastXml.CreateTextNode("New comedy audio has arrived! Come check it out!"));
 
             IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
             XmlElement audio = toastXml.CreateElement("audio");
@@ -43,7 +48,6 @@ namespace Tasks
             ScheduledToastNotification scheduledToast = new ScheduledToastNotification(toastXml, dueTime);
             scheduledToast.Id = "Background";
             ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledToast);
-            ToastNotificationManager.CreateToastNotifier().Show(toast);
         }
     }
 }
