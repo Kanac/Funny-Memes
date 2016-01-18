@@ -10,6 +10,12 @@
     d:DataContext="{Binding Source={d:DesignData Source=../Comedian Soundboard.Shared/DataModel/Soundboard.json, Type=data:SoundDataSource}}"
     xmlns:data="using:Comedian_Soundboard.Data"
     mc:Ignorable="d">
+    <Page.Transitions>
+        <TransitionCollection>
+            <EdgeUIThemeTransition></EdgeUIThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+
     <Page.Resources>
         <Style x:Key="ListViewItemStyle1" TargetType="ListViewItem">
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
@@ -31,12 +37,6 @@
             </Setter>
         </Style>
     </Page.Resources>
-
-    <Page.Transitions>
-        <TransitionCollection>
-            <EdgeUIThemeTransition></EdgeUIThemeTransition>
-        </TransitionCollection>
-    </Page.Transitions>
 
     <Page.BottomAppBar>
         <CommandBar>
@@ -60,12 +60,12 @@
         <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
 
         <StackPanel x:Name="LoadingPanel">
-            <ProgressBar IsIndeterminate="True"></ProgressBar>
-            <TextBlock FontSize="15">Loading...</TextBlock>
+            <ProgressBar IsIndeterminate="True" IsHitTestVisible="False"></ProgressBar>
+            <TextBlock FontSize="15" IsHitTestVisible="False">Loading...</TextBlock>
         </StackPanel>
 
-        <ListView SelectionMode="None"
-                  ItemsSource="{Binding Groups}"
+        <ListView ItemsSource="{Binding Groups}"
+                  SelectionMode="None"
                   IsItemClickEnabled="True"
                   ItemContainerStyle="{StaticResource ListViewItemStyle1}">
             <ListView.ItemTemplate>
@@ -108,6 +108,21 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <Image Source="Assets/BackButton.png" 
+               x:Name="BackButton"
+               Width="50" 
+               Height="50" 
+               Tapped="Back_Tapped" 
+               VerticalAlignment="Top"
+               HorizontalAlignment="Left"
+               Visibility="Collapsed"
+               PointerPressed="PointerImage_Pressed"
+               PointerReleased="PointerImage_Released" 
+               PointerCanceled="PointerImage_Released"
+               PointerCaptureLost="PointerImage_Released"
+               PointerExited="PointerImage_Released">
+        </Image>
 
         <!--<Grid Grid.Row="1">
             <UI:AdControl ApplicationId="a68cc9d2-57ba-4afa-b57d-775ab4c7f44a" Style="{StaticResource HorizontalLongAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="268704" />

@@ -38,8 +38,8 @@ namespace Comedian_Soundboard.Data
             this.Content = content;
         }
 
-        public string UniqueId { get; private set; }
-        public string Title { get; private set; }
+        public string UniqueId {get; private set; }
+        public string Title {get; private set; }
         public string Subtitle { get; private set; }
         public string Description { get; private set; }
         public string SoundPath { get; private set; }
@@ -88,7 +88,7 @@ namespace Comedian_Soundboard.Data
     public sealed class SoundDataSource
     {
         private static readonly SoundDataSource _soundDataSource = new SoundDataSource();
-        private int onlineOffset = 0;
+        private int _onlineOffset = 0;
 
         private ObservableCollection<Category> _categories = new ObservableCollection<Category>();
         public ObservableCollection<Category> Categories
@@ -99,14 +99,14 @@ namespace Comedian_Soundboard.Data
         public static async Task<IEnumerable<Category>> GetOnlineCategoriesAsync() {
             await _soundDataSource.GetOnlineSoundDataAsync();
 
-            return _soundDataSource.Categories.Skip(_soundDataSource.onlineOffset);
+            return _soundDataSource.Categories.Skip(_soundDataSource._onlineOffset);
         }
 
         public static async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
             await _soundDataSource.GetSoundDataAutomatedAsync();
 
-            return _soundDataSource.Categories;
+            return _soundDataSource.Categories.Take(_soundDataSource._onlineOffset);
         }
 
         public static async Task<Category> GetCategoryAsync(string uniqueId)
@@ -132,18 +132,18 @@ namespace Comedian_Soundboard.Data
 
         // Helper method that changes the input string to match given constraints such that only the first 3 words are taken and 
         // if those 3 words have already been used before (recorded by dictionary input wordCount) it will list a number suffix to it as well
-        private string humanizeAudioTitle(string title, Dictionary<string, int> wordCount) {
+        public static string HumanizeAudioTitle(string title, int maxWords = 3, Dictionary<string, int> wordCount = null) {
             var words = title.Split(' ');
             int count = 0;
             StringBuilder audioName = new StringBuilder();
             foreach (var word in words)
             {
-                if (count >= 3) break;
+                if (count >= maxWords) break;
                 if (word != "")
                 {
                     audioName.Append(word[0].ToString().ToUpper());
                     if (word.Length > 1)
-                        audioName.Append(word.Substring(1));
+                        audioName.Append(word.Substring(1).ToLower());
 
                     audioName.Append(" ");
                     count++;
@@ -152,24 +152,25 @@ namespace Comedian_Soundboard.Data
 
             audioName.Remove(audioName.Length - 1, 1);
             string audioNameDisplay = audioName.ToString();
-            if (wordCount.ContainsKey(audioName.ToString()))
+            if (wordCount != null)
             {
-                wordCount[audioName.ToString()]++;
-                audioNameDisplay += " " + wordCount[audioName.ToString()];
+                if (wordCount.ContainsKey(audioName.ToString()))
+                {
+                    wordCount[audioName.ToString()]++;
+                    audioNameDisplay += " " + wordCount[audioName.ToString()];
+                }
+                else
+                    wordCount.Add(audioName.ToString(), 1);
             }
-            else
-                wordCount.Add(audioName.ToString(), 1);
-
             return audioNameDisplay;
         }
 
         private async Task GetOnlineSoundDataAsync() {
-            if (this.onlineOffset != 0)
+            if (this._onlineOffset != this.Categories.Count) // check if online data has yet to be added
                 return;
 
-            this.onlineOffset = _soundDataSource.Categories.Count();  // Get the offset to the online files in collection before adding
             ICollection<Category> onlineComedians = await SoundArchiveDataSource.GetSoundboardAudioFiles();
-            foreach (Category comedian in onlineComedians) {
+            foreach (Category comedian in onlineComedians){
                 this.Categories.Add(comedian);
             }
 
@@ -200,6 +201,8 @@ namespace Comedian_Soundboard.Data
 
                 await GetSoundItemAutomatedAsync(currComedian);
             }
+
+            _soundDataSource._onlineOffset = this.Categories.Count();
         }
 
         // This method helps split the task of parsing the actual sound files for each comedian.
@@ -216,7 +219,7 @@ namespace Comedian_Soundboard.Data
 
             foreach (StorageFile currComedianSound in comedianSounds)
             {
-                string audioNameDisplay = humanizeAudioTitle(currComedianSound.DisplayName, wordCount);
+                string audioNameDisplay = HumanizeAudioTitle(currComedianSound.DisplayName, wordCount:wordCount);
                 string currComedianSoundPath = "Assets/Comedians/" + comedian.Title + "/Sounds/" + currComedianSound.Name;
 
                 comedian.SoundItems.Add(

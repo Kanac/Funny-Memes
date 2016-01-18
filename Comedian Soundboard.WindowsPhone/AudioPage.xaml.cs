@@ -52,7 +52,7 @@ namespace Comedian_Soundboard
             // Hub is only supported in Portrait orientation
             DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
 
-            this.NavigationCacheMode = NavigationCacheMode.Enabled;
+            this.NavigationCacheMode = NavigationCacheMode.Disabled;
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
@@ -136,7 +136,11 @@ namespace Comedian_Soundboard
         private void Sound_Click(object sender, TappedRoutedEventArgs e)
         {
             SoundItem soundItem = (SoundItem)(((FrameworkElement)e.OriginalSource).DataContext);
-            Audio.Source = new Uri("ms-appx:///" +  soundItem.SoundPath, UriKind.RelativeOrAbsolute);
+
+            if (soundItem.SoundPath.Contains("http"))  // Check whether url is online or in assets folder
+                Audio.Source = new Uri(soundItem.SoundPath, UriKind.RelativeOrAbsolute);
+            else
+                Audio.Source = new Uri("ms-appx:///" +  soundItem.SoundPath, UriKind.RelativeOrAbsolute);
 
             if (currentProgressBar != null)
             {

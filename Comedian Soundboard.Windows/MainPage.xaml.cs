@@ -39,7 +39,7 @@ namespace Comedian_Soundboard
         public MainPage()
         {
             DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
-            this.NavigationCacheMode = NavigationCacheMode.Enabled;
+            this.NavigationCacheMode = NavigationCacheMode.Disabled;
             this.InitializeComponent();
 
             this.navigationHelper = new NavigationHelper(this);
@@ -77,7 +77,17 @@ namespace Comedian_Soundboard
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            var groups = await SoundDataSource.GetCategoriesAsync();
+            IEnumerable<Category> groups;
+            if (e.NavigationParameter.ToString() == "Search Online")
+            {
+                groups = await SoundDataSource.GetOnlineCategoriesAsync();
+                BackButton.Visibility = Visibility.Visible;
+            }
+            else {
+                groups = await SoundDataSource.GetCategoriesAsync();
+                BackButton.Visibility = Visibility.Collapsed;
+            }
+
             this.DefaultViewModel["Groups"] = groups;
             LoadingPanel.Visibility = Visibility.Collapsed;
             AppHelper.ReviewApp();
@@ -130,7 +140,11 @@ namespace Comedian_Soundboard
 
         private void Group_Click(object sender, TappedRoutedEventArgs e)
         {
-            Frame.Navigate(typeof(AudioPage), ((e.OriginalSource as FrameworkElement).DataContext as Category).UniqueId);
+            string comedian = ((e.OriginalSource as FrameworkElement).DataContext as Category).UniqueId;
+            if (comedian == "Search Online")
+                Frame.Navigate(typeof(MainPage), comedian);
+            else
+                Frame.Navigate(typeof(AudioPage), comedian);
         }
 
         private async void Comment_Click(object sender, RoutedEventArgs e)
@@ -180,6 +194,21 @@ namespace Comedian_Soundboard
             border.StrokeThickness = 4;
             border.Width = 258;
             border.Height = 258;
+        }
+
+        private void PointerImage_Pressed(object sender, PointerRoutedEventArgs e)
+        {
+            (sender as Image).Opacity = 0.5;
+        }
+
+        private void PointerImage_Released(object sender, PointerRoutedEventArgs e)
+        {
+            (sender as Image).Opacity = 1;
+        }
+
+        private void Back_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.GoBack();
         }
     }
 }

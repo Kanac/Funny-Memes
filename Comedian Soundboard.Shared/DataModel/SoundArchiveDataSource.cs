@@ -26,9 +26,12 @@ namespace Comedian_Soundboard.DataModel
             ICollection<Category> comedians = new List<Category>();
             foreach (HtmlNode htmlATag in htmlATags)
             {
-                string title = htmlATag.InnerText;
+                string title = htmlATag.Descendants("h3").FirstOrDefault().InnerHtml;
+                if (title.Contains("<br>"))
+                    title = title.Substring(0, title.IndexOf("<br>"));
+                title = SoundDataSource.HumanizeAudioTitle(title, maxWords:6);
                 string imageUrl = "http://www.thesoundarchive.com/" + htmlATag.Descendants("img").FirstOrDefault().Attributes["src"].Value;
-                Category comedian = new Category(title, title, "", imageUrl, "");
+                Category comedian = title == "South Park" ? new Category(title + "2", title, "", imageUrl, "") : new Category(title, title, "", imageUrl, "");
 
                 string link = "http://www.thesoundarchive.com/" + htmlATag.Attributes["href"].Value;
                 string pageHtml = await _soundArchiveDataSource.httpClient.GetStringAsync(link);
@@ -40,9 +43,17 @@ namespace Comedian_Soundboard.DataModel
                 foreach (HtmlNode htmlLiTag in htmlLiTags)
                 {
                     string soundTitle = htmlLiTag.InnerText;
+                    soundTitle = soundTitle.Replace("&quot;", "");
+                    if (soundTitle.Contains("- |")){
+                        soundTitle = soundTitle.Substring(0, soundTitle.IndexOf("- |"));
+                    }
+                    soundTitle = SoundDataSource.HumanizeAudioTitle(soundTitle, maxWords: 3);
+
                     if (htmlLiTag.Descendants("a").Where(x => x.InnerText.Contains("MP3")).Count() > 0)
                     {
-                        string soundUrl = "http://www.thesoundarchive.com/" + htmlLiTag.Descendants("a").Where(x => x.InnerText.Contains("MP3")).FirstOrDefault().Attributes["href"].Value;
+                        string rawSoundUrl = htmlLiTag.Descendants("a").Where(x => x.InnerText.Contains("MP3")).FirstOrDefault().Attributes["href"].Value;
+                        rawSoundUrl = rawSoundUrl.Replace("play-wav-files.asp?sound=", "");
+                        string soundUrl = "http://www.thesoundarchive.com/" + rawSoundUrl;
                         comedian.SoundItems.Add(new SoundItem("","",soundTitle, soundUrl,"",""));
                     }
                 }
