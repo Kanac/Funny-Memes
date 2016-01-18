@@ -19,6 +19,7 @@
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
     <PackageCertificateThumbprint>BF2C9672143EDC13517E991F82DC39BB9FC92284</PackageCertificateThumbprint>
+    <AppxBundle>Always</AppxBundle>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -128,7 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\BackButton.png" />
-    <Content Include="Assets\BadgeLogo.scale-180.jpg" />
+    <Content Include="Assets\Comedy24.jpg" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />

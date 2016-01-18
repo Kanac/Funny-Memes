@@ -155,13 +155,20 @@ namespace Comedian_Soundboard.Data
             return audioNameDisplay;
         }
 
+        // Add an online category for purpose of a button in the main page list view
+        private Category AddOnlineCategory() {
+            return new Category("Search Online", "Search Online", "", "Assets/Chrome.jpg", "");
+        }
+
         // Automatically parses the assets into objects for each comedian provided that files are located in the given hierarchy
         // Assets/Comedians/(x)/ is the location of the (only) file for iamge
         // Assets/Comedians/(x)/Sounds/ is the location of all the mp3 files
         private async Task GetSoundDataAutomatedAsync() {
             if (this._categories.Count != 0)
                 return;
-            
+
+            this.Categories.Add(AddOnlineCategory());
+
             StorageFolder appFolder = await Package.Current.InstalledLocation.GetFolderAsync(@"Assets\Comedians\");
             IReadOnlyList<StorageFolder> comedianFolders = await appFolder.GetFoldersAsync();
             foreach (StorageFolder currComedianFolder in comedianFolders) {
