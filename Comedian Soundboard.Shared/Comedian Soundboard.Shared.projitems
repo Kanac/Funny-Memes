@@ -19,7 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\SoundArchiveDataSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\SoundDataSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\AppHelper.cs" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Chrome.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Chrome.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Adam Sandler.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\Crazy Guy.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Adam Sandler\Sounds\Drunk.mp3" />

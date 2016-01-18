@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Comedian_Soundboard.DataModel
 {
@@ -13,7 +14,7 @@ namespace Comedian_Soundboard.DataModel
         private static readonly SoundArchiveDataSource _soundArchiveDataSource = new SoundArchiveDataSource();
         private HttpClient httpClient = new HttpClient();
 
-        public async static void GetSoundboardAudioFiles()
+        public async static Task<ICollection<Category>> GetSoundboardAudioFiles()
         {
             string mainHtml = await _soundArchiveDataSource.httpClient.GetStringAsync("http://www.thesoundarchive.com/");
 
@@ -22,6 +23,7 @@ namespace Comedian_Soundboard.DataModel
             HtmlNode htmlList = mainDoc.DocumentNode.Descendants("ul").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains("cbp-rfgrid")).FirstOrDefault();
             IEnumerable<HtmlNode> htmlATags = htmlList.Descendants("a");
 
+            ICollection<Category> comedians = new List<Category>();
             foreach (HtmlNode htmlATag in htmlATags)
             {
                 string title = htmlATag.InnerText;
@@ -44,7 +46,9 @@ namespace Comedian_Soundboard.DataModel
                         comedian.SoundItems.Add(new SoundItem("","",soundTitle, soundUrl,"",""));
                     }
                 }
+                comedians.Add(comedian);
             }
+            return comedians;
         }
     }
 }

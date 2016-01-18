@@ -77,7 +77,7 @@ namespace Comedian_Soundboard
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            var groups = await SoundDataSource.GetCategoryAsync();
+            var groups = await SoundDataSource.GetCategoriesAsync();
             this.DefaultViewModel["Groups"] = groups;
             LoadingPanel.Visibility = Visibility.Collapsed;
             AppHelper.ReviewApp();
@@ -149,7 +149,7 @@ namespace Comedian_Soundboard
 
         private async void Lucky_Click(object sender, RoutedEventArgs e)
         {
-            IEnumerable<Category> comedians = await SoundDataSource.GetCategoryAsync();
+            IEnumerable<Category> comedians = await SoundDataSource.GetCategoriesAsync();
             Category randComedian = comedians.ElementAt(random.Next(0, comedians.Count()));
             SoundItem randSound = randComedian.SoundItems.ElementAt(random.Next(0, randComedian.SoundItems.Count()));
             Audio.Source = new Uri("ms-appx:///" + randSound.SoundPath, UriKind.RelativeOrAbsolute);

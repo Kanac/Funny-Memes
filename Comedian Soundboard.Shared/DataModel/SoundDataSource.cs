@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Comedian_Soundboard.DataModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -86,7 +87,8 @@ namespace Comedian_Soundboard.Data
     /// </summary>
     public sealed class SoundDataSource
     {
-        private static SoundDataSource _soundDataSource = new SoundDataSource();
+        private static readonly SoundDataSource _soundDataSource = new SoundDataSource();
+        private int onlineOffset = 0;
 
         private ObservableCollection<Category> _categories = new ObservableCollection<Category>();
         public ObservableCollection<Category> Categories
@@ -94,7 +96,13 @@ namespace Comedian_Soundboard.Data
             get { return this._categories; }
         }
 
-        public static async Task<IEnumerable<Category>> GetCategoryAsync()
+        public static async Task<IEnumerable<Category>> GetOnlineCategoriesAsync() {
+            await _soundDataSource.GetOnlineSoundDataAsync();
+
+            return _soundDataSource.Categories.Skip(_soundDataSource.onlineOffset);
+        }
+
+        public static async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
             await _soundDataSource.GetSoundDataAutomatedAsync();
 
@@ -155,9 +163,21 @@ namespace Comedian_Soundboard.Data
             return audioNameDisplay;
         }
 
+        private async Task GetOnlineSoundDataAsync() {
+            if (this.onlineOffset != 0)
+                return;
+
+            this.onlineOffset = _soundDataSource.Categories.Count();  // Get the offset to the online files in collection before adding
+            ICollection<Category> onlineComedians = await SoundArchiveDataSource.GetSoundboardAudioFiles();
+            foreach (Category comedian in onlineComedians) {
+                this.Categories.Add(comedian);
+            }
+
+        }
+
         // Add an online category for purpose of a button in the main page list view
         private Category AddOnlineCategory() {
-            return new Category("Search Online", "Search Online", "", "Assets/Chrome.jpg", "");
+            return new Category("Search Online", "Search Online", "", "Assets/Chrome.png", "");
         }
 
         // Automatically parses the assets into objects for each comedian provided that files are located in the given hierarchy
