@@ -39,15 +39,15 @@
     </Page.Resources>
 
     <Page.BottomAppBar>
-        <CommandBar>
-            <AppBarButton Icon="Mail"
+            <CommandBar IsOpen="True" IsSticky="True">
+                <AppBarButton Icon="Mail"
                           Label="Send Feedback"
                           Click="Comment_Click"/>
-            <AppBarButton Label="Rate App"
+                <AppBarButton Label="Rate App"
                           Click="Rate_Click" Icon="SolidStar"/>
-            <AppBarButton Label="Feeling Lucky"
+                <AppBarButton Label="Feeling Lucky"
                           Click="Lucky_Click" Icon="Rotate"/>
-        </CommandBar>
+            </CommandBar>
     </Page.BottomAppBar>
     <Grid>
         <Grid.RowDefinitions>

@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.Store;
 using Windows.Data.Xml.Dom;
+using Windows.Networking.Connectivity;
 using Windows.System;
 using Windows.UI.Notifications;
 using Windows.UI.Popups;
@@ -127,6 +128,21 @@ namespace Comedian_Soundboard.Helper
             ScheduledToastNotification scheduledToast = new ScheduledToastNotification(toastXml, dueTime);
             scheduledToast.Id = "Reuse";
             ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledToast);
+        }
+        public static async Task<bool> IsInternetAvailable()
+        {
+            var profiles = NetworkInformation.GetConnectionProfiles();
+            var internetProfile = NetworkInformation.GetInternetConnectionProfile();
+            var isInternetEnabled = profiles.Any(s => s.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess)
+                || (internetProfile != null
+                        && internetProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess);
+            if (!isInternetEnabled)
+            {
+                MessageDialog messageBox = new MessageDialog("Make sure your internet connection is working and try again!");
+                await messageBox.ShowAsync();
+                return false;
+            }
+            return true;
         }
     }
 }

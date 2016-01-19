@@ -136,11 +136,14 @@ namespace Comedian_Soundboard
         }
         #endregion
 
-        private void Group_Click(object sender, TappedRoutedEventArgs e)
+        private async void Group_Click(object sender, TappedRoutedEventArgs e)
         {
             string comedian = ((e.OriginalSource as FrameworkElement).DataContext as Category).UniqueId;
-            if (comedian == "Search Online") 
-                Frame.Navigate(typeof(MainPage), comedian);
+            if (comedian == "Search Online")
+            {
+                if (await AppHelper.IsInternetAvailable())
+                    Frame.Navigate(typeof(MainPage), comedian);
+            }
             else
                 Frame.Navigate(typeof(AudioPage), comedian);
         }

@@ -78,12 +78,11 @@ namespace Comedian_Soundboard
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             IEnumerable<Category> groups;
-            if (e.NavigationParameter.ToString() == "Search Online")
-            {
+            if (e.NavigationParameter.ToString() == "Search Online"){
                 groups = await SoundDataSource.GetOnlineCategoriesAsync();
                 BackButton.Visibility = Visibility.Visible;
             }
-            else {
+            else{
                 groups = await SoundDataSource.GetCategoriesAsync();
                 BackButton.Visibility = Visibility.Collapsed;
             }
@@ -138,11 +137,14 @@ namespace Comedian_Soundboard
         }
         #endregion
 
-        private void Group_Click(object sender, TappedRoutedEventArgs e)
+        private async void Group_Click(object sender, TappedRoutedEventArgs e)
         {
             string comedian = ((e.OriginalSource as FrameworkElement).DataContext as Category).UniqueId;
             if (comedian == "Search Online")
-                Frame.Navigate(typeof(MainPage), comedian);
+            {
+                if (await AppHelper.IsInternetAvailable())
+                    Frame.Navigate(typeof(MainPage), comedian);
+            }
             else
                 Frame.Navigate(typeof(AudioPage), comedian);
         }
@@ -208,7 +210,8 @@ namespace Comedian_Soundboard
 
         private void Back_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            Frame.GoBack();
+            if (Frame.CanGoBack)
+                Frame.GoBack();
         }
     }
 }

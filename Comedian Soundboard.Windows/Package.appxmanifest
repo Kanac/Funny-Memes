@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="62206AnthonyC.ComedySoundboard" Publisher="CN=F30DC63F-6CBF-4542-8D92-E93F173C760F" Version="1.1.0.10" />
+  <Identity Name="62206AnthonyC.ComedySoundboard" Publisher="CN=F30DC63F-6CBF-4542-8D92-E93F173C760F" Version="1.1.0.11" />
   <Properties>
     <DisplayName>Comedy Soundboard</DisplayName>
     <PublisherDisplayName>Anthony C</PublisherDisplayName>

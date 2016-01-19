@@ -29,8 +29,7 @@ namespace Comedian_Soundboard.DataModel
             foreach (HtmlNode htmlATag in htmlATags)
             {
                 string title = htmlATag.Descendants("h3").FirstOrDefault().InnerHtml;
-                if (title.Contains("<br>"))
-                {
+                if (title.Contains("<br>")){
                     title = title.Substring(0, title.IndexOf("<br>"));
                 }
                 title = SoundDataSource.HumanizeAudioTitle(title, maxWords:6);

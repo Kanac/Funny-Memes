@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
@@ -137,7 +138,7 @@ namespace Comedian_Soundboard
         {
             SoundItem soundItem = (SoundItem)(((FrameworkElement)e.OriginalSource).DataContext);
 
-            if (soundItem.SoundPath.Contains("http"))  // Check whether url is online or in assets folder
+            if (soundItem.SoundPath.Contains("://www."))  // Check whether url is online or in assets folder
                 Audio.Source = new Uri(soundItem.SoundPath, UriKind.RelativeOrAbsolute);
             else
                 Audio.Source = new Uri("ms-appx:///" +  soundItem.SoundPath, UriKind.RelativeOrAbsolute);
@@ -185,12 +186,29 @@ namespace Comedian_Soundboard
             FileSavePicker fileSavePicker = new FileSavePicker();
             SoundItem selectedSound = currentProgressBar.DataContext as SoundItem;
          
-            Uri audioPath = new Uri("ms-appx:///" + selectedSound.SoundPath);
-            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(audioPath);
+            StorageFile file;
+            if (selectedSound.SoundPath.Contains("://www."))
+            {
+                // Download the mp3 if it is an online file
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    var data = await httpClient.GetByteArrayAsync(selectedSound.SoundPath);
+                    file = await ApplicationData.Current.LocalFolder.CreateFileAsync(selectedSound.Subtitle, CreationCollisionOption.ReplaceExisting);
+
+                    using (var targetStream = await file.OpenAsync(FileAccessMode.ReadWrite))
+                    {
+                        await targetStream.AsStreamForWrite().WriteAsync(data, 0, data.Length);
+                        await targetStream.FlushAsync();
+                    }
+                }
+            }
+            else {
+                file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + selectedSound.SoundPath));
+            }
 
             fileSavePicker.SuggestedSaveFile = file;
             fileSavePicker.SuggestedFileName = selectedSound.Subtitle;
-            fileSavePicker.ContinuationData.Add("SourcePath", audioPath.AbsolutePath);
+            fileSavePicker.ContinuationData.Add("SourcePath", file.Path);
             fileSavePicker.FileTypeChoices.Add("MP3", new List<string>() { ".mp3" });
             fileSavePicker.PickSaveFileAndContinue();
         }
@@ -203,8 +221,7 @@ namespace Comedian_Soundboard
             if (file != null)
             {
                 CachedFileManager.DeferUpdates(file);
-                Uri audioPathUri = new Uri("ms-appx://" + audioPath);
-                StorageFile srcFile = await StorageFile.GetFileFromApplicationUriAsync(audioPathUri);
+                StorageFile srcFile = await StorageFile.GetFileFromPathAsync(audioPath);
                 await srcFile.CopyAndReplaceAsync(file);
                 FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
             }
