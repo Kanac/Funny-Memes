@@ -132,7 +132,7 @@ namespace Comedian_Soundboard.Data
 
         // Helper method that changes the input string to match given constraints such that only the first 3 words are taken and 
         // if those 3 words have already been used before (recorded by dictionary input wordCount) it will list a number suffix to it as well
-        public static string HumanizeAudioTitle(string title, int maxWords = 3, Dictionary<string, int> wordCount = null) {
+        public static string HumanizeAudioTitle(string title, int maxWords = 3) {
             var words = title.Split(' ');
             int count = 0;
             StringBuilder audioName = new StringBuilder();
@@ -151,25 +151,14 @@ namespace Comedian_Soundboard.Data
             }
 
             audioName.Remove(audioName.Length - 1, 1);
-            string audioNameDisplay = audioName.ToString();
-            if (wordCount != null)
-            {
-                if (wordCount.ContainsKey(audioName.ToString()))
-                {
-                    wordCount[audioName.ToString()]++;
-                    audioNameDisplay += " " + wordCount[audioName.ToString()];
-                }
-                else
-                    wordCount.Add(audioName.ToString(), 1);
-            }
-            return audioNameDisplay;
+            return audioName.ToString();
         }
 
         private async Task GetOnlineSoundDataAsync() {
             if (this._onlineOffset != this.Categories.Count) // check if online data has yet to be added
                 return;
 
-            ICollection<Category> onlineComedians = await SoundArchiveDataSource.GetSoundboardAudioFiles();
+            ICollection<Category> onlineComedians = await SoundArchiveDataSource.GetSoundboardAudioFiles(this.Categories);
             foreach (Category comedian in onlineComedians){
                 this.Categories.Add(comedian);
             }
@@ -216,14 +205,21 @@ namespace Comedian_Soundboard.Data
             IReadOnlyList<StorageFile> comedianSounds = await currComedianSoundFolder.GetFilesAsync();
 
             Dictionary<string, int> wordCount = new Dictionary<string, int>();
-
             foreach (StorageFile currComedianSound in comedianSounds)
             {
-                string audioNameDisplay = HumanizeAudioTitle(currComedianSound.DisplayName, wordCount:wordCount);
+                string audioDisplayName = HumanizeAudioTitle(currComedianSound.DisplayName);
+                if (wordCount.ContainsKey(audioDisplayName.ToString()))
+                {
+                    wordCount[audioDisplayName.ToString()]++;
+                    audioDisplayName += " " + wordCount[audioDisplayName.ToString()];
+                }
+                else {
+                    wordCount.Add(audioDisplayName.ToString(), 1);
+                }
                 string currComedianSoundPath = "Assets/Comedians/" + comedian.Title + "/Sounds/" + currComedianSound.Name;
 
                 comedian.SoundItems.Add(
-                    new SoundItem("", "", audioNameDisplay, currComedianSoundPath, "", ""));
+                    new SoundItem("", "", audioDisplayName, currComedianSoundPath, "", ""));
             }
         }
 

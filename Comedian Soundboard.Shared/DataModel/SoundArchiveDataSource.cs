@@ -14,7 +14,9 @@ namespace Comedian_Soundboard.DataModel
         private static readonly SoundArchiveDataSource _soundArchiveDataSource = new SoundArchiveDataSource();
         private HttpClient httpClient = new HttpClient();
 
-        public async static Task<ICollection<Category>> GetSoundboardAudioFiles()
+        // Retrieves comedian files from Soundarchive and parses them into Categories. The existingCategories parameter
+        // is optional for the case of comparing for duplicate titles 
+        public async static Task<ICollection<Category>> GetSoundboardAudioFiles(ICollection<Category> existingCategories = null)
         {
             string mainHtml = await _soundArchiveDataSource.httpClient.GetStringAsync("http://www.thesoundarchive.com/");
 
@@ -28,10 +30,16 @@ namespace Comedian_Soundboard.DataModel
             {
                 string title = htmlATag.Descendants("h3").FirstOrDefault().InnerHtml;
                 if (title.Contains("<br>"))
+                {
                     title = title.Substring(0, title.IndexOf("<br>"));
+                }
                 title = SoundDataSource.HumanizeAudioTitle(title, maxWords:6);
+                string uniqueId = title;
                 string imageUrl = "http://www.thesoundarchive.com/" + htmlATag.Descendants("img").FirstOrDefault().Attributes["src"].Value;
-                Category comedian = title == "South Park" ? new Category(title + "2", title, "", imageUrl, "") : new Category(title, title, "", imageUrl, "");
+                if (existingCategories != null && existingCategories.Where(x => x.UniqueId == title).Count() > 0) {
+                    uniqueId += "1";  // Ensure no duplicate uniqueIds
+                }
+                Category comedian = new Category(uniqueId, title, "", imageUrl, "");
 
                 string link = "http://www.thesoundarchive.com/" + htmlATag.Attributes["href"].Value;
                 string pageHtml = await _soundArchiveDataSource.httpClient.GetStringAsync(link);
