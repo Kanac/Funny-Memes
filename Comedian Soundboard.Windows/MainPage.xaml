@@ -51,6 +51,7 @@
     </Page.BottomAppBar>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <!--<RowDefinition Height="90"></RowDefinition>-->
         </Grid.RowDefinitions>
@@ -64,10 +65,23 @@
             <TextBlock FontSize="15" IsHitTestVisible="False">Loading...</TextBlock>
         </StackPanel>
 
+        <Grid Width="400">
+            <TextBox x:Name="SearchTextBox" Margin="10,10,10,0" Width="400" AcceptsReturn="True" 
+                         FontSize="17" TextChanged="SearchTextBox_TextChanged">
+            </TextBox>
+            <TextBlock HorizontalAlignment="Left" x:Name="SearchTextBlock" Foreground="Gray" Margin="23,17,0,0" 
+                           Text="Type to Search" FontSize="17" IsHitTestVisible="False">
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Right" Margin="0,17,20,0" FontFamily="Segoe MDL2 Assets" Text="" 
+                       Foreground="Black" FontSize="17" IsHitTestVisible="False">
+            </TextBlock>
+        </Grid>
+
         <ListView ItemsSource="{Binding Groups}"
                   SelectionMode="None"
                   IsItemClickEnabled="True"
-                  ItemContainerStyle="{StaticResource ListViewItemStyle1}">
+                  ItemContainerStyle="{StaticResource ListViewItemStyle1}"
+                  Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,30,0,0" HorizontalAlignment="Center" >

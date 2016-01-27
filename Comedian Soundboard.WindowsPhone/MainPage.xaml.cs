@@ -25,6 +25,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 using Comedian_Soundboard.Helper;
+using System.Collections.ObjectModel;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Comedian_Soundboard
@@ -37,6 +38,8 @@ namespace Comedian_Soundboard
         private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
         private Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+        private ObservableCollection<Category> groups;
+        private ObservableCollection<Category> filteredGroups;
         private Random random = new Random();
 
         public MainPage()
@@ -80,13 +83,13 @@ namespace Comedian_Soundboard
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            IEnumerable<Category> groups;
             if (e.NavigationParameter.ToString() == "Search Online")
-                groups = await SoundDataSource.GetOnlineCategoriesAsync();
+                groups = new ObservableCollection<Category>(await SoundDataSource.GetOnlineCategoriesAsync());
             else
-                groups = await SoundDataSource.GetCategoriesAsync();
+                groups = new ObservableCollection<Category>(await SoundDataSource.GetCategoriesAsync());
 
-            this.DefaultViewModel["Groups"] = groups;
+            filteredGroups = new ObservableCollection<Category>(groups);
+            this.DefaultViewModel["Groups"] = filteredGroups;
             LoadingPanel.Visibility = Visibility.Collapsed;
             AppHelper.ReviewApp();
             if (!App.firstLoad)
@@ -196,6 +199,36 @@ namespace Comedian_Soundboard
         {
             Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
             (sender as Ellipse).Stroke = new SolidColorBrush(color);
+        }
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (SearchTextBox.Text == "")
+                SearchTextBlock.Visibility = Visibility.Visible;
+            else
+                SearchTextBlock.Visibility = Visibility.Collapsed;
+
+            if (groups != null)
+            {
+                foreach (Category item in groups)
+                {
+                    if (item.Title.ToLower().Contains(SearchTextBox.Text.ToLower()))
+                    {
+                        if (!filteredGroups.Contains(item))
+                        {
+                            filteredGroups.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        filteredGroups.Remove(item);
+                    }
+                }
+
+                if (filteredGroups.Count() == groups.Count())
+                    filteredGroups = new ObservableCollection<Category>(groups);
+
+                this.DefaultViewModel["Groups"] = filteredGroups;
+            }
         }
     }
 }
