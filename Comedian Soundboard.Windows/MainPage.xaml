@@ -53,7 +53,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <!--<RowDefinition Height="90"></RowDefinition>-->
+            <RowDefinition Height="90"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="Assets/ComedyBackground2.jpg"></ImageBrush>
@@ -138,10 +138,10 @@
                PointerExited="PointerImage_Released">
         </Image>
 
-        <!--<Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <UI:AdControl ApplicationId="a68cc9d2-57ba-4afa-b57d-775ab4c7f44a" Style="{StaticResource HorizontalLongAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="268704" />
         </Grid>
-        <Grid Grid.Row="1" Margin="0,89,0,0">
+        <Grid Grid.Row="2" Margin="0,89,0,0">
             <UI:AdControl ApplicationId="a68cc9d2-57ba-4afa-b57d-775ab4c7f44a" Style="{StaticResource HorizontalLongAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="268704" />
             <UI:AdControl ApplicationId="a68cc9d2-57ba-4afa-b57d-775ab4c7f44a" Style="{StaticResource HorizontalLongAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="268704" />
             <UI:AdControl ApplicationId="a68cc9d2-57ba-4afa-b57d-775ab4c7f44a" Style="{StaticResource HorizontalLongAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="268704" />
@@ -162,6 +162,6 @@
             <UI:AdControl ApplicationId="a68cc9d2-57ba-4afa-b57d-775ab4c7f44a" Style="{StaticResource HorizontalLongAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="268704" />
             <UI:AdControl ApplicationId="a68cc9d2-57ba-4afa-b57d-775ab4c7f44a" Style="{StaticResource HorizontalLongAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="268704" />
             <UI:AdControl ApplicationId="a68cc9d2-57ba-4afa-b57d-775ab4c7f44a" Style="{StaticResource HorizontalLongAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="268704" />
-        </Grid>-->
+        </Grid>
     </Grid>
 </Page>

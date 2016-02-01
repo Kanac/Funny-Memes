@@ -45,9 +45,9 @@
 
         <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
 
-        <StackPanel x:Name="LoadingPanel" Margin="0,-15,0,0">
+        <StackPanel x:Name="LoadingPanel" Margin="0,-8,0,0">
             <ProgressBar IsIndeterminate="True"></ProgressBar>
-            <TextBlock Margin="5,0,0,0" FontSize="15">Loading...</TextBlock>
+            <TextBlock Margin="5,0,0,0" FontSize="12">Loading...</TextBlock>
         </StackPanel>
 
         <Grid>
