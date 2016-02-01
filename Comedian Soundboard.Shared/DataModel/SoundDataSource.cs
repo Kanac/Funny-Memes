@@ -28,7 +28,7 @@ namespace Comedian_Soundboard.Data
     /// </summary>
     public class SoundItem
     {
-        public SoundItem(String uniqueId, String title, String subtitle, String soundPath, String description, String content)
+        public SoundItem(String uniqueId, String title, String subtitle, String soundPath, String description, String content, bool isOnline)
         {
             this.UniqueId = uniqueId;
             this.Title = title;
@@ -36,6 +36,7 @@ namespace Comedian_Soundboard.Data
             this.Description = description;
             this.SoundPath = soundPath;
             this.Content = content;
+            this.isOnline = isOnline;
         }
 
         public string UniqueId {get; private set; }
@@ -44,6 +45,7 @@ namespace Comedian_Soundboard.Data
         public string Description { get; private set; }
         public string SoundPath { get; private set; }
         public string Content { get; private set; }
+        public bool isOnline { get; private set; }
 
         public override string ToString()
         {
@@ -162,6 +164,11 @@ namespace Comedian_Soundboard.Data
             foreach (Category comedian in onlineComedians){
                 this.Categories.Add(comedian);
             }
+            ICollection<Category> onlineComedians2 = await MyInstantsDataSource.GetSoundboardAudioFiles();
+            foreach (Category comedian in onlineComedians2)
+            {
+                this.Categories.Add(comedian);
+            }
 
         }
 
@@ -219,7 +226,7 @@ namespace Comedian_Soundboard.Data
                 string currComedianSoundPath = "Assets/Comedians/" + comedian.Title + "/Sounds/" + currComedianSound.Name;
 
                 comedian.SoundItems.Add(
-                    new SoundItem("", "", audioDisplayName, currComedianSoundPath, "", ""));
+                    new SoundItem("", "", audioDisplayName, currComedianSoundPath, "", "", false));
             }
         }
 
@@ -255,7 +262,8 @@ namespace Comedian_Soundboard.Data
                                                        itemObject["Subtitle"].GetString(),
                                                        itemObject["SoundPath"].GetString(),
                                                        itemObject["Description"].GetString(),
-                                                       itemObject["Content"].GetString()));
+                                                       itemObject["Content"].GetString(),
+                                                       false));
                 }
                 this.Categories.Add(group);
             }

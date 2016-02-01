@@ -60,7 +60,7 @@
         </Grid.Background>
         <MediaElement x:Name="Audio" Visibility="Collapsed" AutoPlay="False" MediaOpened="Audio_MediaOpened"></MediaElement>
 
-        <StackPanel x:Name="LoadingPanel">
+        <StackPanel x:Name="LoadingPanel" Margin="5,0,0,0">
             <ProgressBar IsIndeterminate="True" IsHitTestVisible="False"></ProgressBar>
             <TextBlock FontSize="15" IsHitTestVisible="False">Loading...</TextBlock>
         </StackPanel>

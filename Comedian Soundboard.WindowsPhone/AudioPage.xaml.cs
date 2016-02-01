@@ -138,7 +138,7 @@ namespace Comedian_Soundboard
         {
             SoundItem soundItem = (SoundItem)(((FrameworkElement)e.OriginalSource).DataContext);
 
-            if (soundItem.SoundPath.Contains("://www."))  // Check whether url is online or in assets folder
+            if (soundItem.isOnline)  // Check whether url is online or in assets folder
                 Audio.Source = new Uri(soundItem.SoundPath, UriKind.RelativeOrAbsolute);
             else
                 Audio.Source = new Uri("ms-appx:///" +  soundItem.SoundPath, UriKind.RelativeOrAbsolute);
@@ -187,7 +187,7 @@ namespace Comedian_Soundboard
             SoundItem selectedSound = currentProgressBar.DataContext as SoundItem;
          
             StorageFile file;
-            if (selectedSound.SoundPath.Contains("://www."))
+            if (selectedSound.isOnline)
             {
                 // Download the mp3 if it is an online file
                 using (HttpClient httpClient = new HttpClient())

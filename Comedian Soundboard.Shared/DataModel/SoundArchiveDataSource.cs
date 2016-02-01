@@ -42,7 +42,7 @@ namespace Comedian_Soundboard.DataModel
 
                 string link = "http://www.thesoundarchive.com/" + htmlATag.Attributes["href"].Value;
                 string pageHtml = await _soundArchiveDataSource.httpClient.GetStringAsync(link);
-                HtmlDocument pageDoc = new HtmlAgilityPack.HtmlDocument();
+                HtmlDocument pageDoc = new HtmlDocument();
                 pageDoc.LoadHtml(pageHtml);
                 HtmlNode audioList = pageDoc.DocumentNode.Descendants("div").Where(x => x.Attributes.Contains("id") && x.Attributes["id"].Value.Contains("page-content")).FirstOrDefault();
                 IEnumerable<HtmlNode> htmlLiTags = audioList.Descendants("li");
@@ -61,7 +61,7 @@ namespace Comedian_Soundboard.DataModel
                         string rawSoundUrl = htmlLiTag.Descendants("a").Where(x => x.InnerText.Contains("MP3")).FirstOrDefault().Attributes["href"].Value;
                         rawSoundUrl = rawSoundUrl.Replace("play-wav-files.asp?sound=", "");
                         string soundUrl = "http://www.thesoundarchive.com/" + rawSoundUrl;
-                        comedian.SoundItems.Add(new SoundItem("","",soundTitle, soundUrl,"",""));
+                        comedian.SoundItems.Add(new SoundItem("","",soundTitle, soundUrl,"","", true));
                     }
                 }
                 comedians.Add(comedian);

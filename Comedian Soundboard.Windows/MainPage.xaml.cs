@@ -229,14 +229,10 @@ namespace Comedian_Soundboard
                     if (item.Title.ToLower().Contains(SearchTextBox.Text.ToLower()))
                     {
                         if (!filteredGroups.Contains(item))
-                        {
                             filteredGroups.Add(item);
-                        }
                     }
                     else
-                    {
                         filteredGroups.Remove(item);
-                    }
                 }
 
                 if (filteredGroups.Count() == groups.Count())
