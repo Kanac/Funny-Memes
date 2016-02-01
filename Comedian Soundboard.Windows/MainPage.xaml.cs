@@ -166,12 +166,14 @@ namespace Comedian_Soundboard
             await Launcher.LaunchUriAsync(new Uri(string.Format("ms-windows-store:REVIEW?PFN={0}", Windows.ApplicationModel.Package.Current.Id.FamilyName)));
         }
 
-        private async void Lucky_Click(object sender, RoutedEventArgs e)
+        private void Lucky_Click(object sender, RoutedEventArgs e)
         {
-            IEnumerable<Category> comedians = await SoundDataSource.GetCategoriesAsync();
-            Category randComedian = comedians.ElementAt(random.Next(0, comedians.Count()));
+            Category randComedian = groups.ElementAt(random.Next(0, groups.Count()));
             SoundItem randSound = randComedian.SoundItems.ElementAt(random.Next(0, randComedian.SoundItems.Count()));
-            Audio.Source = new Uri("ms-appx:///" + randSound.SoundPath, UriKind.RelativeOrAbsolute);
+            if (randSound.isOnline)  // Check whether url is online or in assets folder
+                Audio.Source = new Uri(randSound.SoundPath);
+            else
+                Audio.Source = new Uri("ms-appx:///" + randSound.SoundPath, UriKind.RelativeOrAbsolute);
 
         }
         private void Audio_MediaOpened(object sender, RoutedEventArgs e)

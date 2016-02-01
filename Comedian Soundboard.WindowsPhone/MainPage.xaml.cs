@@ -166,12 +166,14 @@ namespace Comedian_Soundboard
             await Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + "450ee59b-0aff-40b4-b896-0382d05d96ee"));
         }
 
-        private async void Lucky_Click(object sender, RoutedEventArgs e)
+        private void Lucky_Click(object sender, RoutedEventArgs e)
         {
-            IEnumerable<Category> comedians = await SoundDataSource.GetCategoriesAsync();
-            Category randComedian = comedians.ElementAt(random.Next(0, comedians.Count()));
+            Category randComedian = groups.ElementAt(random.Next(0, groups.Count()));
             SoundItem randSound = randComedian.SoundItems.ElementAt(random.Next(0, randComedian.SoundItems.Count()));
-            Audio.Source = new Uri("ms-appx:///" + randSound.SoundPath, UriKind.RelativeOrAbsolute);
+            if (randSound.isOnline)  // Check whether url is online or in assets folder
+                Audio.Source = new Uri(randSound.SoundPath);
+            else
+                Audio.Source = new Uri("ms-appx:///" + randSound.SoundPath, UriKind.RelativeOrAbsolute);
 
         }
         private void Audio_MediaOpened(object sender, RoutedEventArgs e)
@@ -214,14 +216,10 @@ namespace Comedian_Soundboard
                     if (item.Title.ToLower().Contains(SearchTextBox.Text.ToLower()))
                     {
                         if (!filteredGroups.Contains(item))
-                        {
                             filteredGroups.Add(item);
-                        }
                     }
                     else
-                    {
                         filteredGroups.Remove(item);
-                    }
                 }
 
                 if (filteredGroups.Count() == groups.Count())
