@@ -372,17 +372,17 @@
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>X86</PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.11</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>1.1.0.12</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>X64</PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.11</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>1.1.0.12</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Arm</PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.11</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>1.1.0.12</PackageMaxArchitectureVersion>
       </PackageInfo>
     </BundleInfo>
   </PackageInfoList>

@@ -1,4 +1,5 @@
-﻿using Comedian_Soundboard.DataModel;
+﻿using Comedian_Soundboard.Common;
+using Comedian_Soundboard.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -90,45 +91,79 @@ namespace Comedian_Soundboard.Data
     public sealed class SoundDataSource
     {
         private static readonly SoundDataSource _soundDataSource = new SoundDataSource();
-        private int _onlineOffset = 0;
-
+        private bool _isOfflineCategories = true;
+        public bool IsOfflineCategories {
+            get { return _isOfflineCategories; }
+            set { _isOfflineCategories = value; }
+        }
         private ObservableCollection<Category> _categories = new ObservableCollection<Category>();
         public ObservableCollection<Category> Categories
         {
             get { return this._categories; }
         }
-
-        public static async Task<IEnumerable<Category>> GetOnlineCategoriesAsync() {
-            await _soundDataSource.GetOnlineSoundDataAsync();
-
-            return _soundDataSource.Categories.Skip(_soundDataSource._onlineOffset);
+        private ObservableCollection<Category> _onlineCategories = new IncrementalLoadingCollection<MyInstantsDataSource, Category>();
+        public ObservableCollection<Category> OnlineCategories
+        {
+            get { return this._onlineCategories; }
         }
 
+        
         public static async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
             await _soundDataSource.GetSoundDataAutomatedAsync();
+            _soundDataSource.IsOfflineCategories = true;
+            return _soundDataSource.Categories;
+        }
 
-            return _soundDataSource.Categories.Take(_soundDataSource._onlineOffset);
+        public static async Task<ObservableCollection<Category>> GetOnlineCategoriesAsync()
+        {
+            await _soundDataSource.GetOnlineSoundDataAsync();
+            _soundDataSource.IsOfflineCategories = false;
+            return _soundDataSource.OnlineCategories;
         }
 
         public static async Task<Category> GetCategoryAsync(string uniqueId)
         {
-            await _soundDataSource.GetSoundDataAutomatedAsync();
-            // Simple linear search is acceptable for small data sets
-            var matches = _soundDataSource.Categories.Where((group) => group.UniqueId.Equals(uniqueId));
-            if (matches.Count() == 1) {
-                 await _soundDataSource.GetSoundItemAutomatedAsync(matches.First());
-                 return matches.First();
+            IEnumerable<Category> matches = null;
+            if (_soundDataSource.IsOfflineCategories)
+            {
+                await _soundDataSource.GetSoundDataAutomatedAsync();
+                // Simple linear search is acceptable for small data sets
+                matches = _soundDataSource.Categories.Where((group) => group.UniqueId.Equals(uniqueId));
             }
+            else
+            {
+                await _soundDataSource.GetOnlineSoundDataAsync();
+                matches = _soundDataSource.OnlineCategories.Where((group) => group.UniqueId.Equals(uniqueId));
+            }
+
+            if (matches.Count() == 1)
+            {
+                return matches.First();
+            }
+
             return null;
         }
 
         public static async Task<SoundItem> GetSoundAsync(string uniqueId)
         {
-            await _soundDataSource.GetSoundDataAutomatedAsync();
-            // Simple linear search is acceptable for small data sets
-            var matches = _soundDataSource.Categories.SelectMany(group => group.SoundItems).Where((item) => item.UniqueId.Equals(uniqueId));
-            if (matches.Count() == 1) return matches.First();
+            IEnumerable<SoundItem> matches = null;
+            if (_soundDataSource.IsOfflineCategories)
+            {
+                await _soundDataSource.GetSoundDataAutomatedAsync();
+                // Simple linear search is acceptable for small data sets
+                matches = _soundDataSource.Categories.SelectMany(group => group.SoundItems).Where((item) => item.UniqueId.Equals(uniqueId));
+            }
+            else
+            {
+                await _soundDataSource.GetOnlineSoundDataAsync();
+                matches = _soundDataSource.OnlineCategories.SelectMany(group => group.SoundItems).Where((item) => item.UniqueId.Equals(uniqueId));
+            }
+            if (matches.Count() == 1)
+            {
+                return matches.First();
+            }
+
             return null;
         }
 
@@ -157,19 +192,13 @@ namespace Comedian_Soundboard.Data
         }
 
         private async Task GetOnlineSoundDataAsync() {
-            if (this._onlineOffset != this.Categories.Count) // check if online data has yet to be added
+            if (this.OnlineCategories.Count > 0) // check if online data has yet to be added
                 return;
 
             ICollection<Category> onlineComedians = await SoundArchiveDataSource.GetSoundboardAudioFiles(this.Categories);
             foreach (Category comedian in onlineComedians){
-                this.Categories.Add(comedian);
+                this.OnlineCategories.Add(comedian);
             }
-            ICollection<Category> onlineComedians2 = await MyInstantsDataSource.GetSoundboardAudioFiles();
-            foreach (Category comedian in onlineComedians2)
-            {
-                this.Categories.Add(comedian);
-            }
-
         }
 
         // Add an online category for purpose of a button in the main page list view
@@ -197,8 +226,6 @@ namespace Comedian_Soundboard.Data
 
                 await GetSoundItemAutomatedAsync(currComedian);
             }
-
-            _soundDataSource._onlineOffset = this.Categories.Count();
         }
 
         // This method helps split the task of parsing the actual sound files for each comedian.

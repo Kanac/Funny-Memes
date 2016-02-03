@@ -26,6 +26,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 using Comedian_Soundboard.Helper;
 using System.Collections.ObjectModel;
+using Comedian_Soundboard.DataModel;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Comedian_Soundboard
@@ -84,12 +85,16 @@ namespace Comedian_Soundboard
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             if (e.NavigationParameter.ToString() == "Search Online")
-                groups = new ObservableCollection<Category>(await SoundDataSource.GetOnlineCategoriesAsync());
-            else
+            {
+                groups = await SoundDataSource.GetOnlineCategoriesAsync();
+                filteredGroups = new IncrementalLoadingCollection<MyInstantsDataSource, Category>(groups);
+            }
+            else {
                 groups = new ObservableCollection<Category>(await SoundDataSource.GetCategoriesAsync());
+                filteredGroups = new ObservableCollection<Category>(groups);
+            }
 
-            filteredGroups = new ObservableCollection<Category>(groups);
-            this.DefaultViewModel["Groups"] = filteredGroups;
+            this.DefaultViewModel["Groups"] = groups;
             LoadingPanel.Visibility = Visibility.Collapsed;
             AppHelper.ReviewApp();
             if (!App.firstLoad)
@@ -221,7 +226,6 @@ namespace Comedian_Soundboard
                     else
                         filteredGroups.Remove(item);
                 }
-
                 if (filteredGroups.Count() == groups.Count())
                     filteredGroups = new ObservableCollection<Category>(groups);
 

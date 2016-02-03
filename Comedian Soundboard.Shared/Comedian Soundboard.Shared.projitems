@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Common\IncrementalLoadingCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NameSplit.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\MyInstantsDataSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\SoundArchiveDataSource.cs" />

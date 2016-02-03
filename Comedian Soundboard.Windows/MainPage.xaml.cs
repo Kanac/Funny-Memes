@@ -1,5 +1,6 @@
 ﻿using Comedian_Soundboard.Common;
 using Comedian_Soundboard.Data;
+using Comedian_Soundboard.DataModel;
 using Comedian_Soundboard.Helper;
 using System;
 using System.Collections.Generic;
@@ -81,16 +82,17 @@ namespace Comedian_Soundboard
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             if (e.NavigationParameter.ToString() == "Search Online"){
-                groups = new ObservableCollection<Category>(await SoundDataSource.GetOnlineCategoriesAsync());
+                groups = await SoundDataSource.GetOnlineCategoriesAsync();
+                filteredGroups = new IncrementalLoadingCollection<MyInstantsDataSource, Category>(groups);
                 BackButton.Visibility = Visibility.Visible;
             }
             else{
                 groups = new ObservableCollection<Category>(await SoundDataSource.GetCategoriesAsync());
+                filteredGroups = new ObservableCollection<Category>(groups);
                 BackButton.Visibility = Visibility.Collapsed;
             }
 
-            filteredGroups = new ObservableCollection<Category>(groups);
-            this.DefaultViewModel["Groups"] = filteredGroups;
+            this.DefaultViewModel["Groups"] = groups;
             LoadingPanel.Visibility = Visibility.Collapsed;
             AppHelper.ReviewApp();
             if (!App.firstLoad)
@@ -236,11 +238,10 @@ namespace Comedian_Soundboard
                     else
                         filteredGroups.Remove(item);
                 }
-
                 if (filteredGroups.Count() == groups.Count())
                     filteredGroups = new ObservableCollection<Category>(groups);
-                    this.DefaultViewModel["Groups"] = filteredGroups;
 
+                this.DefaultViewModel["Groups"] = filteredGroups;
             }
         }
     }
