@@ -361,6 +361,7 @@
     <MainPackageIdentityName>62206AnthonyC.ComedySoundboard</MainPackageIdentityName>
     <ReservedNames>
       <ReservedName>Comedy Soundboard</ReservedName>
+      <ReservedName>Comedy ✓</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
@@ -372,17 +373,17 @@
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>X86</PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.12</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>1.1.0.14</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>X64</PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.12</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>1.1.0.14</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Arm</PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.12</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>1.1.0.14</PackageMaxArchitectureVersion>
       </PackageInfo>
     </BundleInfo>
   </PackageInfoList>

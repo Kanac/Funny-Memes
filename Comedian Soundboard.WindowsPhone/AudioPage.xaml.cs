@@ -18,6 +18,7 @@ using Windows.Storage.Pickers;
 using Windows.Storage.Provider;
 using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -192,12 +193,30 @@ namespace Comedian_Soundboard
                 // Download the mp3 if it is an online file
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    var data = await httpClient.GetByteArrayAsync(selectedSound.SoundPath);
+                    byte[] data;
+                    try {
+                        data = await httpClient.GetByteArrayAsync(selectedSound.SoundPath);
+                    }
+                    catch(ArgumentNullException)
+                    {
+                        var errorBox = new MessageDialog("An error has occured!");
+                        await errorBox.ShowAsync();
+                        return;
+                    }
                     file = await ApplicationData.Current.LocalFolder.CreateFileAsync(selectedSound.Subtitle, CreationCollisionOption.ReplaceExisting);
 
                     using (var targetStream = await file.OpenAsync(FileAccessMode.ReadWrite))
                     {
-                        await targetStream.AsStreamForWrite().WriteAsync(data, 0, data.Length);
+                        try
+                        {
+                            await targetStream.AsStreamForWrite().WriteAsync(data, 0, data.Length);
+                        }
+                        catch (ArgumentNullException)
+                        {
+                            var errorBox = new MessageDialog("An error has occured!");
+                            await errorBox.ShowAsync();
+                            return;
+                        }
                         await targetStream.FlushAsync();
                     }
                 }

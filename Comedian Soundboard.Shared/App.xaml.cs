@@ -21,6 +21,7 @@ using Windows.Storage;
 using Comedian_Soundboard.Common;
 using Microsoft.ApplicationInsights;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Popups;
 
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
@@ -46,6 +47,7 @@ namespace Comedian_Soundboard
 
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+            this.UnhandledException += Application_UnhandledException;
         }
 
         /// <summary>
@@ -162,6 +164,14 @@ namespace Comedian_Soundboard
                 mainPage.ContinueFileOpenPicker(args as FileSavePickerContinuationEventArgs);
             }
 #endif
+        }
+        private async void Application_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            var errorBox = new MessageDialog("An error has occured!");
+            await errorBox.ShowAsync();
+            System.Threading.Tasks.Task.Delay(2000).Wait();
+            Application.Current.Exit();
+            
         }
     }
 }
