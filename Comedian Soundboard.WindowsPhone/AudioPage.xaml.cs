@@ -181,68 +181,62 @@ namespace Comedian_Soundboard
 
         private async void Save_Clicked(object sender, RoutedEventArgs e)
         {
-            if (currentProgressBar == null)
-                return;
+            try {
+                if (currentProgressBar == null)
+                    return;
 
-            FileSavePicker fileSavePicker = new FileSavePicker();
-            SoundItem selectedSound = currentProgressBar.DataContext as SoundItem;
-         
-            StorageFile file;
-            if (selectedSound.isOnline)
-            {
-                // Download the mp3 if it is an online file
-                using (HttpClient httpClient = new HttpClient())
+                FileSavePicker fileSavePicker = new FileSavePicker();
+                SoundItem selectedSound = currentProgressBar.DataContext as SoundItem;
+
+                StorageFile file;
+                if (selectedSound.isOnline)
                 {
-                    byte[] data;
-                    try {
-                        data = await httpClient.GetByteArrayAsync(selectedSound.SoundPath);
-                    }
-                    catch(ArgumentNullException)
+                    // Download the mp3 if it is an online file
+                    using (HttpClient httpClient = new HttpClient())
                     {
-                        var errorBox = new MessageDialog("An error has occured!");
-                        await errorBox.ShowAsync();
-                        return;
-                    }
-                    file = await ApplicationData.Current.LocalFolder.CreateFileAsync(selectedSound.Subtitle, CreationCollisionOption.ReplaceExisting);
+                        byte[] data = await httpClient.GetByteArrayAsync(selectedSound.SoundPath);
+                        file = await ApplicationData.Current.LocalFolder.CreateFileAsync(selectedSound.Subtitle, CreationCollisionOption.ReplaceExisting);
 
-                    using (var targetStream = await file.OpenAsync(FileAccessMode.ReadWrite))
-                    {
-                        try
+                        using (var targetStream = await file.OpenAsync(FileAccessMode.ReadWrite))
                         {
                             await targetStream.AsStreamForWrite().WriteAsync(data, 0, data.Length);
+                            await targetStream.FlushAsync();
                         }
-                        catch (ArgumentNullException)
-                        {
-                            var errorBox = new MessageDialog("An error has occured!");
-                            await errorBox.ShowAsync();
-                            return;
-                        }
-                        await targetStream.FlushAsync();
                     }
                 }
+                else {
+                    file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + selectedSound.SoundPath));
+                }
+                fileSavePicker.SuggestedSaveFile = file;
+                fileSavePicker.SuggestedFileName = selectedSound.Subtitle;
+                fileSavePicker.ContinuationData.Add("SourcePath", file.Path);
+                fileSavePicker.FileTypeChoices.Add("MP3", new List<string>() { ".mp3" });
+                fileSavePicker.PickSaveFileAndContinue();
             }
-            else {
-                file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + selectedSound.SoundPath));
+            catch {
+                var message = new MessageDialog("An error has occured!");
+                await message.ShowAsync();
             }
-
-            fileSavePicker.SuggestedSaveFile = file;
-            fileSavePicker.SuggestedFileName = selectedSound.Subtitle;
-            fileSavePicker.ContinuationData.Add("SourcePath", file.Path);
-            fileSavePicker.FileTypeChoices.Add("MP3", new List<string>() { ".mp3" });
-            fileSavePicker.PickSaveFileAndContinue();
         }
 
         internal async void ContinueFileOpenPicker(FileSavePickerContinuationEventArgs e)
         {
-            StorageFile file = e.File;
-            String audioPath = (string)e.ContinuationData["SourcePath"];
+            try {
+                StorageFile file = e.File;
+                String audioPath = (string)e.ContinuationData["SourcePath"];
 
-            if (file != null)
+                if (file != null)
+                {
+                    CachedFileManager.DeferUpdates(file);
+                    StorageFile srcFile = await StorageFile.GetFileFromPathAsync(audioPath);
+                    await srcFile.CopyAndReplaceAsync(file);
+                    FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
+                }
+            }
+            catch
             {
-                CachedFileManager.DeferUpdates(file);
-                StorageFile srcFile = await StorageFile.GetFileFromPathAsync(audioPath);
-                await srcFile.CopyAndReplaceAsync(file);
-                FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
+                var message = new MessageDialog("An error has occured!");
+                await message.ShowAsync();
             }
         }
         private void Pointer_Pressed(object sender, PointerRoutedEventArgs e)
