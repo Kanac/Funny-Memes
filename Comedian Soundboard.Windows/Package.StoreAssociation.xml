@@ -362,6 +362,8 @@
     <ReservedNames>
       <ReservedName>Comedy Soundboard</ReservedName>
       <ReservedName>Comedy ✓</ReservedName>
+      <ReservedName>Comedy ✔</ReservedName>
+      <ReservedName>The Funny App ✔</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
@@ -373,17 +375,17 @@
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>X86</PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.15</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>1.1.0.17</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>X64</PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.15</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>1.1.0.17</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Arm</PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.15</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>1.1.0.17</PackageMaxArchitectureVersion>
       </PackageInfo>
     </BundleInfo>
   </PackageInfoList>
