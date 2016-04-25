@@ -1,0 +1,44 @@
+﻿<Page
+    x:Class="Comedian_Soundboard.RootPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Comedian_Soundboard"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    
+    <Page.Transitions>
+        <TransitionCollection>
+            <EdgeUIThemeTransition></EdgeUIThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+    
+    <Page.Background>
+        <ImageBrush ImageSource="Assets/ComedyBackground2.jpg"></ImageBrush>
+    </Page.Background>
+    
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+
+        <Pivot>
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" FontSize="45"/>
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+
+            <PivotItem Header="Sounds">
+            </PivotItem>
+
+            <PivotItem Header="Images">
+            </PivotItem>
+        </Pivot>
+        
+    </Grid>
+</Page>
