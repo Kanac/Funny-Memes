@@ -62,10 +62,11 @@
             </TextBlock>
         </Grid>
 
-        <ListView SelectionMode="None"
-                      ItemsSource="{Binding Groups}"
-                      IsItemClickEnabled="True"
-                      Grid.Row="1">
+        <ListView x:Name="CategoryListView"
+                  SelectionMode="None"
+                  ItemsSource="{Binding Groups}"
+                  IsItemClickEnabled="True"
+                  Grid.Row="1">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment"

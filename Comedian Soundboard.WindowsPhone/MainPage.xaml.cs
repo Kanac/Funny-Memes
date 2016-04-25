@@ -84,7 +84,9 @@ namespace Comedian_Soundboard
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            if (e.NavigationParameter.ToString() == "Search Online")
+            string param = e.NavigationParameter.ToString();
+
+            if (param == "Search Online")
             {
                 groups = await SoundDataSource.GetOnlineCategoriesAsync();
                 filteredGroups = new IncrementalLoadingCollection<MyInstantsDataSource, Category>(groups);
@@ -97,6 +99,18 @@ namespace Comedian_Soundboard
 
             this.DefaultViewModel["Groups"] = groups;
             LoadingPanel.Visibility = Visibility.Collapsed;
+
+            Category category = await SoundDataSource.GetCategoryAsync(param);
+            if (category != null)
+            {
+                await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low, () =>
+                {
+                    Task.Delay(TimeSpan.FromMilliseconds(300));
+                    CategoryListView.ScrollIntoView(category);
+                }
+                );
+            }
+
             AppHelper.ReviewApp();
             if (!App.FirstLoad)
             {
