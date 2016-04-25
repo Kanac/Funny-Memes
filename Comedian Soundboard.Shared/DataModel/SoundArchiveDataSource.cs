@@ -14,8 +14,10 @@ namespace Comedian_Soundboard.DataModel
         private static readonly SoundArchiveDataSource _soundArchiveDataSource = new SoundArchiveDataSource();
         private HttpClient httpClient = new HttpClient();
 
+        /// <summary>
         // Retrieves comedian files from Soundarchive and parses them into Categories. The existingCategories parameter
         // is optional for the case of comparing for duplicate titles 
+        /// </summary>
         public async static Task<ICollection<Category>> GetSoundboardAudioFiles(ICollection<Category> existingCategories = null)
         {
             string mainHtml = await _soundArchiveDataSource.httpClient.GetStringAsync("http://www.thesoundarchive.com/");

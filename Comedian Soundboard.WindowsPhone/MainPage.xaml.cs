@@ -89,7 +89,8 @@ namespace Comedian_Soundboard
                 groups = await SoundDataSource.GetOnlineCategoriesAsync();
                 filteredGroups = new IncrementalLoadingCollection<MyInstantsDataSource, Category>(groups);
             }
-            else {
+            else
+            {
                 groups = new ObservableCollection<Category>(await SoundDataSource.GetCategoriesAsync());
                 filteredGroups = new ObservableCollection<Category>(groups);
             }
@@ -97,11 +98,11 @@ namespace Comedian_Soundboard
             this.DefaultViewModel["Groups"] = groups;
             LoadingPanel.Visibility = Visibility.Collapsed;
             AppHelper.ReviewApp();
-            if (!App.firstLoad)
+            if (!App.FirstLoad)
             {
                 await AppHelper.SetupBackgroundToast();
                 AppHelper.setupReuseToast();
-                App.firstLoad = false;
+                App.FirstLoad = false;
             }
         }
 

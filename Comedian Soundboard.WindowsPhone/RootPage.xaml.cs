@@ -1,12 +1,16 @@
 ﻿using Comedian_Soundboard.Common;
+using Comedian_Soundboard.Data;
+using Comedian_Soundboard.Helper;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -15,6 +19,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -27,6 +32,8 @@ namespace Comedian_Soundboard
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private ObservableCollection<Category> soundGroups;
+        private Random random = new Random();
 
         public RootPage()
         {
@@ -65,8 +72,20 @@ namespace Comedian_Soundboard
         /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session.  The state will be null the first time a page is visited.</param>
-        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            soundGroups = new ObservableCollection<Category>(await SoundDataSource.GetSampleCategoriesAsync());
+            this.DefaultViewModel["Groups"] = soundGroups;
+
+            LoadingPanel.Visibility = Visibility.Collapsed;
+
+            AppHelper.ReviewApp();
+            if (!App.FirstLoad)
+            {
+                await AppHelper.SetupBackgroundToast();
+                AppHelper.setupReuseToast();
+                App.FirstLoad = false;
+            }
         }
 
         /// <summary>
@@ -107,5 +126,34 @@ namespace Comedian_Soundboard
         }
 
         #endregion
+
+        private void Border_Loaded(object sender, RoutedEventArgs e)
+        {
+            Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
+            (sender as Ellipse).Stroke = new SolidColorBrush(color);
+        }
+
+        private void Pointer_Pressed(object sender, PointerRoutedEventArgs e)
+        {
+            FrameworkElement image = (sender as FrameworkElement);
+            Ellipse border = image.FindName("ImageBorder") as Ellipse;
+            border.Width = 235;
+            border.Height = 235;
+            border.StrokeThickness = 8;
+        }
+
+        private void Pointer_Released(object sender, PointerRoutedEventArgs e)
+        {
+            FrameworkElement image = (sender as FrameworkElement);
+            Ellipse border = image.FindName("ImageBorder") as Ellipse;
+            border.Width = 228;
+            border.Height = 228;
+            border.StrokeThickness = 4;
+        }
+
+        private void SoundGroup_Click(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
     }
 }

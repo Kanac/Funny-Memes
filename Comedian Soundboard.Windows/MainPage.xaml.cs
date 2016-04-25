@@ -81,12 +81,14 @@ namespace Comedian_Soundboard
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            if (e.NavigationParameter.ToString() == "Search Online"){
+            if (e.NavigationParameter.ToString() == "Search Online")
+            {
                 groups = await SoundDataSource.GetOnlineCategoriesAsync();
                 filteredGroups = new IncrementalLoadingCollection<MyInstantsDataSource, Category>(groups);
                 BackButton.Visibility = Visibility.Visible;
             }
-            else{
+            else
+            {
                 groups = new ObservableCollection<Category>(await SoundDataSource.GetCategoriesAsync());
                 filteredGroups = new ObservableCollection<Category>(groups);
                 BackButton.Visibility = Visibility.Collapsed;
@@ -95,11 +97,11 @@ namespace Comedian_Soundboard
             this.DefaultViewModel["Groups"] = groups;
             LoadingPanel.Visibility = Visibility.Collapsed;
             AppHelper.ReviewApp();
-            if (!App.firstLoad)
+            if (!App.FirstLoad)
             {
                 await AppHelper.SetupBackgroundToast();
                 AppHelper.setupReuseToast();
-                App.firstLoad = false;
+                App.FirstLoad = false;
             }
         }
 

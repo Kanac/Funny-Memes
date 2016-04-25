@@ -5,7 +5,10 @@
     xmlns:local="using:Comedian_Soundboard"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    d:DataContext="{Binding Source={d:DesignData Source=../Comedian Soundboard.Shared/DataModel/Soundboard.json, Type=data:SoundDataSource}}"
+    xmlns:data="using:Comedian_Soundboard.Data">
     
     <Page.Transitions>
         <TransitionCollection>
@@ -16,16 +19,12 @@
     <Page.Background>
         <ImageBrush ImageSource="Assets/ComedyBackground2.jpg"></ImageBrush>
     </Page.Background>
-    
+
     <Grid x:Name="LayoutRoot">
-
-        <Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
-
-
+        <StackPanel x:Name="LoadingPanel" Margin="0,-8,0,0">
+            <ProgressBar IsIndeterminate="True"></ProgressBar>
+            <TextBlock Margin="5,0,0,0" FontSize="12">Loading...</TextBlock>
+        </StackPanel>
         <Pivot>
             <Pivot.HeaderTemplate>
                 <DataTemplate>
@@ -34,11 +33,86 @@
             </Pivot.HeaderTemplate>
 
             <PivotItem Header="Sounds">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Style="{StaticResource TitleTextBlockStyle}"
+                               Text="Recommended for you"
+                               TextAlignment="Left"
+                               Margin="0,-25,0,0">
+                    </TextBlock>
+
+                    <ListView SelectionMode="None"
+                      ItemsSource="{Binding Groups}"
+                      IsItemClickEnabled="True"
+                      Grid.Row="1">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment"
+                                Value="Stretch">
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,30,0,0" HorizontalAlignment="Center" >
+                                    <TextBlock 
+                                Text="{Binding Title}" 
+                                FontSize="25" 
+                                Foreground="White"
+                                FontWeight= "Medium"
+                                TextAlignment="Center" 
+                                VerticalAlignment="Top">
+                                    </TextBlock>
+
+                                    <Grid Margin="0,45,0,0">
+                                        <Ellipse
+                                x:Name="ImageBorder"
+                                Width="228"
+                                Height="228"
+                                StrokeThickness="4"
+                                Loaded="Border_Loaded">
+                                        </Ellipse>
+                                        <Ellipse
+                                Width="220" 
+                                Height="220" 
+                                Stretch="Fill" 
+                                PointerPressed="Pointer_Pressed"
+                                PointerReleased="Pointer_Released" 
+                                PointerCanceled="Pointer_Released"
+                                PointerCaptureLost="Pointer_Released"
+                                PointerExited="Pointer_Released"
+                                Tapped="SoundGroup_Click">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="{Binding ImagePath}"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    
+                </Grid>
             </PivotItem>
 
             <PivotItem Header="Images">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Style="{StaticResource TitleTextBlockStyle}"
+                               Text="Here's some suggestions"
+                               TextAlignment="Left"
+                               Margin="0,-25,0,0">
+                    </TextBlock>
+                </Grid>
             </PivotItem>
         </Pivot>
-        
     </Grid>
 </Page>

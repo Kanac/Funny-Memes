@@ -36,7 +36,7 @@ namespace Comedian_Soundboard
 #if WINDOWS_PHONE_APP
         private TransitionCollection transitions;
 #endif
-        public static bool firstLoad = false;
+        public static bool FirstLoad = false;
         /// <summary>
         /// Initializes the singleton instance of the <see cref="App"/> class. This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -119,7 +119,7 @@ namespace Comedian_Soundboard
                 // parameter
 
                 // Configure initial page here. Navigation stack isn't restored means (i.e in alt tab mode).
-                if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
+                if (!rootFrame.Navigate(typeof(RootPage), e.Arguments))
                 {
                     throw new Exception("Failed to create initial page");
                 }

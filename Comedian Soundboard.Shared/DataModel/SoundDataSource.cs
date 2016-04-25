@@ -114,6 +114,27 @@ namespace Comedian_Soundboard.Data
             _soundDataSource.IsOfflineCategories = true;
             return _soundDataSource.Categories;
         }
+        public static async Task<IEnumerable<Category>> GetSampleCategoriesAsync()
+        {
+            await _soundDataSource.GetSoundDataAutomatedAsync();
+            _soundDataSource.IsOfflineCategories = true;
+            List<Category> categories = new List<Category>();
+            Random random = new Random();
+
+            int i = 0;
+            while (i < 3) 
+            {
+                int randIndex = random.Next(_soundDataSource.Categories.Count);
+                Category category = _soundDataSource.Categories[randIndex];
+                if (!categories.Contains(category) && category.UniqueId != "Search Online")
+                {
+                    categories.Add(category);
+                    i++;
+                }
+            }
+
+            return categories;
+        }
 
         public static async Task<ObservableCollection<Category>> GetOnlineCategoriesAsync()
         {
