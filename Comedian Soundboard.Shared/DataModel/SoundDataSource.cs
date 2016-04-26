@@ -132,7 +132,7 @@ namespace Comedian_Soundboard.Data
                     i++;
                 }
             }
-
+            categories.Add(new Category("More", "See More", "", "Assets/Comedy.png", ""));
             return categories;
         }
 

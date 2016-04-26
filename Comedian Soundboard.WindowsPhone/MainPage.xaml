@@ -22,13 +22,9 @@
     </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton Icon="Mail"
-                          Label="Send Feedback"
-                          Click="Comment_Click"/>
-            <AppBarButton Label="Rate App"
-                          Click="Rate_Click" Icon="SolidStar"/>
             <AppBarButton Label="Feeling Lucky"
-                          Click="Lucky_Click" Icon="Rotate"/>
+                          Click="Lucky_Click" Icon="Rotate">
+            </AppBarButton>
         </CommandBar>
     </Page.BottomAppBar>
 

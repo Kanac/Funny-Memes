@@ -328,6 +328,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Will Ferrell\Sounds\Who let the dogs out   Song.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Will Ferrell\Sounds\Youre not a doctor.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Comedians\Will Ferrell\Will Ferrell.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Comedy.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\ComedyBackground2.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\QuestionMark.png" />
     <Content Include="$(MSBuildThisFileDirectory)DataModel\Soundboard.json" />

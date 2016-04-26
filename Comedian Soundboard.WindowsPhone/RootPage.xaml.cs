@@ -7,9 +7,11 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Email;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.System;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -156,5 +158,23 @@ namespace Comedian_Soundboard
             string comedian = ((e.OriginalSource as FrameworkElement).DataContext as Category).UniqueId;
             Frame.Navigate(typeof(MainPage), comedian);
         }
+
+        #region CommandBar Events
+        private async void Comment_Click(object sender, RoutedEventArgs e)
+        {
+            EmailRecipient sendTo = new EmailRecipient() { Address = "testgglol@outlook.com" };
+            EmailMessage mail = new EmailMessage();
+
+            mail.Subject = "Comedian Suggestion for Comedy Soundboard";
+            mail.To.Add(sendTo);
+            await EmailManager.ShowComposeNewEmailAsync(mail);
+        }
+
+        private async void Rate_Click(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + "450ee59b-0aff-40b4-b896-0382d05d96ee"));
+        }
+
+        #endregion CommandBar Events
     }
 }

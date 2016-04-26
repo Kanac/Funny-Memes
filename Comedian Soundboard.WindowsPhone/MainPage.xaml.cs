@@ -105,7 +105,7 @@ namespace Comedian_Soundboard
             {
                 await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low, () =>
                 {
-                    Task.Delay(TimeSpan.FromMilliseconds(300));
+                    Task.Delay(TimeSpan.FromMilliseconds(500));
                     CategoryListView.ScrollIntoView(category);
                 }
                 );
@@ -169,21 +169,6 @@ namespace Comedian_Soundboard
             }
             else
                 Frame.Navigate(typeof(AudioPage), comedian);
-        }
-
-        private async void Comment_Click(object sender, RoutedEventArgs e)
-        {
-            EmailRecipient sendTo = new EmailRecipient() { Address = "testgglol@outlook.com" };
-            EmailMessage mail = new EmailMessage();
-
-            mail.Subject = "Comedian Suggestion for Comedy Soundboard";
-            mail.To.Add(sendTo);
-            await EmailManager.ShowComposeNewEmailAsync(mail);
-        }
-
-        private async void Rate_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + "450ee59b-0aff-40b4-b896-0382d05d96ee"));
         }
 
         private void Lucky_Click(object sender, RoutedEventArgs e)

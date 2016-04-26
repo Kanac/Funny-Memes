@@ -20,6 +20,16 @@
         <ImageBrush ImageSource="Assets/ComedyBackground2.jpg"></ImageBrush>
     </Page.Background>
 
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="Mail"
+                          Label="Send Feedback"
+                          Click="Comment_Click"/>
+            <AppBarButton Label="Rate App"
+                          Click="Rate_Click" Icon="SolidStar"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+    
     <Grid x:Name="LayoutRoot">
         <StackPanel x:Name="LoadingPanel" Margin="0,-8,0,0">
             <ProgressBar IsIndeterminate="True"></ProgressBar>
