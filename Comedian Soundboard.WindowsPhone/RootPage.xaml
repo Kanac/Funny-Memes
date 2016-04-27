@@ -20,6 +20,42 @@
         <ImageBrush ImageSource="Assets/ComedyBackground2.jpg"></ImageBrush>
     </Page.Background>
 
+    <Page.Resources>
+        <DataTemplate x:Key="ListViewMainTemplate">
+            <Grid Margin="0,30,0,0" HorizontalAlignment="Center" >
+                <TextBlock  Text="{Binding Title}" 
+                            FontSize="25" 
+                            Foreground="White"
+                            FontWeight= "Medium"
+                            TextAlignment="Center" 
+                            VerticalAlignment="Top">
+                </TextBlock>
+
+                <Grid Margin="0,45,0,0">
+                    <Ellipse x:Name="ImageBorder"
+                             Width="228"
+                             Height="228"
+                             StrokeThickness="4"
+                             Loaded="Border_Loaded">
+                    </Ellipse>
+                    <Ellipse Width="220" 
+                             Height="220" 
+                             Stretch="Fill" 
+                             PointerPressed="Pointer_Pressed"
+                             PointerReleased="Pointer_Released" 
+                             PointerCanceled="Pointer_Released"
+                             PointerCaptureLost="Pointer_Released"
+                             PointerExited="Pointer_Released"
+                             Tapped="SoundGroup_Click">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding ImagePath}"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    
     <Page.BottomAppBar>
         <CommandBar>
             <AppBarButton Icon="Mail"
@@ -68,40 +104,7 @@
                         </ListView.ItemContainerStyle>
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Grid Margin="0,30,0,0" HorizontalAlignment="Center" >
-                                    <TextBlock 
-                                Text="{Binding Title}" 
-                                FontSize="25" 
-                                Foreground="White"
-                                FontWeight= "Medium"
-                                TextAlignment="Center" 
-                                VerticalAlignment="Top">
-                                    </TextBlock>
-
-                                    <Grid Margin="0,45,0,0">
-                                        <Ellipse
-                                x:Name="ImageBorder"
-                                Width="228"
-                                Height="228"
-                                StrokeThickness="4"
-                                Loaded="Border_Loaded">
-                                        </Ellipse>
-                                        <Ellipse
-                                Width="220" 
-                                Height="220" 
-                                Stretch="Fill" 
-                                PointerPressed="Pointer_Pressed"
-                                PointerReleased="Pointer_Released" 
-                                PointerCanceled="Pointer_Released"
-                                PointerCaptureLost="Pointer_Released"
-                                PointerExited="Pointer_Released"
-                                Tapped="SoundGroup_Click">
-                                            <Ellipse.Fill>
-                                                <ImageBrush ImageSource="{Binding ImagePath}"/>
-                                            </Ellipse.Fill>
-                                        </Ellipse>
-                                    </Grid>
-                                </Grid>
+                                <ContentControl ContentTemplate="{StaticResource ListViewMainTemplate}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
@@ -135,40 +138,7 @@
                         </ListView.ItemContainerStyle>
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Grid Margin="0,30,0,0" HorizontalAlignment="Center" >
-                                    <TextBlock 
-                                Text="{Binding Title}" 
-                                FontSize="25" 
-                                Foreground="White"
-                                FontWeight= "Medium"
-                                TextAlignment="Center" 
-                                VerticalAlignment="Top">
-                                    </TextBlock>
-
-                                    <Grid Margin="0,45,0,0">
-                                        <Ellipse
-                                x:Name="ImageBorder"
-                                Width="228"
-                                Height="228"
-                                StrokeThickness="4"
-                                Loaded="Border_Loaded">
-                                        </Ellipse>
-                                        <Ellipse
-                                Width="220" 
-                                Height="220" 
-                                Stretch="Fill" 
-                                PointerPressed="Pointer_Pressed"
-                                PointerReleased="Pointer_Released" 
-                                PointerCanceled="Pointer_Released"
-                                PointerCaptureLost="Pointer_Released"
-                                PointerExited="Pointer_Released"
-                                Tapped="SoundGroup_Click">
-                                            <Ellipse.Fill>
-                                                <ImageBrush ImageSource="{Binding ImagePath}"/>
-                                            </Ellipse.Fill>
-                                        </Ellipse>
-                                    </Grid>
-                                </Grid>
+                                <ContentControl ContentTemplate="{StaticResource ListViewMainTemplate}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>

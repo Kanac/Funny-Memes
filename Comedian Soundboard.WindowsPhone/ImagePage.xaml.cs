@@ -1,6 +1,8 @@
 ﻿using Comedian_Soundboard.Common;
+using Comedian_Soundboard.DataModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -27,6 +29,7 @@ namespace Comedian_Soundboard
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private ObservableCollection<ImageItem> _Images;
 
         public ImagePage()
         {
@@ -67,6 +70,8 @@ namespace Comedian_Soundboard
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            _Images = ImageDataSource.GetImages();
+            DefaultViewModel["Images"] = _Images;
         }
 
         /// <summary>

@@ -30,6 +30,11 @@ namespace Comedian_Soundboard.DataModel
             get { return this._Images; }
         }
 
+        public static ObservableCollection<ImageItem> GetImages()
+        {
+            return _ImageDataSource.Images;
+        }
+
         public static async Task<ObservableCollection<ImageItem>> GetSampleImages()
         {
             IEnumerable<ImageItem> sample = await MemesDataSource.Current.GetSampleItems();

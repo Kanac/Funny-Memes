@@ -55,8 +55,8 @@ namespace Comedian_Soundboard.DataModel
         {
             HtmlDocument mainDoc = new HtmlDocument();
             mainDoc.LoadHtml(html);
-            IEnumerable<HtmlNode> imageDivs = mainDoc.DocumentNode.Descendants("div").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value == "img-holder");
-
+            IEnumerable<HtmlNode> imageDivs = mainDoc.DocumentNode.Descendants("div").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value == "post");
+            int test = imageDivs.Count();
             if (imageDivs.Count() == 0)
             {
                 _HasCrawledAll = true;
@@ -65,8 +65,13 @@ namespace Comedian_Soundboard.DataModel
 
             foreach (HtmlNode div in imageDivs)
             {
+                HtmlNode titleNode = div.Descendants("h2").FirstOrDefault();
                 HtmlNode imgNode = div.Descendants("img").FirstOrDefault();
-                string title = imgNode.Attributes["alt"].Value;
+
+                if (titleNode == null || imgNode == null)
+                    continue;
+
+                string title = titleNode.Descendants("a").FirstOrDefault().InnerText;
                 string url = imgNode.Attributes["src"].Value;
 
                 ImageItem imageItem = new ImageItem(title, url);

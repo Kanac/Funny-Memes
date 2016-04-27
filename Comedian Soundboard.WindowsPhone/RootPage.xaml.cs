@@ -160,8 +160,17 @@ namespace Comedian_Soundboard
 
         private void SoundGroup_Click(object sender, TappedRoutedEventArgs e)
         {
-            string comedian = ((e.OriginalSource as FrameworkElement).DataContext as Category).UniqueId;
-            Frame.Navigate(typeof(MainPage), comedian);
+            var dataContext = (e.OriginalSource as FrameworkElement).DataContext;
+
+            if (dataContext is Category)
+            {
+                string comedian = ((e.OriginalSource as FrameworkElement).DataContext as Category).UniqueId;
+                Frame.Navigate(typeof(MainPage), comedian);
+            }
+            else if (dataContext is ImageItem)
+            {
+                Frame.Navigate(typeof(ImagePage));
+            }
         }
 
         #region CommandBar Events
