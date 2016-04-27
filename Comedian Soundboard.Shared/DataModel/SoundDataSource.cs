@@ -83,14 +83,11 @@ namespace Comedian_Soundboard.Data
     }
 
     /// <summary>
-    /// Creates a collection of groups and items with content read from a static json file.
-    /// 
-    /// SampleDataSource initializes with data read from a static json file included in the 
-    /// project.  This provides sample data at both design-time and run-time.
+    /// Creates a collection of sound items generated from both online andd offline sound assets
     /// </summary>
     public sealed class SoundDataSource
     {
-        private static readonly SoundDataSource _soundDataSource = new SoundDataSource();
+        private static readonly SoundDataSource _SoundDataSource = new SoundDataSource();
         private bool _isOfflineCategories = true;
         public bool IsOfflineCategories {
             get { return _isOfflineCategories; }
@@ -110,22 +107,22 @@ namespace Comedian_Soundboard.Data
         
         public static async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
-            await _soundDataSource.GetSoundDataAutomatedAsync();
-            _soundDataSource.IsOfflineCategories = true;
-            return _soundDataSource.Categories;
+            await _SoundDataSource.GetSoundDataAutomatedAsync();
+            _SoundDataSource.IsOfflineCategories = true;
+            return _SoundDataSource.Categories;
         }
         public static async Task<IEnumerable<Category>> GetSampleCategoriesAsync()
         {
-            await _soundDataSource.GetSoundDataAutomatedAsync();
-            _soundDataSource.IsOfflineCategories = true;
+            await _SoundDataSource.GetSoundDataAutomatedAsync();
+            _SoundDataSource.IsOfflineCategories = true;
             List<Category> categories = new List<Category>();
             Random random = new Random();
 
             int i = 0;
             while (i < 3) 
             {
-                int randIndex = random.Next(_soundDataSource.Categories.Count);
-                Category category = _soundDataSource.Categories[randIndex];
+                int randIndex = random.Next(_SoundDataSource.Categories.Count);
+                Category category = _SoundDataSource.Categories[randIndex];
                 if (!categories.Contains(category) && category.UniqueId != "Search Online")
                 {
                     categories.Add(category);
@@ -138,24 +135,24 @@ namespace Comedian_Soundboard.Data
 
         public static async Task<ObservableCollection<Category>> GetOnlineCategoriesAsync()
         {
-            await _soundDataSource.GetOnlineSoundDataAsync();
-            _soundDataSource.IsOfflineCategories = false;
-            return _soundDataSource.OnlineCategories;
+            await _SoundDataSource.GetOnlineSoundDataAsync();
+            _SoundDataSource.IsOfflineCategories = false;
+            return _SoundDataSource.OnlineCategories;
         }
 
         public static async Task<Category> GetCategoryAsync(string uniqueId)
         {
             IEnumerable<Category> matches = null;
-            if (_soundDataSource.IsOfflineCategories)
+            if (_SoundDataSource.IsOfflineCategories)
             {
-                await _soundDataSource.GetSoundDataAutomatedAsync();
+                await _SoundDataSource.GetSoundDataAutomatedAsync();
                 // Simple linear search is acceptable for small data sets
-                matches = _soundDataSource.Categories.Where((group) => group.UniqueId.Equals(uniqueId));
+                matches = _SoundDataSource.Categories.Where((group) => group.UniqueId.Equals(uniqueId));
             }
             else
             {
-                await _soundDataSource.GetOnlineSoundDataAsync();
-                matches = _soundDataSource.OnlineCategories.Where((group) => group.UniqueId.Equals(uniqueId));
+                await _SoundDataSource.GetOnlineSoundDataAsync();
+                matches = _SoundDataSource.OnlineCategories.Where((group) => group.UniqueId.Equals(uniqueId));
             }
 
             if (matches.Count() == 1)
@@ -169,16 +166,16 @@ namespace Comedian_Soundboard.Data
         public static async Task<SoundItem> GetSoundAsync(string uniqueId)
         {
             IEnumerable<SoundItem> matches = null;
-            if (_soundDataSource.IsOfflineCategories)
+            if (_SoundDataSource.IsOfflineCategories)
             {
-                await _soundDataSource.GetSoundDataAutomatedAsync();
+                await _SoundDataSource.GetSoundDataAutomatedAsync();
                 // Simple linear search is acceptable for small data sets
-                matches = _soundDataSource.Categories.SelectMany(group => group.SoundItems).Where((item) => item.UniqueId.Equals(uniqueId));
+                matches = _SoundDataSource.Categories.SelectMany(group => group.SoundItems).Where((item) => item.UniqueId.Equals(uniqueId));
             }
             else
             {
-                await _soundDataSource.GetOnlineSoundDataAsync();
-                matches = _soundDataSource.OnlineCategories.SelectMany(group => group.SoundItems).Where((item) => item.UniqueId.Equals(uniqueId));
+                await _SoundDataSource.GetOnlineSoundDataAsync();
+                matches = _SoundDataSource.OnlineCategories.SelectMany(group => group.SoundItems).Where((item) => item.UniqueId.Equals(uniqueId));
             }
             if (matches.Count() == 1)
             {
@@ -217,7 +214,8 @@ namespace Comedian_Soundboard.Data
                 return;
 
             ICollection<Category> onlineComedians = await SoundArchiveDataSource.GetSoundboardAudioFiles(this.Categories);
-            foreach (Category comedian in onlineComedians){
+            foreach (Category comedian in onlineComedians)
+            {
                 this.OnlineCategories.Add(comedian);
             }
         }

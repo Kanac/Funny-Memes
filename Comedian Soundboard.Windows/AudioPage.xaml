@@ -11,14 +11,17 @@
     xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     xmlns:ValueConverter="using:Comedian_Soundboard.Converters"
     mc:Ignorable="d">
+    
     <Page.Transitions>
         <TransitionCollection>
             <EdgeUIThemeTransition></EdgeUIThemeTransition>
         </TransitionCollection>
     </Page.Transitions>
+    
     <Page.Resources>
         <ValueConverter:NameSplit x:Key="NameSplit" />
     </Page.Resources>
+    
     <Page.BottomAppBar>
         <CommandBar>
             <AppBarButton Icon="Save" Label="Save Audio File" Click="Save_Clicked" />

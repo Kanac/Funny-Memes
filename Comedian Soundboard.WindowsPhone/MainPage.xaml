@@ -12,11 +12,13 @@
     xmlns:data="using:Comedian_Soundboard.Data"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
     <Page.Transitions>
         <TransitionCollection>
             <EdgeUIThemeTransition></EdgeUIThemeTransition>
         </TransitionCollection>
     </Page.Transitions>
+    
     <Page.Resources>
         <ValueConverter:NameSplit x:Key="NameSplit" />
     </Page.Resources>

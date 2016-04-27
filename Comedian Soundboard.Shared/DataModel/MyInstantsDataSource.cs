@@ -13,35 +13,37 @@ namespace Comedian_Soundboard.DataModel
     public sealed class MyInstantsDataSource : IIncrementalSource<Category>
     {
         public static readonly MyInstantsDataSource Current = new MyInstantsDataSource();
-        private HttpClient httpClient = new HttpClient();
+
+        private HttpClient _HttpClient = new HttpClient();
         private readonly int MAX_CATEGORY_AUDIO_FILES = 15;
         private readonly int MAX_PAGES = 99;
         private readonly int PAGES_PER_CRAWL = 1;
-        private int page = 1;  // current page of site
-        private int count = 0; // total audio mp3s crawled
-        private bool hasCrawledAll = false;
+        private int _Page = 1;  // current page of site
+        private int _Count = 0; // total audio mp3s crawled
+        private bool _HasCrawledAll = false;
 
         public async Task<IEnumerable<Category>> GetPagedItems()
         {
             ICollection<Category> categories = new List<Category>();
-            string mainHtml = mainHtml = await httpClient.GetStringAsync("http://www.myinstants.com" + "?page=" + page);
+            string mainHtml = mainHtml = await _HttpClient.GetStringAsync("http://www.myinstants.com" + "?page=" + _Page);
             
             int currPage = 0;
-            while(currPage < PAGES_PER_CRAWL && page < MAX_PAGES && !hasCrawledAll )
+            while (currPage < PAGES_PER_CRAWL && _Page < MAX_PAGES && !_HasCrawledAll)
             {
                 HtmlDocument mainDoc = new HtmlDocument();
                 mainDoc.LoadHtml(mainHtml);
                 IEnumerable<HtmlNode> audioDivs = mainDoc.DocumentNode.Descendants("div").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value == "instant");
 
-                string categoryTitle = "Random " + (count / MAX_CATEGORY_AUDIO_FILES + 1).ToString();
+                string categoryTitle = "Random " + (_Count / MAX_CATEGORY_AUDIO_FILES + 1).ToString();
                 Category currCategory = new Category(categoryTitle, categoryTitle, "", "Assets/QuestionMark.png", "");
                 categories.Add(currCategory);
 
                 int currCount = 0;
                 foreach (HtmlNode ad in audioDivs)
                 {
-                    if (currCount % MAX_CATEGORY_AUDIO_FILES == 0 && currCount != 0) {
-                        categoryTitle = "Random " + (count / MAX_CATEGORY_AUDIO_FILES + 1).ToString();
+                    if (currCount % MAX_CATEGORY_AUDIO_FILES == 0 && currCount != 0)
+                    {
+                        categoryTitle = "Random " + (_Count / MAX_CATEGORY_AUDIO_FILES + 1).ToString();
                         currCategory = new Category(categoryTitle, categoryTitle, "", "Assets/QuestionMark.png", "");
                         categories.Add(currCategory);
                     }
@@ -58,15 +60,17 @@ namespace Comedian_Soundboard.DataModel
                     title = SoundDataSource.HumanizeAudioTitle(title);
                     currCategory.SoundItems.Add(new SoundItem("", "", title, url, "", "", true));
 
-                    ++count;
+                    ++_Count;
                     ++currCount;
                 }
 
-                if (mainDoc.DocumentNode.Descendants("a").Where(x => x.Attributes.Contains("id") && x.Attributes["id"].Value == "moar").Count() > 0){
-                    mainHtml = await httpClient.GetStringAsync("http://www.myinstants.com" + "?page=" + ++page);
+                if (mainDoc.DocumentNode.Descendants("a").Where(x => x.Attributes.Contains("id") && x.Attributes["id"].Value == "moar").Count() > 0)
+                {
+                    mainHtml = await _HttpClient.GetStringAsync("http://www.myinstants.com" + "?page=" + ++_Page);
                 }
-                else {
-                    hasCrawledAll = true;
+                else
+                {
+                    _HasCrawledAll = true;
                     break;
                 }
 

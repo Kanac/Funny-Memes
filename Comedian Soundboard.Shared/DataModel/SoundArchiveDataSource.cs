@@ -11,8 +11,8 @@ namespace Comedian_Soundboard.DataModel
 {
     public sealed class SoundArchiveDataSource
     {
-        private static readonly SoundArchiveDataSource _soundArchiveDataSource = new SoundArchiveDataSource();
-        private HttpClient httpClient = new HttpClient();
+        private static readonly SoundArchiveDataSource _SoundArchiveDataSource = new SoundArchiveDataSource();
+        private HttpClient _HttpClient = new HttpClient();
 
         /// <summary>
         // Retrieves comedian files from Soundarchive and parses them into Categories. The existingCategories parameter
@@ -20,7 +20,7 @@ namespace Comedian_Soundboard.DataModel
         /// </summary>
         public async static Task<ICollection<Category>> GetSoundboardAudioFiles(ICollection<Category> existingCategories = null)
         {
-            string mainHtml = await _soundArchiveDataSource.httpClient.GetStringAsync("http://www.thesoundarchive.com/");
+            string mainHtml = await _SoundArchiveDataSource._HttpClient.GetStringAsync("http://www.thesoundarchive.com/");
 
             HtmlDocument mainDoc = new HtmlAgilityPack.HtmlDocument();
             mainDoc.LoadHtml(mainHtml);
@@ -43,7 +43,7 @@ namespace Comedian_Soundboard.DataModel
                 Category comedian = new Category(uniqueId, title, "", imageUrl, "");
 
                 string link = "http://www.thesoundarchive.com/" + htmlATag.Attributes["href"].Value;
-                string pageHtml = await _soundArchiveDataSource.httpClient.GetStringAsync(link);
+                string pageHtml = await _SoundArchiveDataSource._HttpClient.GetStringAsync(link);
                 HtmlDocument pageDoc = new HtmlDocument();
                 pageDoc.LoadHtml(pageHtml);
                 HtmlNode audioList = pageDoc.DocumentNode.Descendants("div").Where(x => x.Attributes.Contains("id") && x.Attributes["id"].Value.Contains("page-content")).FirstOrDefault();
