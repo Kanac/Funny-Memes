@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Comedian_Soundboard.DataModel
 {
@@ -11,12 +12,12 @@ namespace Comedian_Soundboard.DataModel
         public ImageItem(string title, string url)
         {
             this.Title = title;
-            this.Url = url;
+            this.ImagePath = url;
         }
 
         public string Title { get; private set; }
 
-        public string Url { get; private set; }
+        public string ImagePath { get; private set; }
     }
 
     public sealed class ImageDataSource
@@ -27,6 +28,12 @@ namespace Comedian_Soundboard.DataModel
         public ObservableCollection<ImageItem> Images
         {
             get { return this._Images; }
+        }
+
+        public static async Task<ObservableCollection<ImageItem>> GetSampleImages()
+        {
+            IEnumerable<ImageItem> sample = await MemesDataSource.Current.GetSampleItems();
+            return new ObservableCollection<ImageItem>(sample);
         }
     }
 }

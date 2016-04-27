@@ -1,5 +1,6 @@
 ﻿using Comedian_Soundboard.Common;
 using Comedian_Soundboard.Data;
+using Comedian_Soundboard.DataModel;
 using Comedian_Soundboard.Helper;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,7 @@ namespace Comedian_Soundboard
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         private ObservableCollection<Category> soundGroups;
+        private ObservableCollection<ImageItem> imageGroups;
         private Random random = new Random();
 
         public RootPage()
@@ -77,7 +79,10 @@ namespace Comedian_Soundboard
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             soundGroups = new ObservableCollection<Category>(await SoundDataSource.GetSampleCategoriesAsync());
-            this.DefaultViewModel["Groups"] = soundGroups;
+            this.DefaultViewModel["SoundGroups"] = soundGroups;
+
+            imageGroups = new ObservableCollection<ImageItem>(await ImageDataSource.GetSampleImages());
+            this.DefaultViewModel["ImageGroups"] = imageGroups;
 
             LoadingPanel.Visibility = Visibility.Collapsed;
 

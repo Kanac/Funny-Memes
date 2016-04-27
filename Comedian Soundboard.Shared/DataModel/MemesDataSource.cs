@@ -24,38 +24,56 @@ namespace Comedian_Soundboard.DataModel
         public async Task<IEnumerable<ImageItem>> GetPagedItems()
         {
             ICollection<ImageItem> images = new List<ImageItem>();
-            string mainHtml = mainHtml = await _HttpClient.GetStringAsync("http://www.quickmeme.com/page/" + _Page + "/");
+            string mainHtml = await _HttpClient.GetStringAsync("http://www.quickmeme.com/page/" + _Page + "/");
 
             int currPage = 0;
             while (currPage < PAGES_PER_CRAWL && _Page < MAX_PAGES && !_HasCrawledAll)
             {
-                HtmlDocument mainDoc = new HtmlDocument();
-                mainDoc.LoadHtml(mainHtml);
-                IEnumerable<HtmlNode> imageDivs = mainDoc.DocumentNode.Descendants("div").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value == "img-holder");
-
-                if (imageDivs.Count() == 0)
-                {
-                    _HasCrawledAll = true;
-                    break;
-                }
-
-                foreach (HtmlNode div in imageDivs)
-                {
-                    HtmlNode imgNode = div.Descendants("img").FirstOrDefault();
-                    string title = imgNode.Attributes["alt"].Value;
-                    string url = imgNode.Attributes["src"].Value;
-
-                    ImageItem imageItem = new ImageItem(title, url);
-                    images.Add(imageItem);
-
-                    ++_Count;
-                }
+                GetImagesFromHtml(mainHtml, images);
 
                 ++currPage;
                 ++_Page;
             }
 
             return images;
+        }
+
+        public async Task<IEnumerable<ImageItem>> GetSampleItems()
+        {
+            ICollection<ImageItem> images = new List<ImageItem>();
+            string mainHtml = await _HttpClient.GetStringAsync("http://www.quickmeme.com/page/1/");
+
+            GetImagesFromHtml(mainHtml, images);
+            ImageItem more = new ImageItem("See More", "Assets/Comedy.png");
+
+            List<ImageItem> filteredImages = images.Take(3).ToList();
+            filteredImages.Add(more);
+            return filteredImages;
+        }
+
+        private void GetImagesFromHtml(string html, ICollection<ImageItem> images)
+        {
+            HtmlDocument mainDoc = new HtmlDocument();
+            mainDoc.LoadHtml(html);
+            IEnumerable<HtmlNode> imageDivs = mainDoc.DocumentNode.Descendants("div").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value == "img-holder");
+
+            if (imageDivs.Count() == 0)
+            {
+                _HasCrawledAll = true;
+                return;
+            }
+
+            foreach (HtmlNode div in imageDivs)
+            {
+                HtmlNode imgNode = div.Descendants("img").FirstOrDefault();
+                string title = imgNode.Attributes["alt"].Value;
+                string url = imgNode.Attributes["src"].Value;
+
+                ImageItem imageItem = new ImageItem(title, url);
+                images.Add(imageItem);
+
+                ++_Count;
+            }
         }
     }
 }
