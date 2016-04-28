@@ -114,23 +114,23 @@
         </ListView>
         
         <Grid Grid.Row="2">
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="294787" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="296273" />
         </Grid>
         <Grid Grid.Row="2" Margin="0,49,0,0">
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="294787" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="294787" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="294787" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="294787" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="294787" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="294787" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="294787" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="294787" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="294787" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="294787" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="294787" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="294787" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="294787" />
-            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="294787" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="296273" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="296273" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="296273" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="296273" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="296273" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="296273" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="296273" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="296273" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="296273" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="296273" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="296273" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="296273" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="296273" />
+            <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="296273" />
         </Grid>
     </Grid>
 </Page>
