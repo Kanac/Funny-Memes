@@ -35,9 +35,9 @@ namespace Comedian_Soundboard
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private ObservableCollection<Category> soundGroups;
-        private ObservableCollection<ImageItem> imageGroups;
-        private Random random = new Random();
+        private ObservableCollection<Category> _SoundGroups;
+        private ObservableCollection<ImageItem> _ImageGroups;
+        private Random _Random = new Random();
 
         public RootPage()
         {
@@ -78,11 +78,11 @@ namespace Comedian_Soundboard
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            soundGroups = new ObservableCollection<Category>(await SoundDataSource.GetSampleCategoriesAsync());
-            this.DefaultViewModel["SoundGroups"] = soundGroups;
+            _SoundGroups = new ObservableCollection<Category>(await SoundDataSource.GetSampleCategoriesAsync());
+            this.DefaultViewModel["SoundGroups"] = _SoundGroups;
 
-            imageGroups = new ObservableCollection<ImageItem>(await ImageDataSource.GetSampleImages());
-            this.DefaultViewModel["ImageGroups"] = imageGroups;
+            _ImageGroups = new ObservableCollection<ImageItem>(await ImageDataSource.GetSampleImages());
+            this.DefaultViewModel["ImageGroups"] = _ImageGroups;
 
             LoadingPanel.Visibility = Visibility.Collapsed;
 
@@ -136,7 +136,7 @@ namespace Comedian_Soundboard
 
         private void Border_Loaded(object sender, RoutedEventArgs e)
         {
-            Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
+            Color color = Color.FromArgb(255, Convert.ToByte(_Random.Next(0, 256)), Convert.ToByte(_Random.Next(0, 256)), Convert.ToByte(_Random.Next(0, 256)));
             (sender as Ellipse).Stroke = new SolidColorBrush(color);
         }
 
@@ -169,7 +169,14 @@ namespace Comedian_Soundboard
             }
             else if (dataContext is ImageItem)
             {
-                Frame.Navigate(typeof(ImagePage));
+                // pass index of clicked sample item 
+                ImageItem image = dataContext as ImageItem;
+                int index = _ImageGroups.IndexOf(image);
+                if (image.Title == "See More")
+                {
+                    index = 0;
+                }
+                Frame.Navigate(typeof(ImagePage), _ImageGroups.IndexOf(image));
             }
         }
 

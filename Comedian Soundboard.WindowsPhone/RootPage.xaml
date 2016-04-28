@@ -5,6 +5,7 @@
     xmlns:local="using:Comedian_Soundboard"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ValueConverter="using:Comedian_Soundboard.Converters"
     mc:Ignorable="d"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     d:DataContext="{Binding Source={d:DesignData Source=../Comedian Soundboard.Shared/DataModel/Soundboard.json, Type=data:SoundDataSource}}"
@@ -19,19 +20,27 @@
     <Page.Background>
         <ImageBrush ImageSource="Assets/ComedyBackground2.jpg"></ImageBrush>
     </Page.Background>
-
+    
     <Page.Resources>
+        <ValueConverter:MaxWordsConverter x:Key="MaxWordsConverter"/>
+
         <DataTemplate x:Key="ListViewMainTemplate">
-            <Grid Margin="0,30,0,0" HorizontalAlignment="Center" >
-                <TextBlock  Text="{Binding Title}" 
+            <Grid Margin="0,30,0,0" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <TextBlock  Text="{Binding Title, Converter={StaticResource MaxWordsConverter}, ConverterParameter=4}" 
                             FontSize="25" 
                             Foreground="White"
                             FontWeight= "Medium"
                             TextAlignment="Center" 
-                            VerticalAlignment="Top">
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Center">
                 </TextBlock>
 
-                <Grid Margin="0,45,0,0">
+                <Grid Margin="0,5,0,0" Grid.Row="1">
                     <Ellipse x:Name="ImageBorder"
                              Width="228"
                              Height="228"
@@ -93,6 +102,7 @@
 
                     <ListView SelectionMode="None"
                       ItemsSource="{Binding SoundGroups}"
+                      ItemTemplate="{StaticResource ListViewMainTemplate}"
                       IsItemClickEnabled="True"
                       Grid.Row="1">
                         <ListView.ItemContainerStyle>
@@ -102,11 +112,6 @@
                                 </Setter>
                             </Style>
                         </ListView.ItemContainerStyle>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ContentControl ContentTemplate="{StaticResource ListViewMainTemplate}" HorizontalAlignment="Center"/>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
                     </ListView>
                     
                 </Grid>
@@ -127,6 +132,7 @@
 
                     <ListView SelectionMode="None"
                       ItemsSource="{Binding ImageGroups}"
+                      ItemTemplate="{StaticResource ListViewMainTemplate}"
                       IsItemClickEnabled="True"
                       Grid.Row="1">
                         <ListView.ItemContainerStyle>
@@ -136,11 +142,6 @@
                                 </Setter>
                             </Style>
                         </ListView.ItemContainerStyle>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ContentControl ContentTemplate="{StaticResource ListViewMainTemplate}" HorizontalAlignment="Center"/>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
                     </ListView>
                 </Grid>
             </PivotItem>

@@ -6,9 +6,11 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -30,6 +32,8 @@ namespace Comedian_Soundboard
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         private ObservableCollection<ImageItem> _Images;
+        private Random _Random = new Random();
+        private int _IndexParam;
 
         public ImagePage()
         {
@@ -68,10 +72,32 @@ namespace Comedian_Soundboard
         /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session.  The state will be null the first time a page is visited.</param>
-        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            _IndexParam = Convert.ToInt32(e.NavigationParameter);
             _Images = ImageDataSource.GetImages();
             DefaultViewModel["Images"] = _Images;
+
+            // Scroll into view depending on when data has arrived
+            if (_IndexParam < _Images.Count)
+            {
+                await Task.Delay(300);
+                ImageListView.ScrollIntoView(_Images[_IndexParam]);
+            }
+            else
+            {
+                _Images.CollectionChanged += _Images_CollectionChanged;
+            }
+        }
+
+        private async void _Images_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (_IndexParam < _Images.Count)
+            {
+                _Images.CollectionChanged -= _Images_CollectionChanged;
+                await Task.Delay(300);
+                ImageListView.ScrollIntoView(_Images[_IndexParam]);
+            }
         }
 
         /// <summary>
@@ -108,9 +134,17 @@ namespace Comedian_Soundboard
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            _Images.Clear();
+
             this.navigationHelper.OnNavigatedFrom(e);
         }
 
         #endregion
+
+        private void Border_Loaded(object sender, RoutedEventArgs e)
+        {
+            Color color = Color.FromArgb(255, Convert.ToByte(_Random.Next(0, 256)), Convert.ToByte(_Random.Next(0, 256)), Convert.ToByte(_Random.Next(0, 256)));
+            (sender as Border).BorderBrush = new SolidColorBrush(color);
+        }
     }
 }

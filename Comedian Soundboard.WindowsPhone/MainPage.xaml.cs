@@ -157,6 +157,7 @@ namespace Comedian_Soundboard
             Audio.Source = null;
             this.navigationHelper.OnNavigatedFrom(e);
         }
+
         #endregion
 
         private async void Group_Click(object sender, TappedRoutedEventArgs e)
@@ -165,10 +166,14 @@ namespace Comedian_Soundboard
             if (comedian == "Search Online")
             {
                 if (await AppHelper.IsInternetAvailable())
+                {
                     Frame.Navigate(typeof(MainPage), comedian);
+                }
             }
             else
+            {
                 Frame.Navigate(typeof(AudioPage), comedian);
+            }
         }
 
         private void Lucky_Click(object sender, RoutedEventArgs e)
@@ -176,15 +181,21 @@ namespace Comedian_Soundboard
             Category randComedian = groups.ElementAt(random.Next(0, groups.Count()));
             SoundItem randSound = randComedian.SoundItems.ElementAt(random.Next(0, randComedian.SoundItems.Count()));
             if (randSound.isOnline)  // Check whether url is online or in assets folder
+            {
                 Audio.Source = new Uri(randSound.SoundPath);
+            }
             else
+            {
                 Audio.Source = new Uri("ms-appx:///" + randSound.SoundPath, UriKind.RelativeOrAbsolute);
+            }
 
         }
+
         private void Audio_MediaOpened(object sender, RoutedEventArgs e)
         {
             Audio.Play();
         }
+
         private void Pointer_Pressed(object sender, PointerRoutedEventArgs e)
         {
             FrameworkElement image = (sender as FrameworkElement);
@@ -202,18 +213,16 @@ namespace Comedian_Soundboard
             border.Height = 228;
             border.StrokeThickness = 4;
         }
+
         private void Border_Loaded(object sender, RoutedEventArgs e)
         {
             Color color = Color.FromArgb(255, Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)), Convert.ToByte(random.Next(0, 256)));
             (sender as Ellipse).Stroke = new SolidColorBrush(color);
         }
+
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (SearchTextBox.Text == "")
-                SearchTextBlock.Visibility = Visibility.Visible;
-            else
-                SearchTextBlock.Visibility = Visibility.Collapsed;
-
+            SearchTextBlock.Visibility = string.IsNullOrEmpty(SearchTextBox.Text) ? Visibility.Visible : Visibility.Collapsed; 
             if (groups != null)
             {
                 foreach (Category item in groups)
@@ -221,13 +230,19 @@ namespace Comedian_Soundboard
                     if (item.Title.ToLower().Contains(SearchTextBox.Text.ToLower()))
                     {
                         if (!filteredGroups.Contains(item))
+                        {
                             filteredGroups.Add(item);
+                        }
                     }
                     else
+                    {
                         filteredGroups.Remove(item);
+                    }
                 }
                 if (filteredGroups.Count() == groups.Count())
+                {
                     filteredGroups = new ObservableCollection<Category>(groups);
+                }
 
                 this.DefaultViewModel["Groups"] = filteredGroups;
             }

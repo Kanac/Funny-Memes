@@ -21,7 +21,8 @@
     </Page.Background>
     
     <Grid>
-        <ListView SelectionMode="None"
+        <ListView x:Name="ImageListView"
+                  SelectionMode="None"
                   ItemsSource="{Binding Images}"
                   IsItemClickEnabled="True">
             <ListView.ItemContainerStyle>
@@ -33,12 +34,12 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="0,7,0,0">
+                    <Border BorderThickness="5" Loaded="Border_Loaded">
                         <Image Source="{Binding ImagePath}" 
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Stretch">
                         </Image>
-                    </Grid>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

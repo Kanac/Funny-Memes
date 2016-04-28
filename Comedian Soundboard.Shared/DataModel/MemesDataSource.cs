@@ -15,24 +15,27 @@ namespace Comedian_Soundboard.DataModel
         public static readonly MemesDataSource Current = new MemesDataSource();
 
         private HttpClient _HttpClient = new HttpClient();
-        private readonly int MAX_PAGES = 99;
+        private readonly int MAX_PAGES = 999;
         private readonly int PAGES_PER_CRAWL = 1;
         private int _Page = 1;  // current page of site
+        private int _PagesCrawled = 0;
         private int _Count = 0; // total images crawled
         private bool _HasCrawledAll = false;
+        private Random _Random = new Random();
 
         public async Task<IEnumerable<ImageItem>> GetPagedItems()
         {
             ICollection<ImageItem> images = new List<ImageItem>();
-            string mainHtml = await _HttpClient.GetStringAsync("http://www.quickmeme.com/page/" + _Page + "/");
+            string mainHtml = await Current._HttpClient.GetStringAsync("http://www.quickmeme.com/page/" + Current._Page + "/");
 
             int currPage = 0;
-            while (currPage < PAGES_PER_CRAWL && _Page < MAX_PAGES && !_HasCrawledAll)
+            while (currPage < PAGES_PER_CRAWL && Current._PagesCrawled < MAX_PAGES && !Current._HasCrawledAll)
             {
                 GetImagesFromHtml(mainHtml, images);
 
                 ++currPage;
-                ++_Page;
+                ++Current._Page;
+                ++Current._PagesCrawled;
             }
 
             return images;
@@ -40,8 +43,11 @@ namespace Comedian_Soundboard.DataModel
 
         public async Task<IEnumerable<ImageItem>> GetSampleItems()
         {
+            // Assuming this method is called first, this will set the initial page to crawl from for GetPagedItems()
+            Current._Page = Current._Random.Next(1000);
+
             ICollection<ImageItem> images = new List<ImageItem>();
-            string mainHtml = await _HttpClient.GetStringAsync("http://www.quickmeme.com/page/1/");
+            string mainHtml = await Current._HttpClient.GetStringAsync("http://www.quickmeme.com/page/" + Current._Page + "/");
 
             GetImagesFromHtml(mainHtml, images);
             ImageItem more = new ImageItem("See More", "Assets/Comedy.png");
@@ -59,7 +65,7 @@ namespace Comedian_Soundboard.DataModel
             int test = imageDivs.Count();
             if (imageDivs.Count() == 0)
             {
-                _HasCrawledAll = true;
+                Current._HasCrawledAll = true;
                 return;
             }
 
@@ -77,7 +83,7 @@ namespace Comedian_Soundboard.DataModel
                 ImageItem imageItem = new ImageItem(title, url);
                 images.Add(imageItem);
 
-                ++_Count;
+                ++Current._Count;
             }
         }
     }

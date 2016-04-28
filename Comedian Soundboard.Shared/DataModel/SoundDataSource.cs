@@ -266,7 +266,8 @@ namespace Comedian_Soundboard.Data
                     wordCount[audioDisplayName.ToString()]++;
                     audioDisplayName += " " + wordCount[audioDisplayName.ToString()];
                 }
-                else {
+                else
+                {
                     wordCount.Add(audioDisplayName.ToString(), 1);
                 }
                 string currComedianSoundPath = "Assets/Comedians/" + comedian.Title + "/Sounds/" + currComedianSound.Name;
