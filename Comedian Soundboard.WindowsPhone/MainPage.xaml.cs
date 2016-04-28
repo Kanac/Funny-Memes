@@ -105,18 +105,9 @@ namespace Comedian_Soundboard
             {
                 await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low, () =>
                 {
-                    Task.Delay(TimeSpan.FromMilliseconds(500));
                     CategoryListView.ScrollIntoView(category);
                 }
                 );
-            }
-
-            AppHelper.ReviewApp();
-            if (!App.FirstLoad)
-            {
-                await AppHelper.SetupBackgroundToast();
-                AppHelper.setupReuseToast();
-                App.FirstLoad = false;
             }
         }
 

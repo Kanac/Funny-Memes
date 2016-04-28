@@ -81,22 +81,21 @@ namespace Comedian_Soundboard
             // Scroll into view depending on when data has arrived
             if (_IndexParam < _Images.Count && _IndexParam != 0)
             {
+                ImageListView.Opacity = 1;
+                LoadingPanel.Visibility = Visibility.Collapsed;
                 await Task.Delay(300);
                 ImageListView.ScrollIntoView(_Images[_IndexParam]);
             }
-            else if (_IndexParam != 0)
+            else 
             {
-                _Images.CollectionChanged += _Images_CollectionChanged;
-            }
-        }
+                await Task.Delay(300);
+                ImageListView.Opacity = 1;
+                LoadingPanel.Visibility = Visibility.Collapsed;
+                if (_IndexParam < _Images.Count && _IndexParam != 0)
+                {
+                    ImageListView.ScrollIntoView(_Images[_IndexParam]);
+                }
 
-        private async void _Images_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (_IndexParam < _Images.Count)
-            {
-                _Images.CollectionChanged -= _Images_CollectionChanged;
-                await Task.Delay(300);
-                ImageListView.ScrollIntoView(_Images[_IndexParam]);
             }
         }
 

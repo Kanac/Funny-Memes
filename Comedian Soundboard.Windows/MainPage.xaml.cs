@@ -100,7 +100,7 @@ namespace Comedian_Soundboard
             if (!App.FirstLoad)
             {
                 await AppHelper.SetupBackgroundToast();
-                AppHelper.setupReuseToast();
+                AppHelper.setupReuseToast(50);
                 App.FirstLoad = false;
             }
         }

@@ -30,7 +30,6 @@ namespace Tasks
             XmlElement audio = toastXml.CreateElement("audio");
 
             // Get a random comedian audio and play it for the toast
-            var test =  Package.Current.InstalledLocation;
             //StorageFolder appFolder = await Package.Current.InstalledLocation.GetFolderAsync(@"Assets\Comedians\");
             //Random random = new Random();
             //IReadOnlyList<StorageFolder> comedianFolders = await appFolder.GetFoldersAsync();
@@ -40,8 +39,8 @@ namespace Tasks
             //StorageFile randComedianSound = randComedianSoundFiles.ElementAt(random.Next(0, randComedianSoundFiles.Count()));
 
             //audio.SetAttribute("src", "ms-appx:///Assets/" + randComedian.DisplayType + "/Sounds/" + randComedianSound.DisplayName + randComedianSound.FileType);
-            audio.SetAttribute("src", "ms-appx:///Assets/Adam Sandler/Crazy Guy.mp3");
-            toastNode.AppendChild(audio);
+            //audio.SetAttribute("src", "ms-appx:///Assets/Adam Sandler/Crazy Guy.mp3");
+            //toastNode.AppendChild(audio);
 
             ToastNotification toast = new ToastNotification(toastXml);
             DateTime dueTime = DateTime.Now.AddHours(50);

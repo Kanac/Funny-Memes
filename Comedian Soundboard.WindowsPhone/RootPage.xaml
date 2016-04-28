@@ -111,7 +111,8 @@
                       ItemsSource="{Binding SoundGroups}"
                       ItemTemplate="{StaticResource ListViewMainTemplate}"
                       IsItemClickEnabled="True"
-                      Grid.Row="1">
+                      Grid.Row="1"
+                      Margin="0,15,0,0">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment"
@@ -141,7 +142,8 @@
                       ItemsSource="{Binding ImageGroups}"
                       ItemTemplate="{StaticResource ListViewMainTemplate}"
                       IsItemClickEnabled="True"
-                      Grid.Row="1">
+                      Grid.Row="1"
+                      Margin="0,15,0,0">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment"
