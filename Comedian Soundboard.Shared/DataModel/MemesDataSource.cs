@@ -44,7 +44,7 @@ namespace Comedian_Soundboard.DataModel
         public async Task<IEnumerable<ImageItem>> GetSampleItems()
         {
             // Assuming this method is called first, this will set the initial page to crawl from for GetPagedItems()
-            Current._Page = Current._Random.Next(1000);
+            Current._Page = Current._Random.Next(100);
 
             ICollection<ImageItem> images = new List<ImageItem>();
             string mainHtml = await Current._HttpClient.GetStringAsync("http://www.quickmeme.com/page/" + Current._Page + "/");

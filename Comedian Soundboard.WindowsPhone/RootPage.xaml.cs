@@ -90,7 +90,8 @@ namespace Comedian_Soundboard
             if (!App.FirstLoad)
             {
                 await AppHelper.SetupBackgroundToast();
-                AppHelper.setupReuseToast();
+                AppHelper.setupReuseToast(50);
+                AppHelper.setupReuseToast(50*80);
                 App.FirstLoad = false;
             }
         }
@@ -176,7 +177,7 @@ namespace Comedian_Soundboard
                 {
                     index = 0;
                 }
-                Frame.Navigate(typeof(ImagePage), _ImageGroups.IndexOf(image));
+                Frame.Navigate(typeof(ImagePage), index);
             }
         }
 

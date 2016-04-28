@@ -17,7 +17,7 @@ namespace Comedian_Soundboard.Helper
     public sealed class AppHelper
     {
         private static readonly AppHelper _appHelper = new AppHelper();
-
+        private static Random _Random = new Random();
         private Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
 
         private async void CheckAppVersion()
@@ -103,7 +103,7 @@ namespace Comedian_Soundboard.Helper
                 BackgroundTaskRegistration task = builder.Register();
             }
         }
-        public static void setupReuseToast()
+        public static void setupReuseToast(int min)
         {
             // Check if a reuse toast is already scheduled
             if (ToastNotificationManager.CreateToastNotifier().GetScheduledToastNotifications().Where(x => x.Id == "Reuse").Count() > 0)
@@ -116,7 +116,22 @@ namespace Comedian_Soundboard.Helper
 
             XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
             toastTextElements[0].AppendChild(toastXml.CreateTextNode("Comedy"));
-            toastTextElements[1].AppendChild(toastXml.CreateTextNode("Check out new comedy sounds now!"));
+
+            int val = _Random.Next(3);
+            if (val == 0)
+            {
+                toastTextElements[1].AppendChild(toastXml.CreateTextNode("Check out new comedy sounds now!"));
+            }
+            else if (val == 1)
+            {
+                toastTextElements[1].AppendChild(toastXml.CreateTextNode("Users have submitted more memes!"));
+
+            }
+            else
+            {
+                toastTextElements[1].AppendChild(toastXml.CreateTextNode("New update has arrived!"));
+
+            }
 
             IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
             XmlElement audio = toastXml.CreateElement("audio");
@@ -124,7 +139,7 @@ namespace Comedian_Soundboard.Helper
             toastNode.AppendChild(audio);
 
             ToastNotification toast = new ToastNotification(toastXml);
-            DateTime dueTime = DateTime.Now.AddMinutes(50);
+            DateTime dueTime = DateTime.Now.AddMinutes(min);
             ScheduledToastNotification scheduledToast = new ScheduledToastNotification(toastXml, dueTime);
             scheduledToast.Id = "Reuse";
             ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledToast);

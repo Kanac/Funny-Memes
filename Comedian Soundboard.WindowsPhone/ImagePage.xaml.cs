@@ -79,12 +79,12 @@ namespace Comedian_Soundboard
             DefaultViewModel["Images"] = _Images;
 
             // Scroll into view depending on when data has arrived
-            if (_IndexParam < _Images.Count)
+            if (_IndexParam < _Images.Count && _IndexParam != 0)
             {
                 await Task.Delay(300);
                 ImageListView.ScrollIntoView(_Images[_IndexParam]);
             }
-            else
+            else if (_IndexParam != 0)
             {
                 _Images.CollectionChanged += _Images_CollectionChanged;
             }

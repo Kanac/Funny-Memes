@@ -64,7 +64,8 @@
                   SelectionMode="None"
                   ItemsSource="{Binding Groups}"
                   IsItemClickEnabled="True"
-                  Grid.Row="1">
+                  Grid.Row="1"
+                  Margin="0,0,0,-49">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment"
