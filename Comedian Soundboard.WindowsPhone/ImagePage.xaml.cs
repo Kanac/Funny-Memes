@@ -78,25 +78,16 @@ namespace Comedian_Soundboard
             _Images = ImageDataSource.GetImages();
             DefaultViewModel["Images"] = _Images;
 
-            // Scroll into view depending on when data has arrived
-            if (_IndexParam < _Images.Count && _IndexParam != 0)
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low, () =>
             {
-                ImageListView.Opacity = 1;
-                LoadingPanel.Visibility = Visibility.Collapsed;
-                await Task.Delay(300);
-                ImageListView.ScrollIntoView(_Images[_IndexParam]);
-            }
-            else 
-            {
-                await Task.Delay(300);
                 ImageListView.Opacity = 1;
                 LoadingPanel.Visibility = Visibility.Collapsed;
                 if (_IndexParam < _Images.Count && _IndexParam != 0)
                 {
                     ImageListView.ScrollIntoView(_Images[_IndexParam]);
                 }
-
             }
+            );
         }
 
         /// <summary>

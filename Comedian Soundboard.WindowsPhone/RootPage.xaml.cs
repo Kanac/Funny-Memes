@@ -37,6 +37,7 @@ namespace Comedian_Soundboard
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         private ObservableCollection<Category> _SoundGroups;
         private ObservableCollection<ImageItem> _ImageGroups;
+        private ObservableCollection<AnimationItem> _GifGroups;
         private Random _Random = new Random();
 
         public RootPage()
@@ -83,6 +84,9 @@ namespace Comedian_Soundboard
 
             _ImageGroups = new ObservableCollection<ImageItem>(await ImageDataSource.GetSampleImages());
             this.DefaultViewModel["ImageGroups"] = _ImageGroups;
+
+            _GifGroups = new ObservableCollection<AnimationItem>(await AnimationDataSource.GetSampleAnimations());
+            this.DefaultViewModel["GifGroups"] = _GifGroups;
 
             LoadingPanel.Visibility = Visibility.Collapsed;
 

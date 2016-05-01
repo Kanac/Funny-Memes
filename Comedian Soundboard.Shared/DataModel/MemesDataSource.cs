@@ -49,15 +49,15 @@ namespace Comedian_Soundboard.DataModel
             ICollection<ImageItem> images = new List<ImageItem>();
             string mainHtml = await Current._HttpClient.GetStringAsync("http://www.quickmeme.com/page/" + Current._Page + "/");
 
-            GetImagesFromHtml(mainHtml, images);
+            GetImagesFromHtml(mainHtml, images, 3);
             ImageItem more = new ImageItem("See More", "Assets/Comedy.png");
 
-            List<ImageItem> filteredImages = images.Take(3).ToList();
-            filteredImages.Add(more);
-            return filteredImages;
+            images.Add(more);
+            return images;
         }
 
-        private void GetImagesFromHtml(string html, ICollection<ImageItem> images)
+        // maxImages = 0 means it will get as many as possible from the html
+        private void GetImagesFromHtml(string html, ICollection<ImageItem> images, int maxImages = 0)
         {
             HtmlDocument mainDoc = new HtmlDocument();
             mainDoc.LoadHtml(html);
@@ -70,8 +70,12 @@ namespace Comedian_Soundboard.DataModel
                 return;
             }
 
+            int count = 0;
             foreach (HtmlNode div in imageDivs)
             {
+                if (count >= maxImages && maxImages != 0)
+                    break;
+
                 HtmlNode titleNode = div.Descendants("h2").FirstOrDefault();
                 HtmlNode imgNode = div.Descendants("img").FirstOrDefault();
 
@@ -85,6 +89,7 @@ namespace Comedian_Soundboard.DataModel
                 images.Add(imageItem);
 
                 ++Current._Count;
+                ++count;
             }
         }
     }

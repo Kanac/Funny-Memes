@@ -23,10 +23,11 @@ namespace Comedian_Soundboard.DataModel
         private bool _HasCrawledAll = false;
         private Random _Random = new Random();
 
+        // giphy redirects page url requests to page 1, change approach later
         public async Task<IEnumerable<AnimationItem>> GetPagedItems()
         {
             ICollection<AnimationItem> animations = new List<AnimationItem>();
-            string mainHtml = await Current._HttpClient.GetStringAsync("http://giphy.com/page" + Current._Page + "/");
+            string mainHtml = await Current._HttpClient.GetStringAsync("http://giphy.com/page/" + Current._Page + "/");
 
             int currPage = 0;
             while (currPage < PAGES_PER_CRAWL && Current._PagesCrawled < MAX_PAGES && !Current._HasCrawledAll)
@@ -47,17 +48,17 @@ namespace Comedian_Soundboard.DataModel
             Current._Page = Current._Random.Next(100);
 
             ICollection<AnimationItem> animations = new List<AnimationItem>();
-            string mainHtml = await Current._HttpClient.GetStringAsync("http://giphy.com/page" + Current._Page + "/");
+            string mainHtml = await Current._HttpClient.GetStringAsync("http://giphy.com/page/" + Current._Page + "/");
 
-            GetAnimationsFromHtml(mainHtml, animations);
+            GetAnimationsFromHtml(mainHtml, animations, 3);
             AnimationItem more = new AnimationItem("See More", "Assets/Comedy.png");
 
-            List<AnimationItem> filteredGifs = animations.Take(3).ToList();
-            filteredGifs.Add(more);
-            return filteredGifs;
+            animations.Add(more);
+            return animations;
         }
+        // maxImages = 0 means it will get as many as possible from the html
 
-        private void GetAnimationsFromHtml(string html, ICollection<AnimationItem> animations)
+        private void GetAnimationsFromHtml(string html, ICollection<AnimationItem> animations, int maxGifs = 0)
         {
             HtmlDocument mainDoc = new HtmlDocument();
             mainDoc.LoadHtml(html);
@@ -71,20 +72,20 @@ namespace Comedian_Soundboard.DataModel
                 return;
             }
 
-            for (int i = 0; i < gifDivs.Count(); ++i)
+            for (int i = 0; i < gifDivs.Count() && i < maxGifs; ++i)
             {
                 HtmlNode currGifDiv = gifDivs.ElementAt(i);
                 HtmlNode currTagDiv = tagDivs.ElementAt(i);
 
                 HtmlNode gifNode = currGifDiv.Descendants("img").FirstOrDefault();
-                string url = gifNode.Attributes["animated"].Value;
+                string url = gifNode.Attributes["data-animated"].Value;
 
                 StringBuilder titleSb = new StringBuilder();
-                IEnumerable<HtmlNode> tagNodes = currGifDiv.Descendants("a");
+                IEnumerable<HtmlNode> tagNodes = currTagDiv.Descendants("a");
                 foreach(HtmlNode tag in tagNodes)
                 {
-                    string val = tag.InnerText;
-                    titleSb.Append("#" + val + " ");
+                    string val = tag.InnerText.Trim();
+                    titleSb.Append(val + " ");
                 }
 
                 AnimationItem gifItem = new AnimationItem(titleSb.ToString(), url);

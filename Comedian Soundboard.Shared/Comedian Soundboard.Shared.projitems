@@ -18,6 +18,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\IncrementalLoadingCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\MaxWordsConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NameSplit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\ReverseVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\StringToVisibilityConvertercs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\AnimationDataSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\GiphyDataSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\ImageDataSource.cs" />

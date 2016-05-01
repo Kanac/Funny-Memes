@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     xmlns:ValueConverter="using:Comedian_Soundboard.Converters"
+    xmlns:gif="using:XamlAnimatedGif"
     mc:Ignorable="d"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     d:DataContext="{Binding Source={d:DesignData Source=../Comedian Soundboard.Shared/DataModel/Soundboard.json, Type=data:SoundDataSource}}"
@@ -24,9 +25,11 @@
     
     <Page.Resources>
         <ValueConverter:MaxWordsConverter x:Key="MaxWordsConverter"/>
+        <ValueConverter:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        <ValueConverter:ReverseVisibilityConverter x:Key="ReverseVisibilityConverter"/>
 
         <DataTemplate x:Key="ListViewMainTemplate">
-            <Grid Margin="0,30,0,0" HorizontalAlignment="Center">
+            <Grid Margin="0,15,0,0" HorizontalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
@@ -59,6 +62,54 @@
                              Tapped="SoundGroup_Click">
                         <Ellipse.Fill>
                             <ImageBrush ImageSource="{Binding ImagePath}"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Name="ListViewGifTemplate">
+            <Grid Margin="0,30,0,0" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock  Text="{Binding Title}"
+                            FontSize="25" 
+                            Foreground="White"
+                            FontWeight= "Medium"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Center">
+                </TextBlock>
+
+                <Grid Margin="0,5,0,0" Grid.Row="1">
+                    <Image gif:AnimationBehavior.SourceUri="{Binding GifPath}"
+                           Width="220" Height="220" Stretch="Fill"
+                           Visibility="{Binding ElementName=ImageBorder, Path=Visibility, Converter={StaticResource ReverseVisibilityConverter}}">
+                    </Image>
+                    
+                    <Ellipse x:Name="ImageBorder"
+                             Width="228"
+                             Height="228"
+                             StrokeThickness="4"
+                             Loaded="Border_Loaded"
+                             Visibility="{Binding Title, Converter={StaticResource StringToVisibilityConverter}, ConverterParameter=See More}">
+                    </Ellipse>
+                    <Ellipse Width="220" 
+                             Height="220" 
+                             Stretch="Fill" 
+                             PointerPressed="Pointer_Pressed"
+                             PointerReleased="Pointer_Released" 
+                             PointerCanceled="Pointer_Released"
+                             PointerCaptureLost="Pointer_Released"
+                             PointerExited="Pointer_Released"
+                             Tapped="SoundGroup_Click"
+                             Visibility="{Binding Title, Converter={StaticResource StringToVisibilityConverter}, ConverterParameter=See More}">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding GifPath}"/>
                         </Ellipse.Fill>
                     </Ellipse>
                 </Grid>
@@ -169,8 +220,8 @@
                     </TextBlock>
 
                     <ListView SelectionMode="None"
-                      ItemsSource="{Binding ImageGroups}"
-                      ItemTemplate="{StaticResource ListViewMainTemplate}"
+                      ItemsSource="{Binding GifGroups}"
+                      ItemTemplate="{StaticResource ListViewGifTemplate}"
                       IsItemClickEnabled="True"
                       Grid.Row="1"
                       Margin="0,15,0,0">
