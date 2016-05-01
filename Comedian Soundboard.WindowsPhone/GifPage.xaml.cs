@@ -27,15 +27,15 @@ namespace Comedian_Soundboard
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ImagePage : Page
+    public sealed partial class GifPage : Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private ObservableCollection<ImageItem> _Images;
+        private ObservableCollection<AnimationItem> _Gifs;
         private Random _Random = new Random();
         private int _IndexParam;
 
-        public ImagePage()
+        public GifPage()
         {
             this.InitializeComponent();
 
@@ -75,17 +75,17 @@ namespace Comedian_Soundboard
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             _IndexParam = Convert.ToInt32(e.NavigationParameter);
-            _Images = ImageDataSource.GetImages();
-            DefaultViewModel["Images"] = _Images;
+            _Gifs = AnimationDataSource.GetAnimations();
+            DefaultViewModel["Gifs"] = _Gifs;
 
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low, async () =>
             {
-                await Task.Delay(1000);
-                ImageListView.Opacity = 1;
+                await Task.Delay(3500);
+                GifListView.Opacity = 1;
                 DefaultViewModel["IsLoading"] = false;
-                if (_IndexParam < _Images.Count && _IndexParam != 0)
+                if (_IndexParam < _Gifs.Count && _IndexParam != 0)
                 {
-                    ImageListView.ScrollIntoView(_Images[_IndexParam]);
+                    GifListView.ScrollIntoView(_Gifs[_IndexParam]);
                 }
             }
             );
@@ -125,13 +125,11 @@ namespace Comedian_Soundboard
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            _Images.Clear();
-
+            _Gifs.Clear();
             this.navigationHelper.OnNavigatedFrom(e);
         }
 
         #endregion
-
         private void Border_Loaded(object sender, RoutedEventArgs e)
         {
             Color color = Color.FromArgb(255, Convert.ToByte(_Random.Next(0, 256)), Convert.ToByte(_Random.Next(0, 256)), Convert.ToByte(_Random.Next(0, 256)));

@@ -27,6 +27,7 @@
         <ValueConverter:MaxWordsConverter x:Key="MaxWordsConverter"/>
         <ValueConverter:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
         <ValueConverter:ReverseVisibilityConverter x:Key="ReverseVisibilityConverter"/>
+        <ValueConverter:BooleanToVisibility x:Key="BooleanToVisibility"/>
 
         <DataTemplate x:Key="ListViewMainTemplate">
             <Grid Margin="0,15,0,0" HorizontalAlignment="Center">
@@ -59,7 +60,7 @@
                              PointerCanceled="Pointer_Released"
                              PointerCaptureLost="Pointer_Released"
                              PointerExited="Pointer_Released"
-                             Tapped="SoundGroup_Click">
+                             Tapped="Group_Click">
                         <Ellipse.Fill>
                             <ImageBrush ImageSource="{Binding ImagePath}"/>
                         </Ellipse.Fill>
@@ -88,7 +89,8 @@
                 <Grid Margin="0,5,0,0" Grid.Row="1">
                     <Image gif:AnimationBehavior.SourceUri="{Binding GifPath}"
                            Width="220" Height="220" Stretch="Fill"
-                           Visibility="{Binding ElementName=ImageBorder, Path=Visibility, Converter={StaticResource ReverseVisibilityConverter}}">
+                           Visibility="{Binding ElementName=ImageBorder, Path=Visibility, Converter={StaticResource ReverseVisibilityConverter}}"
+                           Tapped="Group_Click">
                     </Image>
                     
                     <Ellipse x:Name="ImageBorder"
@@ -106,7 +108,7 @@
                              PointerCanceled="Pointer_Released"
                              PointerCaptureLost="Pointer_Released"
                              PointerExited="Pointer_Released"
-                             Tapped="SoundGroup_Click"
+                             Tapped="Group_Click"
                              Visibility="{Binding Title, Converter={StaticResource StringToVisibilityConverter}, ConverterParameter=See More}">
                         <Ellipse.Fill>
                             <ImageBrush ImageSource="{Binding GifPath}"/>
@@ -133,7 +135,8 @@
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         
-        <StackPanel x:Name="LoadingPanel" Margin="0,-8,0,0">
+        <StackPanel x:Name="LoadingPanel" Margin="0,-8,0,0"
+                    Visibility="{Binding LoadingVisibility, FallbackValue=Visible}">
             <ProgressBar IsIndeterminate="True"></ProgressBar>
             <TextBlock Margin="5,0,0,0" FontSize="12">Loading...</TextBlock>
         </StackPanel>
@@ -157,6 +160,13 @@
                                TextAlignment="Left"
                                Margin="0,-25,0,0">
                     </TextBlock>
+
+                    <ProgressRing x:Name="SoundLoadingRing" Background="Transparent"
+                                 HorizontalAlignment="Center" VerticalAlignment="Center"
+                                 Width="150" Height="150" Grid.Row="1"
+                                 IsActive="{Binding IsLoadingSound, FallbackValue=True}"
+                                 Visibility="{Binding IsLoadingSound, Converter={StaticResource BooleanToVisibility}, FallbackValue=Visible}">
+                    </ProgressRing>
 
                     <ListView SelectionMode="None"
                       ItemsSource="{Binding SoundGroups}"
@@ -189,6 +199,13 @@
                                Margin="0,-25,0,0">
                     </TextBlock>
 
+                    <ProgressRing x:Name="ImageLoadingRing" Background="Transparent"
+                                 HorizontalAlignment="Center" VerticalAlignment="Center"
+                                 Width="150" Height="150" Grid.Row="1"
+                                 IsActive="{Binding IsLoadingImage}"
+                                 Visibility="{Binding IsLoadingImage, Converter={StaticResource BooleanToVisibility},FallbackValue=Visible}">
+                    </ProgressRing>
+
                     <ListView SelectionMode="None"
                       ItemsSource="{Binding ImageGroups}"
                       ItemTemplate="{StaticResource ListViewMainTemplate}"
@@ -218,6 +235,13 @@
                                TextAlignment="Left"
                                Margin="0,-25,0,0">
                     </TextBlock>
+
+                    <ProgressRing x:Name="GifLoadingRing" Background="Transparent"
+                                 HorizontalAlignment="Center" VerticalAlignment="Center"
+                                 Width="150" Height="150" Grid.Row="1"
+                                 IsActive="{Binding IsLoadingGif}"
+                                 Visibility="{Binding IsLoadingGif, Converter={StaticResource BooleanToVisibility},FallbackValue=Visible}">
+                    </ProgressRing>
 
                     <ListView SelectionMode="None"
                       ItemsSource="{Binding GifGroups}"

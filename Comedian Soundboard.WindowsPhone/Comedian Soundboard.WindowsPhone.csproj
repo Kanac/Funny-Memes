@@ -86,6 +86,9 @@
     <Compile Include="AudioPage.xaml.cs">
       <DependentUpon>AudioPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GifPage.xaml.cs">
+      <DependentUpon>GifPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ImagePage.xaml.cs">
       <DependentUpon>ImagePage.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,10 @@
     <Page Include="AudioPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GifPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ImagePage.xaml">
       <SubType>Designer</SubType>

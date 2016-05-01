@@ -16,6 +16,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Common\IncrementalLoadingCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\MaxWordsConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NameSplit.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\ReverseVisibilityConverter.cs" />

@@ -1,17 +1,18 @@
 ﻿<Page
-    x:Class="Comedian_Soundboard.ImagePage"
+    x:Class="Comedian_Soundboard.GifPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Comedian_Soundboard"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
+    xmlns:gif="using:XamlAnimatedGif"
     xmlns:ValueConverter="using:Comedian_Soundboard.Converters"
     mc:Ignorable="d"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     d:DataContext="{Binding Source={d:DesignData Source=../Comedian Soundboard.Shared/DataModel/Soundboard.json, Type=data:SoundDataSource}}"
     xmlns:data="using:Comedian_Soundboard.Data">
-
+    
     <Page.Transitions>
         <TransitionCollection>
             <EdgeUIThemeTransition></EdgeUIThemeTransition>
@@ -32,10 +33,10 @@
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <ListView x:Name="ImageListView"
+        <ListView x:Name="GifListView"
                   Margin="0,0,0,-49"
                   SelectionMode="None"
-                  ItemsSource="{Binding Images}"
+                  ItemsSource="{Binding Gifs}"
                   IsItemClickEnabled="True"
                   Opacity="0">
             <ListView.ItemContainerStyle>
@@ -48,7 +49,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="5" Loaded="Border_Loaded">
-                        <Image Source="{Binding ImagePath}" 
+                        <Image gif:AnimationBehavior.SourceUri="{Binding GifPath}"
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Stretch"
                            Stretch="Fill">
@@ -70,7 +71,7 @@
                       IsActive="{Binding IsLoading, FallbackValue=True}"
                       Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibility}, FallbackValue=Visible}">
         </ProgressRing>
-
+        
         <Grid Grid.Row="1">
             <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="296273" />
         </Grid>

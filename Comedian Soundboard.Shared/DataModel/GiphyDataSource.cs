@@ -72,7 +72,7 @@ namespace Comedian_Soundboard.DataModel
                 return;
             }
 
-            for (int i = 0; i < gifDivs.Count() && i < maxGifs; ++i)
+            for (int i = 0; i < gifDivs.Count() && (i < maxGifs || maxGifs == 0); ++i)
             {
                 HtmlNode currGifDiv = gifDivs.ElementAt(i);
                 HtmlNode currTagDiv = tagDivs.ElementAt(i);

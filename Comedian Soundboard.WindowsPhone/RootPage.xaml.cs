@@ -81,14 +81,17 @@ namespace Comedian_Soundboard
         {
             _SoundGroups = new ObservableCollection<Category>(await SoundDataSource.GetSampleCategoriesAsync());
             this.DefaultViewModel["SoundGroups"] = _SoundGroups;
+            this.DefaultViewModel["IsLoadingSound"] = false;
 
             _ImageGroups = new ObservableCollection<ImageItem>(await ImageDataSource.GetSampleImages());
             this.DefaultViewModel["ImageGroups"] = _ImageGroups;
+            this.DefaultViewModel["IsLoadingImage"] = false;
 
             _GifGroups = new ObservableCollection<AnimationItem>(await AnimationDataSource.GetSampleAnimations());
             this.DefaultViewModel["GifGroups"] = _GifGroups;
+            this.DefaultViewModel["IsLoadingGif"] = false;
 
-            LoadingPanel.Visibility = Visibility.Collapsed;
+            this.DefaultViewModel["LoadingVisibility"] = Visibility.Collapsed;
 
             AppHelper.ReviewApp();
             if (!App.FirstLoad)
@@ -163,7 +166,7 @@ namespace Comedian_Soundboard
             border.StrokeThickness = 4;
         }
 
-        private void SoundGroup_Click(object sender, TappedRoutedEventArgs e)
+        private void Group_Click(object sender, TappedRoutedEventArgs e)
         {
             var dataContext = (e.OriginalSource as FrameworkElement).DataContext;
 
@@ -182,6 +185,17 @@ namespace Comedian_Soundboard
                     index = 0;
                 }
                 Frame.Navigate(typeof(ImagePage), index);
+            }
+            else 
+            {
+                // pass index of clicked sample item 
+                AnimationItem gif = dataContext as AnimationItem;
+                int index = _GifGroups.IndexOf(gif);
+                if (gif.Title == "See More")
+                {
+                    index = 0;
+                }
+                Frame.Navigate(typeof(GifPage), index);
             }
         }
 
