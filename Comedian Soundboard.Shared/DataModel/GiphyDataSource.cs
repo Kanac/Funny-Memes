@@ -17,29 +17,41 @@ namespace Comedian_Soundboard.DataModel
         private HttpClient _HttpClient = new HttpClient();
         private readonly int MAX_PAGES = 999;
         private readonly int PAGES_PER_CRAWL = 1;
+        private readonly int _GifsPerGrab = 7;
+        private int _TotalCalls = 0;
         private int _Page = 1;  // current page of site
         private int _PagesCrawled = 0;
         private int _Count = 0; // total gifs crawled
         private bool _HasCrawledAll = false;
         private Random _Random = new Random();
+        private ICollection<AnimationItem> _Animations = new List<AnimationItem>();
 
         // giphy redirects page url requests to page 1, change approach later
         public async Task<IEnumerable<AnimationItem>> GetPagedItems()
         {
-            ICollection<AnimationItem> animations = new List<AnimationItem>();
             string mainHtml = await Current._HttpClient.GetStringAsync("http://giphy.com/page/" + Current._Page + "/");
 
             int currPage = 0;
             while (currPage < PAGES_PER_CRAWL && Current._PagesCrawled < MAX_PAGES && !Current._HasCrawledAll)
             {
-                GetAnimationsFromHtml(mainHtml, animations);
+                GetAnimationsFromHtml(mainHtml, _Animations);
 
                 ++currPage;
                 ++Current._Page;
                 ++Current._PagesCrawled;
+
+                // since page url requests redirect to page 1, 1 html fetch is enough
+                Current._HasCrawledAll = true;
             }
 
-            return animations;
+            Current._TotalCalls++;
+            int startIndex = (Current._TotalCalls - 1) * Current._GifsPerGrab;
+            if ((_Animations.Count - 1) < (startIndex + Current._GifsPerGrab))
+            {
+                return new List<AnimationItem>();
+            }
+
+            return _Animations.Skip(startIndex).Take(Current._GifsPerGrab);
         }
 
         public async Task<IEnumerable<AnimationItem>> GetSampleItems()
