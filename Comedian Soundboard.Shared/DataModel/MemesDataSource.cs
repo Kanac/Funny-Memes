@@ -61,8 +61,9 @@ namespace Comedian_Soundboard.DataModel
         {
             HtmlDocument mainDoc = new HtmlDocument();
             mainDoc.LoadHtml(html);
+
             IEnumerable<HtmlNode> imageDivs = mainDoc.DocumentNode.Descendants("div").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value == "post");
-            int test = imageDivs.Count();
+
             if (imageDivs.Count() == 0)
             {
                 Current._HasCrawledAll = true;

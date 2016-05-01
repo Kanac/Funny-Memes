@@ -154,7 +154,38 @@
                     </ListView>
                 </Grid>
             </PivotItem>
+
+            <PivotItem Header="Gifs">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Style="{StaticResource TitleTextBlockStyle}"
+                               Text="Found something for you"
+                               TextAlignment="Left"
+                               Margin="0,-25,0,0">
+                    </TextBlock>
+
+                    <ListView SelectionMode="None"
+                      ItemsSource="{Binding ImageGroups}"
+                      ItemTemplate="{StaticResource ListViewMainTemplate}"
+                      IsItemClickEnabled="True"
+                      Grid.Row="1"
+                      Margin="0,15,0,0">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment"
+                                Value="Stretch">
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </Grid>
+            </PivotItem>
         </Pivot>
+
 
         <Grid Grid.Row="1">
             <UI:AdControl ApplicationId="8b0cc56c-ae21-4f7f-990e-ae3bd6de16d4" Style="{StaticResource HorizontalAd}" IsAutoRefreshEnabled="True" AutoRefreshIntervalInSeconds="30" AdUnitId="296273" />
