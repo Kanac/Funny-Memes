@@ -1,2 +1,2 @@
-MainPackage=C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Comedian Soundboard\Comedian Soundboard.Windows\bin\ARM\Release\Comedian Soundboard.Windows_1.1.0.19_ARM.appx
-SymbolPackage=C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Comedian Soundboard\Comedian Soundboard.Windows\AppPackages\Comedian Soundboard.Windows_1.1.0.19_Test\Comedian Soundboard.Windows_1.1.0.19_ARM.appxsym
+MainPackage=C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Comedian Soundboard\Comedian Soundboard.Windows\bin\ARM\Release\Comedian Soundboard.Windows_1.1.0.31_ARM.appx
+SymbolPackage=C:\Users\Anthony C\Documents\Visual Studio 2015\Projects\Comedian Soundboard\Comedian Soundboard.Windows\AppPackages\Comedian Soundboard.Windows_1.1.0.31_Test\Comedian Soundboard.Windows_1.1.0.31_ARM.appxsym

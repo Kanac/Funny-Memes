@@ -360,17 +360,20 @@
   <ProductReservedInfo>
     <MainPackageIdentityName>62206AnthonyC.ComedySoundboard</MainPackageIdentityName>
     <ReservedNames>
-      <ReservedName>Comedy Soundboard</ReservedName>
-      <ReservedName>Comedy ✓</ReservedName>
-      <ReservedName>Comedy ✔</ReservedName>
-      <ReservedName>The Funny App ✔</ReservedName>
-      <ReservedName>Funny Memes ✔</ReservedName>
+      <ReservedName>72f43b Comedy Soundboard</ReservedName>
+      <ReservedName>9f7133 Comedy ✓</ReservedName>
+      <ReservedName>ca29ca Comedy ✔</ReservedName>
+      <ReservedName>0e436c The Funny App ✔</ReservedName>
+      <ReservedName>7b9d64 Funny Memes ✔</ReservedName>
+      <ReservedName>804e96 Funny Memes ✔ Pro</ReservedName>
       <ReservedName>Funny Memes ✔ Pro</ReservedName>
+      <ReservedName>Funny Memes ✔</ReservedName>
+      <ReservedName>Funny Memes Pro</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
     <MainPackageIdentityName>62206AnthonyC.LeagueCounterpicks</MainPackageIdentityName>
     <MainPackageIdentityName>62206AnthonyC.SudokuSolverGenerator</MainPackageIdentityName>
   </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH5J8SL" />
+  <PackageInfoList LandingUrl="https://developer.microsoft.com/dashboard/Application?appId=9NBLGGH5J8SL" />
 </StoreAssociation>
